@@ -1,0 +1,260 @@
+schema:
+  entity: component
+  version: "0.2"
+
+required:
+  - id
+  - name
+  - category
+  - description
+  - intent
+  - composition
+  - variants
+  - behavior
+  - usage
+  - accessibility
+  - token_bindings
+  - provenance
+
+fields:
+  id:
+    type: string
+    format: dot.notation
+    example: "button.primary"
+
+  name:
+    type: string
+
+  category:
+    type: enum
+    values:
+      - primitive
+      - input
+      - selection
+      - feedback
+      - navigation
+      - overlay
+      - layout
+      - data_display
+
+  description:
+    type: string
+    description: "Resumen breve y operativo del componente"
+
+  intent:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      desired_outcome:
+        type: string
+        required: false
+
+  composition:
+    type: object
+    required:
+      - slots
+    properties:
+      slots:
+        type: list
+        items:
+          type: object
+          required:
+            - name
+            - role
+            - required
+          properties:
+            name:
+              type: string
+            role:
+              type: string
+            required:
+              type: boolean
+            description:
+              type: string
+              required: false
+
+  variants:
+    type: list
+    items:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        use_case:
+          type: string
+          required: false
+
+  behavior:
+    type: object
+    required:
+      - states
+    properties:
+      states:
+        type: list
+        items:
+          type: object
+          required:
+            - name
+            - description
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+      interactions:
+        type: list
+        items:
+          type: object
+          required:
+            - trigger
+            - response
+          properties:
+            trigger:
+              type: string
+            response:
+              type: string
+        required: false
+
+  usage:
+    type: object
+    required:
+      - use_cases
+      - anti_patterns
+    properties:
+      use_cases:
+        type: list
+        items: string
+      common_patterns:
+        type: list
+        items:
+          type: object
+          required:
+            - name
+            - description
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            composition:
+              type: string
+              required: false
+        required: false
+      anti_patterns:
+        type: list
+        items:
+          type: object
+          required:
+            - scenario
+            - reason
+            - alternative
+          properties:
+            scenario:
+              type: string
+            reason:
+              type: string
+            alternative:
+              type: string
+            severity:
+              type: enum
+              values:
+                - advisory
+                - warning
+                - critical
+              required: false
+
+  accessibility:
+    type: object
+    required:
+      - keyboard_support
+      - focus_behavior
+      - screen_reader_notes
+      - contrast_notes
+    properties:
+      keyboard_support:
+        type: string
+      focus_behavior:
+        type: string
+      screen_reader_notes:
+        type: string
+      contrast_notes:
+        type: string
+
+  token_bindings:
+    type: object
+    properties:
+      background: string
+      text: string
+      border: string
+      icon: string
+      spacing: string
+      radius: string
+      elevation: string
+      motion: string
+
+  ai_hints:
+    type: object
+    required: false
+    properties:
+      selection_guidance:
+        type: string
+        required: false
+      avoid_when:
+        type: list
+        items: string
+        required: false
+      related_components:
+        type: list
+        items: string
+        required: false
+
+  examples:
+    type: object
+    required: false
+    properties:
+      good:
+        type: list
+        items: string
+        required: false
+      bad:
+        type: list
+        items: string
+        required: false
+
+  open_questions:
+    type: list
+    items: string
+    required: false
+
+  provenance:
+    type: object
+    required:
+      - source
+      - confidence
+    properties:
+      source:
+        type: enum
+        values:
+          - observed
+          - inferred
+          - author_defined
+      confidence:
+        type: enum
+        values:
+          - high
+          - medium
+          - low

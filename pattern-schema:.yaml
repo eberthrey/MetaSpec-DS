@@ -1,0 +1,173 @@
+schema:
+  entity: pattern
+  version: "0.2"
+
+required:
+  - id
+  - name
+  - purpose
+  - problem
+  - solves
+  - composition
+  - behavior
+  - usage
+  - accessibility
+  - provenance
+
+fields:
+  id:
+    type: string
+    format: dot.notation
+    example: "feedback.inline-error"
+
+  name:
+    type: string
+
+  purpose:
+    type: string
+
+  problem:
+    type: string
+    description: "Problema UX que este patrón resuelve"
+
+  solves:
+    type: list
+    items: string
+
+  composition:
+    type: object
+    required:
+      - slots
+    properties:
+      slots:
+        type: list
+        items:
+          type: object
+          required:
+            - name
+            - role
+            - required
+          properties:
+            name:
+              type: string
+            role:
+              type: string
+            required:
+              type: boolean
+            description:
+              type: string
+              required: false
+
+  behavior:
+    type: object
+    required:
+      - states
+    properties:
+      states:
+        type: list
+        items:
+          type: object
+          required:
+            - name
+            - description
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+      interactions:
+        type: list
+        items:
+          type: object
+          required:
+            - trigger
+            - response
+          properties:
+            trigger:
+              type: string
+            response:
+              type: string
+        required: false
+
+  usage:
+    type: object
+    required:
+      - use_cases
+      - anti_patterns
+    properties:
+      use_cases:
+        type: list
+        items: string
+      anti_patterns:
+        type: list
+        items:
+          type: object
+          required:
+            - scenario
+            - reason
+            - alternative
+          properties:
+            scenario:
+              type: string
+            reason:
+              type: string
+            alternative:
+              type: string
+            severity:
+              type: enum
+              values:
+                - advisory
+                - warning
+                - critical
+              required: false
+
+  accessibility:
+    type: object
+    required:
+      - considerations
+    properties:
+      considerations:
+        type: list
+        items: string
+
+  maps_to_components:
+    type: list
+    items: string
+    required: false
+
+  ai_hints:
+    type: object
+    required: false
+    properties:
+      prefer_for:
+        type: list
+        items: string
+        required: false
+      avoid_for:
+        type: list
+        items: string
+        required: false
+
+  open_questions:
+    type: list
+    items: string
+    required: false
+
+  provenance:
+    type: object
+    required:
+      - source
+      - confidence
+    properties:
+      source:
+        type: enum
+        values:
+          - observed
+          - inferred
+          - author_defined
+      confidence:
+        type: enum
+        values:
+          - high
+          - medium
+          - low

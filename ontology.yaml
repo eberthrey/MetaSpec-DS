@@ -1,0 +1,105 @@
+version: "0.2"
+
+system:
+  name: "MetaSpec DS"
+  purpose: "Estructura semántica para documentar un design system como metadata estructurada entendible por IA"
+  source_of_truth: "yaml"
+  authoring_mode: "human-guided + llm-assisted"
+
+entities:
+  - id: foundation
+    description: "Definiciones base del sistema visual"
+    includes:
+      - color
+      - typography
+      - spacing
+      - radius
+      - stroke
+      - elevation
+      - motion
+      - opacity
+      - breakpoint
+      - iconography
+
+  - id: intent
+    description: "Objetivo UX que un componente o patrón ayuda a resolver"
+    required_fields:
+      - id
+      - name
+      - description
+      - desired_outcome
+      - scope
+
+  - id: constraint
+    description: "Límite no negociable del sistema"
+    required_fields:
+      - id
+      - name
+      - description
+      - type
+      - severity
+
+  - id: usage_rule
+    description: "Regla que indica cuándo usar o evitar un componente o patrón"
+    required_fields:
+      - when
+      - guidance
+
+  - id: pattern
+    description: "Patrón UX reutilizable independiente de una implementación específica"
+    required_fields:
+      - id
+      - name
+      - purpose
+      - problem
+      - solves
+      - composition
+      - behavior
+      - usage
+      - accessibility
+      - provenance
+
+  - id: component
+    description: "Unidad implementable del design system documentada como metadata estructurada"
+    required_fields:
+      - id
+      - name
+      - category
+      - description
+      - intent
+      - composition
+      - variants
+      - behavior
+      - usage
+      - accessibility
+      - token_bindings
+      - provenance
+
+relationships:
+  - from: component
+    to: pattern
+    type: implements
+
+  - from: component
+    to: foundation
+    type: uses
+
+  - from: component
+    to: intent
+    type: supports
+
+  - from: pattern
+    to: intent
+    type: solves
+
+  - from: pattern
+    to: constraint
+    type: constrained_by
+
+rules:
+  - "Un component no puede definirse solo por su apariencia visual."
+  - "Un pattern no puede definirse como una instancia concreta de UI."
+  - "Todo component debe incluir usage, accessibility y composition."
+  - "Todo anti_pattern debe vivir dentro de usage."
+  - "Toda inferencia generada por LLM debe marcarse con provenance: inferred."
+  - "Si una intención no es observable, no debe declararse como hecho."
