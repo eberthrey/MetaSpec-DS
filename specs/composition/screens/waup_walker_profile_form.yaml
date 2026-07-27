@@ -1,0 +1,64 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Datos Personales del Walker (Paso 1A)
+  waup_walker_profile_form:
+    description: "Formulario para capturar los datos personales y de identidad del paseador."
+    role: "waup_walker"
+    view_state: "waup_walker_profile_form"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Datos Personales"
+          back_action: "navigate_to:waup_walker_onboarding_start"
+          variant: "ghost"
+          
+      - slot_id: "input_first_name"
+        component: "component.input"
+        properties:
+          label: "Nombres"
+          placeholder: "Ej. Juan"
+          required: true
+          
+      - slot_id: "input_last_name"
+        component: "component.input"
+        properties:
+          label: "Apellidos"
+          placeholder: "Ej. Pérez"
+          required: true
+          
+      - slot_id: "input_doc_number"
+        component: "component.input"
+        properties:
+          label: "Número de DNI"
+          placeholder: "Ej. 45678901"
+          required: true
+          
+      - slot_id: "input_phone"
+        component: "component.input"
+        properties:
+          label: "Teléfono de Contacto"
+          placeholder: "Ej. 987654321"
+          required: true
+          
+      - slot_id: "input_address"
+        component: "component.input"
+        properties:
+          label: "Dirección de Domicilio"
+          placeholder: "Ej. Av. Larco 123, Miraflores"
+          required: true
+          
+      - slot_id: "continue_action"
+        component: "component.button"
+        properties:
+          label: "Continuar a Operaciones"
+          action: "navigate_to:waup_walker_operations_form"
+          hierarchy: "primary"

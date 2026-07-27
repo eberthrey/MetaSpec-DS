@@ -1,0 +1,61 @@
+schema_version: '0.2'
+kind: foundation
+identifier: radius
+name: Radius Foundation
+description: Geometría de redondeado de esquinas del sistema para garantizar curvas sofisticadas, amigables y consistentes.
+classification:
+  category: radius
+  foundation_type: token_based
+  scope: raw
+metadata:
+  status: in_review
+  links:
+  - kind: repository
+    url: specs/design-system/tokens/base.yaml
+    label: Base radius tokens
+  - kind: repository
+    url: specs/design-system/tokens/semantic.yaml
+    label: Semantic radius tokens
+document_blocks:
+- kind: purpose
+  statement: Definir radios base consistentes para inputs, botones, tarjetas y superficies destacadas del sistema.
+- kind: scale
+  id: radius-tiers
+  name: Radius tiers
+  description: Escala de radios base disponibles para componentes y superficies del sistema.
+  groups:
+  - id: small
+    description: Radio pequeño para controles de captura y superficies compactas.
+  - id: input
+    description: Radio dedicado a inputs cuando se necesite un valor explícito de captura.
+  - id: medium
+    description: Radio mediano para botones y bloques interactivos frecuentes.
+  - id: large
+    description: Radio amplio para tarjetas y contenedores principales.
+  - id: xl
+    description: Radio extra grande para paneles o contenedores con mayor protagonismo.
+  - id: circle
+    description: Radio circular para avatares, badges redondos y elementos plenamente circulares.
+- kind: guidelines
+  items:
+  - id: inputs-small-radius
+    description: Los inputs y campos de texto deben usar un radio pequeño de 12px.
+    guidance: Los inputs y campos de texto deben usar un radio pequeño de 12px.
+    level: should
+    category: shape-usage
+    rationale: Otorga suficiente área de captura y esquinas suavizadas conservando un aspecto estructurado.
+  - id: cards-and-buttons-medium-radius
+    description: Las tarjetas secundarias y botones principales/secundarios deben usar un radio mediano de 20px o 24px.
+    guidance: Las tarjetas secundarias y botones principales/secundarios deben usar un radio mediano de 20px o 24px.
+    level: should
+    category: shape-usage
+    rationale: Fomenta la diferenciación de bloques interactivos principales mediante formas suaves y redondeadas.
+  - id: bottom-sheet-xl-radius
+    description: Los Bottom Sheets o paneles deslizables inferiores deben usar un radio extra grande de 32px en sus esquinas superiores.
+    guidance: Los Bottom Sheets o paneles deslizables inferiores deben usar un radio extra grande de 32px en sus esquinas superiores.
+    level: should
+    category: shape-usage
+    rationale: Delimita claramente la contención del Bottom Sheet sobre el contenido de la pantalla y brinda una estética moderna y premium.
+provenance:
+  origin: author_defined
+  confidence: high

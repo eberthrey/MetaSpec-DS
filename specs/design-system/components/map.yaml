@@ -1,0 +1,94 @@
+identity:
+  id: component.map
+  name: Map (Visor de Mapa)
+  aliases:
+  - map
+taxonomy:
+  type: data_display
+  category: data_display
+intent:
+  summary: Componente de mapa geográfico interactivo o de solo lectura. Se renderiza con una altura fija de 216px y se expande en formato full-width (ancho completo de la pantalla) sin bordes redondeados en sus extremos laterales.
+  purpose: Presentar mapas de Lima Metropolitana para el ajuste del pin de recojo y el rastreo de paseos en tiempo real.
+  system_role: surface_information
+  user_need: Visualizar ubicación espacial y trayectos
+usage:
+  use_cases:
+  - id: ajuste-de-la-direccion-de-recojo
+    scenario: Ajuste de la dirección de recojo
+    rationale: Permite al dueño arrastrar el mapa bajo un pin estático para calibrar las coordenadas de encuentro.
+  anti_patterns:
+  - scenario: Colocar bordes redondeados y márgenes internos en contenedores fluidos
+    reason: Rompe la estética de inmersión y continuidad de mapa típica de aplicaciones móviles de despacho.
+    correction: 'Utilizar bordes planos (borderRadius: 0) y un ancho del 100% que abarque de borde a borde del dispositivo.'
+variants:
+- id: size
+  name: Size
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Mapa compacto para listados o detalle rápido.
+    use_when:
+    - Mapa compacto para listados o detalle rápido.
+  - id: md
+    name: Medium
+    meaning: Mapa de tamaño estándar de 216px.
+    use_when:
+    - Mapa de tamaño estándar de 216px.
+  - id: lg
+    name: Large
+    meaning: Mapa de gran tamaño para navegación a pantalla completa.
+    use_when:
+    - Mapa de gran tamaño para navegación a pantalla completa.
+composition:
+  slots:
+  - id: pin-marker
+    role: indicator
+    description: Marcador o pin central (draggable o estático) indicando el punto de interés.
+    cardinality: zero_or_one
+  - id: overlay-controls
+    role: primary-action
+    description: Botones flotantes de interacción sobre el mapa (ej. botón de centrar ubicación, zoom).
+    cardinality: zero_or_one
+  parent_constraints:
+  - rule: El contenedor del mapa debe ocupar el ancho completo disponible en su contenedor padre.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Visualización base del mapa con carga de mapa estático o interactivo.
+  - id: adjusting
+    meaning: Estado interactivo en el cual el usuario desplaza el mapa para reubicar el marcador de posición.
+accessibility:
+  semantic_role: region
+  focus_behavior:
+  - El mapa y sus controles deben ser accesibles por teclado o gestos de deslizamiento.
+  screen_reader_expectations:
+  - 'Debe proveer una descripción alternativa textual de la ubicación marcada (ej: dirección escrita en texto plano abajo del mapa).'
+  requirements:
+  - id: accessibility.map.focus
+    statement: El mapa y sus controles deben ser accesibles por teclado o gestos de deslizamiento.
+  - id: accessibility.map.screen-reader
+    statement: 'Debe proveer una descripción alternativa textual de la ubicación marcada (ej: dirección escrita en texto plano abajo del mapa).'
+examples:
+  positive:
+  - scenario: Ajuste de la dirección de recojo
+    rationale: Permite al dueño arrastrar el mapa bajo un pin estático para calibrar las coordenadas de encuentro.
+  negative:
+  - scenario: Colocar bordes redondeados y márgenes internos en contenedores fluidos
+    violation: Rompe la estética de inmersión y continuidad de mapa típica de aplicaciones móviles de despacho.
+    correction: 'Utilizar bordes planos (borderRadius: 0) y un ancho del 100% que abarque de borde a borde del dispositivo.'
+implementation_reference:
+  repository_path: specs/design-system/components/map.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/map.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

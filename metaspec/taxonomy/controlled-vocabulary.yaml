@@ -1,0 +1,155 @@
+version: "0.1"
+
+domains:
+  component_category:
+    description: Categorías canónicas para components.
+    values:
+      - action
+      - input
+      - selection
+      - navigation
+      - data_display
+      - feedback
+      - overlay
+      - layout
+
+  asset_category:
+    description: Categorías canónicas para assets.
+    values:
+      - system
+      - status
+      - navigation
+      - security
+      - feedback
+      - brand
+      - document
+      - placeholder
+      - media
+      - other
+
+  asset_style_family:
+    description: Tratamientos visuales canónicos para assets.
+    values:
+      - outlined
+      - filled
+      - duotone
+      - custom
+      - mixed
+      - brand
+
+  evidence_level:
+    description: Nivel de evidencia para metadata sensible a validación.
+    values:
+      - documented
+      - inferred
+      - pending_review
+
+  severity:
+    description: Severidad canónica para anti-patterns o hallazgos.
+    values:
+      - advisory
+      - warning
+      - critical
+
+  provenance_source:
+    description: Fuente de procedencia de la metadata.
+    values:
+      - figma
+      - imported
+      - inferred
+      - author_defined
+
+  provenance_confidence:
+    description: Nivel de confianza de la procedencia o inferencia.
+    values:
+      - high
+      - medium
+      - low
+
+  editorial_status:
+    description: Estado editorial de una entidad metadata.
+    values:
+      - low
+      - medium
+      - high
+
+  catalog_visibility:
+    description: Controla si la entidad debe mostrarse o no dentro del catálogo visible del sistema.
+    values:
+      - on
+      - off
+
+  state_type:
+    description: Tipos canónicos de estado para behavior.states.
+    values:
+      - interaction
+      - system
+      - availability
+      - base
+
+  slot_roles:
+    description: Roles compositivos frecuentes para slots.
+    values:
+      - content
+      - icon
+      - leading-icon
+      - trailing-icon
+      - leading-visual
+      - trailing-visual
+      - primary-navigation
+      - secondary-navigation
+      - action-group
+      - primary-action
+      - secondary-action
+      - supporting-copy
+      - heading-content
+      - body-content
+      - dismiss-control
+      - label
+      - value
+
+  accepts_families:
+    description: Familias semánticas canónicas para contracts de slots.
+    values:
+      - component.action
+      - component.button
+      - component.navigation_item
+      - component.link
+      - component.input
+      - component.status
+      - component.media
+      - asset.icon
+      - asset.illustration
+      - asset.logo
+      - asset.graphic
+      - text
+      - mixed
+
+  foundation_scope:
+    description: Scope canónico para foundations que separan capas contractuales distintas, por ejemplo base raw y asignaciones semantic.
+    values:
+      - raw
+      - semantic
+
+  foundation_typography_scale:
+    description: Grupos canónicos para foundations tipográficas cuando combinan primitives raw y text styles compuestos.
+    values:
+      - raw.typography.family
+      - raw.typography.size
+      - raw.typography.line
+      - typography.style
+
+naming_rules:
+  id_format: dot.notation
+  slot_name_format: snake_case
+  role_format: kebab-case
+  state_name_format: lowercase
+  foundation_name_language: english
+
+deprecated_values:
+  variant_axes:
+    - state
+    - status
+  general:
+    - disable
+    - on-disable

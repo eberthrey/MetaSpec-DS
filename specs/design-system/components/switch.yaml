@@ -1,0 +1,100 @@
+identity:
+  id: component.switch
+  name: Switch (Interruptor de Conmutación)
+  aliases:
+  - switch
+taxonomy:
+  type: selection
+  category: selection
+intent:
+  summary: Componente de control interactivo que permite alternar entre dos estados excluyentes (on/off) con una animación suave de deslizamiento.
+  purpose: Facilita la activación o desactivación inmediata de configuraciones o preferencias (ej. disponibilidad del paseador, notificaciones, modo oscuro).
+  system_role: capture_selection
+  user_need: Alternar estados binarios instantáneos
+usage:
+  use_cases:
+  - id: activar-disponibilidad-del-paseador-en-tiempo-real
+    scenario: Activar disponibilidad del paseador en tiempo real
+    rationale: Permite al walker cambiar su disponibilidad a conectado.
+  - id: toggles-de-configuracion-de-la-app
+    scenario: Toggles de configuración de la app
+    rationale: Cambiar preferencias como activar sonido, notificaciones o modo oscuro.
+  anti_patterns:
+  - scenario: Usar switch para acciones destructivas directas
+    reason: El switch aplica cambios instantáneos y puede ser fácil de conmutar por error.
+    correction: Usa un botón estándar con modal de confirmación.
+variants:
+- id: size
+  name: Size
+  description: Tamaño físico del control.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Switch compacto.
+    use_when:
+    - Switch compacto.
+  - id: md
+    name: Medium
+    meaning: Switch estándar.
+    use_when:
+    - Switch estándar.
+  - id: lg
+    name: Large
+    meaning: Switch prominente.
+    use_when:
+    - Switch prominente.
+composition:
+  slots:
+  - id: switch-track
+    role: body-content
+    description: Fondo del interruptor que cambia de color según el estado.
+    cardinality: exactly_one
+  - id: switch-thumb
+    role: decorative
+    description: Círculo deslizable interior que se desplaza horizontalmente.
+    cardinality: exactly_one
+behavior:
+  states:
+  - id: unchecked
+    meaning: Estado apagado. Track gris neutro y thumb a la izquierda.
+  - id: checked
+    meaning: Estado encendido. Track de color primario (naranja) y thumb desplazado a la derecha.
+  - id: disabled
+    meaning: Estado inactivo con opacidad reducida.
+accessibility:
+  semantic_role: switch
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - El control recibe el foco secuencialmente y puede ser conmutado mediante espacio o enter.
+  screen_reader_expectations:
+  - Debe anunciar el rol 'switch' o 'checkbox' y el estado 'aria-checked'.
+  requirements:
+  - id: accessibility.switch.focus
+    statement: El control recibe el foco secuencialmente y puede ser conmutado mediante espacio o enter.
+  - id: accessibility.switch.screen-reader
+    statement: Debe anunciar el rol 'switch' o 'checkbox' y el estado 'aria-checked'.
+examples:
+  positive:
+  - scenario: Activar disponibilidad del paseador en tiempo real
+    rationale: Permite al walker cambiar su disponibilidad a conectado.
+  - scenario: Toggles de configuración de la app
+    rationale: Cambiar preferencias como activar sonido, notificaciones o modo oscuro.
+  negative:
+  - scenario: Usar switch para acciones destructivas directas
+    violation: El switch aplica cambios instantáneos y puede ser fácil de conmutar por error.
+    correction: Usa un botón estándar con modal de confirmación.
+implementation_reference:
+  repository_path: specs/design-system/components/switch.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/switch.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

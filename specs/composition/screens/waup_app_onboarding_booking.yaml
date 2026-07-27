@@ -1,0 +1,89 @@
+id: "waup_app_onboarding_booking"
+name: "Onboarding — Reserva de Paseos"
+view_state: "waup_app_onboarding_booking"
+role: "guest"
+layout:
+  display: "flex"
+  flex_direction: "column"
+  background_color: "color.background.default"
+  height: "100%"
+
+composition:
+  - slot_id: "visual_booking_section"
+    layout:
+      display: "flex"
+      flex_direction: "column"
+      gap: "spacing.layout.gap_medium"
+      height: "400px"
+      positioning: "relative"
+    items:
+      - slot_id: "booking_image"
+        component: "image"
+        properties:
+          source: "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=600&q=80"
+          height: "400px"
+      
+      - slot_id: "simulated_booking_summary"
+        component: "component.card"
+        properties:
+          interactive: false
+        layout:
+          padding: "spacing.layout.card_padding"
+          border_radius: "radius.card.default"
+          background_color: "color.surface.default"
+          display: "flex"
+          flex_direction: "column"
+          gap: "spacing.layout.gap_small"
+          positioning: "absolute"
+          bottom: "spacing.layout.gap_medium"
+          left: "spacing.layout.gap_medium"
+          right: "spacing.layout.gap_medium"
+          elevation: "elevation.card.raised"
+        items:
+          - slot_id: "summary_title"
+            component: "text"
+            properties:
+              text: "Resumen de Reserva"
+              style: "typography.style.hero"
+          - slot_id: "summary_details"
+            component: "text"
+            properties:
+              text: "📅 Mañana, 08:00 AM • 🦮 Paseo Regular 60 min"
+              style: "typography.style.body"
+          - slot_id: "summary_price"
+            component: "text"
+            properties:
+              text: "Costo Estimado: S/. 20.00"
+              style: "typography.style.button"
+
+  - slot_id: "content_card"
+    component: "component.card"
+    properties:
+      interactive: false
+    layout:
+      display: "flex"
+      flex_direction: "column"
+      gap: "spacing.layout.gap_medium"
+      padding: "spacing.layout.page_margin"
+      background_color: "color.surface.default"
+      border_radius: "radius.card.default"
+      margin_t: "-24px"
+      elevation: "elevation.card.raised"
+      positioning: "relative"
+      z_index: 10
+    items:
+      - slot_id: "booking_title"
+        component: "title"
+        properties:
+          text: "Reserva Rápida y Segura"
+          style: "typography.style.h1"
+      - slot_id: "booking_description"
+        component: "text"
+        properties:
+          text: "Agenda un paseo en segundos seleccionando el horario ideal para tu perro con paseadores verificados."
+          style: "typography.style.body"
+      - slot_id: "navigation"
+        pattern: "waup_onboarding_navigation"
+        properties:
+          active_step: 2
+          primary_label: "Comenzar"

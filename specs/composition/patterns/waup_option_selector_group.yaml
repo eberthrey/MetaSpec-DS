@@ -1,0 +1,45 @@
+id: "waup.option-selector-group"
+name: "Waup Option Selector Group"
+purpose: "Contenedor de tarjetas u opciones seleccionables (layout de grid o carrusel horizontal) para configuraciones del servicio."
+problem: "El usuario necesita seleccionar parámetros del paseo (como tiempo de duración, fecha de reserva o rangos horarios) entre un grupo cerrado de opciones visualmente prominentes y táctiles."
+solves:
+  - "Selección de parámetros con clics directos sobre tarjetas táctiles."
+  - "Soporte para layouts dinámicos (grid horizontal o carrusel)."
+  - "Independencia entre selección única o múltiple."
+composition:
+  slots:
+    - name: "title"
+      role: "heading-content"
+      required: false
+      description: "Título del grupo de opciones (ej. 'Duración del paseo')."
+    - name: "options"
+      role: "content"
+      required: true
+      description: "Lista de tarjetas de opción seleccionables con estados activo/inactivo."
+behavior:
+  states:
+    - name: "default"
+      description: "Muestra las opciones con una pre-selección por defecto activa."
+    - name: "horizontal_scroll"
+      description: "Layout de desplazamiento horizontal si la cantidad de opciones excede el ancho de la pantalla (ej. para horarios de reserva). Debe contar con una barra de desplazamiento visualmente sutil para facilitar la usabilidad en dispositivos sin soporte táctil y garantizar el descubrimiento del contenido."
+usage:
+  use_cases:
+    - "Switch para alternar entre inmediatez (Ahora) y programación (Programar)."
+    - "Selector de duración (30, 45, 60, 90 min)."
+    - "Selector de fechas y horarios para paseos programados."
+  anti_patterns:
+    - scenario: "Utilizar dropdowns nativos o listados densos para opciones rápidas y móviles"
+      reason: "Dificulta la usabilidad táctil rápida en dispositivos móviles y rompe con la experiencia fluida tipo Rappi."
+      alternative: "Usar tarjetas/pastillas con hover/tap states claros y bordes coloreados."
+      severity: "warning"
+accessibility:
+  considerations:
+    - "Las tarjetas de opción seleccionadas deben usar aria-checked o roles de botón con estado seleccionado explícito para lectores de pantalla."
+    - "Mantener un contraste mínimo de 4.5:1 en las etiquetas de texto de las tarjetas activas e inactivas."
+maps_to_components:
+  - "component.button"
+  - "component.card"
+  - "component.carousel"
+provenance:
+  source: "author_defined"
+  confidence: "high"

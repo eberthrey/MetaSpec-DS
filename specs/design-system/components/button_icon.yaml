@@ -1,0 +1,117 @@
+identity:
+  id: component.button_icon
+  name: Button Icon (Botón de Icono)
+  aliases:
+  - button_icon
+taxonomy:
+  type: action
+  category: action
+intent:
+  summary: Componente de botón interactivo compacto que solo muestra un icono sin etiqueta de texto. Diseñado para navegación de retroceso, cierres de vistas, campana de notificaciones o acciones secundarias en cabeceras.
+  purpose: Proporcionar un control táctil e interactivo minimalista para realizar acciones rápidas sin ocupar espacio visual con texto largo.
+  system_role: trigger_action
+  user_need: Ejecutar acción contextual compacta
+usage:
+  use_cases:
+  - id: navegacion-de-retroceso-en-barra-superior
+    scenario: Navegación de retroceso en barra superior
+    rationale: El botón de retroceso (arrow-left) en la cabecera superior para regresar al estado previo.
+  - id: notificaciones-del-sistema
+    scenario: Notificaciones del sistema
+    rationale: Icono de campana con badge rojo flotando a la derecha en el header del home.
+  anti_patterns:
+  - scenario: Usar un botón de icono sin descripción alternativa
+    reason: Impide que los usuarios que dependen de lectores de pantalla comprendan el propósito de la acción.
+    correction: Proveer obligatoriamente un atributo aria-label explicativo.
+variants:
+- id: style
+  name: Style
+  description: Variante visual del botón.
+  selection: single
+  values:
+  - id: ghost
+    name: Ghost (Fantasma)
+    meaning: Sin fondo ni bordes visibles, el icono flota sobre el fondo de la pantalla.
+    use_when:
+    - Sin fondo ni bordes visibles, el icono flota sobre el fondo de la pantalla.
+  - id: filled
+    name: Filled (Relleno)
+    meaning: Con fondo plano y opacidad reducida para contraste secundario.
+    use_when:
+    - Con fondo plano y opacidad reducida para contraste secundario.
+- id: size
+  name: Size
+  description: Tamaño físico del botón.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Botón de icono compacto para listados densos de 32x32px.
+    use_when:
+    - Botón de icono compacto para listados densos de 32x32px.
+  - id: md
+    name: Medium
+    meaning: Botón de icono estándar de 40x40px.
+    use_when:
+    - Botón de icono estándar de 40x40px.
+  - id: lg
+    name: Large
+    meaning: Botón de icono grande para cabeceras principales de 48x48px.
+    use_when:
+    - Botón de icono grande para cabeceras principales de 48x48px.
+composition:
+  slots:
+  - id: icon
+    role: icon
+    description: Icono representativo de la acción (ej. flecha de retroceso, aspa de cerrar, campana).
+    cardinality: exactly_one
+    accepts:
+    - asset.icon
+  parent_constraints:
+  - rule: El área táctil debe respetar las dimensiones del eje de tamaño.
+    rationale: Preserves the intended semantic contract during composition and usage.
+  - rule: El slot de icono es requerido para renderizar el botón.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado inicial interactivo del botón.
+  - id: hover
+    meaning: Cambio de opacidad sutil al pasar el puntero.
+  - id: disabled
+    meaning: Opacidad reducida y bloqueo de eventos táctiles.
+accessibility:
+  semantic_role: button
+  focus_behavior:
+  - El foco se mueve secuencialmente usando tabulación en web o gestos de deslizamiento en mobile, expandiendo el área táctil mínima a 44x44px.
+  screen_reader_expectations:
+  - 'Requiere obligatoriamente un atributo descriptivo para la voz (ej: aria-label=''Regresar'').'
+  requirements:
+  - id: accessibility.button-icon.focus
+    statement: El foco se mueve secuencialmente usando tabulación en web o gestos de deslizamiento en mobile, expandiendo el área táctil mínima a 44x44px.
+  - id: accessibility.button-icon.screen-reader
+    statement: 'Requiere obligatoriamente un atributo descriptivo para la voz (ej: aria-label=''Regresar'').'
+examples:
+  positive:
+  - scenario: Navegación de retroceso en barra superior
+    rationale: El botón de retroceso (arrow-left) en la cabecera superior para regresar al estado previo.
+  - scenario: Notificaciones del sistema
+    rationale: Icono de campana con badge rojo flotando a la derecha en el header del home.
+  negative:
+  - scenario: Usar un botón de icono sin descripción alternativa
+    violation: Impide que los usuarios que dependen de lectores de pantalla comprendan el propósito de la acción.
+    correction: Proveer obligatoriamente un atributo aria-label explicativo.
+implementation_reference:
+  repository_path: specs/design-system/components/button_icon.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/button_icon.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

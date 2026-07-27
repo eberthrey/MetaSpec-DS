@@ -1,0 +1,51 @@
+id: "waup.owner-header"
+name: "Waup Owner Header (Encabezado del Dueño)"
+purpose: "Encabezado contextual de alta densidad y conversión para la pantalla de inicio del dueño de mascota."
+problem: "El usuario dueño de mascotas necesita un punto de partida consistente en la app que le permita identificarse, recibir mensajes informativos y acceder a sus alertas operacionales."
+solves:
+  - "Acceso inmediato al perfil y configuración de cuenta."
+  - "Visualización en tiempo real de notificaciones críticas de paseos (llegada, inicio, fin)."
+composition:
+  slots:
+    - name: "title"
+      role: "heading-content"
+      required: true
+      description: "Saludo personalizado al usuario."
+    - name: "description"
+      role: "supporting-copy"
+      required: false
+      description: "Frase de tranquilidad o estado contextual."
+    - name: "avatar"
+      role: "trailing-visual"
+      required: true
+      description: "Enlace al perfil del dueño representado por su foto."
+    - name: "notification_button"
+      role: "secondary-action"
+      required: false
+      description: "Acceso interactivo al centro de notificaciones."
+behavior:
+  states:
+    - name: "default"
+      description: "Vista del encabezado con el avatar y el botón de notificaciones en reposo."
+    - name: "active_notifications"
+      description: "Vista del encabezado mostrando el dot badge rojo sobre el botón de notificaciones."
+usage:
+  use_cases:
+    - "Dashboard principal del dueño de mascotas (Waup Owner Home)."
+  anti_patterns:
+    - scenario: "Cambiar la alineación de los elementos en pantallas internas"
+      reason: "Confunde la coherencia espacial de navegación de la super-app."
+      alternative: "Mantener el saludo a la izquierda, las acciones agrupadas a la derecha."
+      severity: "warning"
+accessibility:
+  considerations:
+    - "El botón de notificaciones cuenta con un label descriptivo para lectores de pantalla."
+    - "El avatar lee el nombre del usuario asociado para identificación por voz."
+maps_to_components:
+  - "component.header"
+  - "component.button"
+  - "component.avatar"
+  - "component.badge"
+provenance:
+  source: "author_defined"
+  confidence: "high"

@@ -1,0 +1,102 @@
+identity:
+  id: component.textarea
+  name: Text Area (Área de Texto)
+  aliases:
+  - textarea
+taxonomy:
+  type: input
+  category: input
+intent:
+  summary: Componente de entrada de texto multilínea para descripciones, instrucciones o notas extensas. Tiene una altura expandida de 70px u 80px, sin sombras y con bordes suaves de 1px de trazo.
+  purpose: Proporcionar un control multilínea con altura adecuada, soporte para placeholder descriptivo y validaciones en tiempo real.
+  system_role: collect_input
+  user_need: Capturar notas detalladas o instrucciones operativas
+usage:
+  use_cases:
+  - id: instrucciones-de-entrega-y-recojo-de-mascota-en-la-configuracion-de-paseo
+    scenario: Instrucciones de entrega y recojo de mascota en la configuración de paseo
+    rationale: El dueño detalla indicaciones de ingreso al hogar o recepción para el paseador.
+  anti_patterns:
+  - scenario: Habilitar resize libre
+    reason: Puede distorsionar el layout y diseño del frame del dispositivo móvil.
+    correction: 'Mantener resize: none y definir una altura de caja fija adaptada.'
+variants:
+- id: size
+  name: Size
+  description: Eje de tamaño (altura) del textarea.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Textarea compacto de 70px de altura.
+    use_when:
+    - Textarea compacto de 70px de altura.
+  - id: md
+    name: Medium
+    meaning: Textarea estándar de 80px de altura.
+    use_when:
+    - Textarea estándar de 80px de altura.
+  - id: lg
+    name: Large
+    meaning: Textarea amplio de 120px de altura.
+    use_when:
+    - Textarea amplio de 120px de altura.
+composition:
+  slots:
+  - id: label
+    role: label
+    description: Etiqueta superior que identifica la información solicitada.
+    cardinality: exactly_one
+  - id: textarea-area
+    role: body-content
+    description: 'Área de texto de altura expandida (ej. 70px a 80px), no redimensionable manualmente (resize: none).'
+    cardinality: exactly_one
+  - id: character-counter
+    role: supporting-copy
+    description: Indicador del total de caracteres digitados contra el límite permitido (ej. 0/250).
+    cardinality: zero_or_one
+  parent_constraints:
+  - rule: 'El control no debe permitir el redimensionamiento manual por parte del usuario (resize: none).'
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado normal en reposo, listo para recibir foco, sin sombra y con borde gris tenue.
+  - id: focused
+    meaning: Estado activo al ubicar el cursor en el control, destacando su borde (navy en light / primary en dark) con el mismo grosor de trazo (1px).
+  - id: error
+    meaning: 'Estado de advertencia activa (ej: linter anti-bypass detecta datos de contacto directos), cambiando el color de borde a rojo.'
+accessibility:
+  semantic_role: textbox
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - El área de texto destaca su borde al recibir el foco.
+  screen_reader_expectations:
+  - Debe asociar la etiqueta superior con el control mediante htmlFor e id.
+  requirements:
+  - id: accessibility.textarea.focus
+    statement: El área de texto destaca su borde al recibir el foco.
+  - id: accessibility.textarea.screen-reader
+    statement: Debe asociar la etiqueta superior con el control mediante htmlFor e id.
+examples:
+  positive:
+  - scenario: Instrucciones de entrega y recojo de mascota en la configuración de paseo
+    rationale: El dueño detalla indicaciones de ingreso al hogar o recepción para el paseador.
+  negative:
+  - scenario: Habilitar resize libre
+    violation: Puede distorsionar el layout y diseño del frame del dispositivo móvil.
+    correction: 'Mantener resize: none y definir una altura de caja fija adaptada.'
+implementation_reference:
+  repository_path: specs/design-system/components/textarea.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/textarea.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

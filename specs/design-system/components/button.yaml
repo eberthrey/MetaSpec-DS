@@ -1,0 +1,125 @@
+identity:
+  id: component.button
+  name: Botón
+  aliases:
+  - button
+taxonomy:
+  type: action
+  category: action
+intent:
+  summary: Elemento interactivo que permite al usuario ejecutar acciones primarias, secundarias o de navegación.
+  purpose: Permite iniciar transiciones, guardar formularios o confirmar selecciones.
+  system_role: trigger_action
+  user_need: Ejecutar acción
+usage:
+  use_cases:
+  - id: confirmar-formularios
+    scenario: Confirmar formularios
+    rationale: Uso del botón primario al final de formularios de registro o solicitud.
+  anti_patterns:
+  - scenario: Usar mas de un boton primario por pantalla
+    reason: Confunde la jerarquia visual y la accion principal del usuario.
+    correction: Usa un boton primario y el resto secundarios.
+variants:
+- id: hierarchy
+  name: Hierarchy
+  description: Jerarquía de importancia del botón.
+  selection: single
+  values:
+  - id: primary
+    name: Primario
+    meaning: Acción principal en la vista con color de marca prominente.
+    use_when:
+    - Acción principal en la vista con color de marca prominente.
+  - id: secondary
+    name: Secundario
+    meaning: Acción secundaria con borde y menor peso visual.
+    use_when:
+    - Acción secundaria con borde y menor peso visual.
+- id: size
+  name: Size
+  description: Tamaño físico del botón.
+  selection: single
+  values:
+  - id: sm
+    name: Pequeño (S)
+    meaning: Botón de 32px compacto para layouts densos.
+    use_when:
+    - Botón de 32px compacto para layouts densos.
+  - id: md
+    name: Mediano (M)
+    meaning: Botón estándar de 40px.
+    use_when:
+    - Botón estándar de 40px.
+  - id: lg
+    name: Grande (L)
+    meaning: Botón prominente de 48px para CTA principales.
+    use_when:
+    - Botón prominente de 48px para CTA principales.
+- id: is-destructive
+  name: Is Destructive
+  description: Determina si la acción es destructiva (ej. eliminar perfil).
+  selection: single
+  values:
+  - id: 'true'
+    name: Destructivo
+    meaning: Estética de alerta (rojo) para prevenir errores fatales.
+    use_when:
+    - Estética de alerta (rojo) para prevenir errores fatales.
+composition:
+  slots:
+  - id: label
+    role: label
+    description: El texto descriptivo dentro del boton
+    cardinality: exactly_one
+    accepts:
+    - text
+  - id: icon
+    role: icon
+    description: Icono de soporte visual
+    cardinality: zero_or_one
+    accepts:
+    - asset.icon
+  parent_constraints:
+  - rule: El área táctil debe respetar las dimensiones del eje de tamaño.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado inicial del boton interactivo.
+  - id: hover
+    meaning: Estado cuando el puntero esta sobre el boton.
+  - id: disabled
+    meaning: Estado no interactivo cuando la accion no esta disponible.
+accessibility:
+  semantic_role: button
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - El foco se mueve secuencialmente usando tabulacion en web o gestos de deslizamiento en mobile.
+  requirements:
+  - id: accessibility.button.focus
+    statement: El foco se mueve secuencialmente usando tabulacion en web o gestos de deslizamiento en mobile.
+  - id: accessibility.button.contrast
+    statement: Debe mantener contraste minimo de 4.5:1 contra el color de fondo.
+examples:
+  positive:
+  - scenario: Confirmar formularios
+    rationale: Uso del botón primario al final de formularios de registro o solicitud.
+  negative:
+  - scenario: Usar mas de un boton primario por pantalla
+    violation: Confunde la jerarquia visual y la accion principal del usuario.
+    correction: Usa un boton primario y el resto secundarios.
+implementation_reference:
+  repository_path: specs/design-system/components/button.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/button.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

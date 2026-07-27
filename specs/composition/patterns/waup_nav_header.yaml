@@ -1,0 +1,40 @@
+id: "waup.nav-header"
+name: "Waup Navigation Header"
+purpose: "Barra superior de navegación interna para pantallas secundarias o de configuración en el flujo del dueño."
+problem: "El usuario necesita regresar de forma consistente a la pantalla previa o cancelar un flujo en curso, con un título claro sobre el contexto actual."
+solves:
+  - "Navegación de retorno consistente (back navigation)."
+  - "Orientación de contexto en pantallas internas secundarias."
+composition:
+  slots:
+    - name: "back_action"
+      role: "primary-navigation"
+      required: true
+      description: "Control interactivo (habitualmente botón tipo flecha izquierda) para retroceder."
+    - name: "title"
+      role: "heading-content"
+      required: true
+      description: "Título de la sección o pantalla actual."
+behavior:
+  states:
+    - name: "default"
+      description: "Estado normal con fondo sólido o transparente (ghost) y alineación estándar."
+usage:
+  use_cases:
+    - "Pantalla de búsqueda/configuración de paseo (Buscar paseo)."
+    - "Pantallas internas de perfiles de mascotas o detalle de paseo."
+  anti_patterns:
+    - scenario: "Omitir el botón de retroceso en flujos transaccionales anidados"
+      reason: "Atrapa al usuario y bloquea la navegación, forzando cierres abruptos."
+      alternative: "Usar siempre el botón de retroceso ghost en el slot back_action."
+      severity: "critical"
+accessibility:
+  considerations:
+    - "El botón de retroceso debe contar con un aria-label descriptivo como 'Regresar a la pantalla anterior'."
+    - "El título debe estar etiquetado semánticamente como cabecera (H1 o H2)."
+maps_to_components:
+  - "component.header"
+  - "component.button"
+provenance:
+  source: "author_defined"
+  confidence: "high"

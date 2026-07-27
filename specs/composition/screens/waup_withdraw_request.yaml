@@ -1,0 +1,54 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Solicitar Retiro de Créditos (Walker)
+  waup_withdraw_request:
+    description: "Formulario donde el paseador especifica el monto a retirar y elige la cuenta bancaria de destino."
+    role: "waup_walker"
+    view_state: "waup_walker_withdrawal_request"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Retirar Fondos"
+          back_action: "navigate_to:waup_credits"
+          variant: "ghost"
+          
+      - slot_id: "balance_info_card"
+        description: "Muestra el saldo disponible para transferir."
+        component: "component.card"
+        properties:
+          title: "Saldo disponible"
+          content: "S/. {user.credits_balance}"
+          
+      - slot_id: "input_amount"
+        description: "Campo numérico para ingresar el monto a retirar."
+        component: "component.input"
+        properties:
+          label: "Monto a retirar (S/.)"
+          placeholder: "Monto mínimo S/. 10"
+          required: true
+          
+      - slot_id: "select_destination_account"
+        description: "Selector de la cuenta bancaria guardada de destino."
+        component: "component.input"
+        properties:
+          label: "Cuenta de destino"
+          placeholder: "Selecciona una cuenta de cobro"
+          options_source: "user.payout_methods"
+          required: true
+          
+      - slot_id: "confirm_withdrawal_action"
+        description: "Botón principal de confirmación del retiro."
+        component: "component.button"
+        properties:
+          label: "Confirmar Retiro"
+          action: "submit_withdrawal"
+          hierarchy: "primary"

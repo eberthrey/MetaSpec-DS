@@ -1,0 +1,165 @@
+schema:
+  entity: asset
+  version: "0.1"
+
+required:
+  - id
+  - name
+  - asset_type
+  - description
+  - source_type
+  - provenance
+
+fields:
+  id:
+    type: string
+    description: "Identificador canónico y estable del asset."
+    conventions:
+      - "Debe usar dot.notation."
+      - "No debe depender de labels visibles ni nombres temporales."
+
+  name:
+    type: string
+    description: "Nombre canónico legible del asset."
+
+  asset_type:
+    type: enum
+    values:
+      - icon
+      - illustration
+      - logo
+      - graphic
+      - thumbnail
+
+  description:
+    type: string
+    description: "Resumen breve del asset dentro del sistema."
+
+  semantic_meaning:
+    type: string
+    required: false
+    description: "Significado visual o semántico del asset cuando aplique."
+
+  category:
+    type: string
+    required: false
+    description: "Dominio funcional o semántico del asset."
+
+  source_type:
+    type: enum
+    values:
+      - svg_library
+      - figma
+      - imported
+      - generated
+      - external_library
+
+  style_family:
+    type: string
+    required: false
+    description: "Tratamiento visual del asset."
+
+  variants:
+    type: object
+    required: false
+    description: "Variaciones visuales ligeras del asset. No representa variant_axes ni dimensiones de configuración como en component-schema."
+    additional_properties:
+      type: list
+      items:
+        type: object
+        required:
+          - id
+          - name
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+            required: false
+
+  asset_ref:
+    type: object
+    required: false
+    properties:
+      library:
+        type: string
+        required: false
+      path:
+        type: string
+        required: false
+      format:
+        type: enum
+        required: false
+        values:
+          - svg
+          - png
+          - jpg
+          - webp
+
+  figma_ref:
+    type: object
+    required: false
+    properties:
+      file_key:
+        type: string
+        required: false
+      component_set_key:
+        type: string
+        required: false
+      component_key:
+        type: string
+        required: false
+      node_id:
+        type: string
+        required: false
+      matched_name:
+        type: string
+        required: false
+      confidence:
+        type: string
+        description: "Nivel de confianza del match con Figma."
+        required: false
+
+  editorial_status:
+    type: enum
+    required: false
+    values:
+      - low
+      - medium
+      - high
+
+  catalog_visibility:
+    type: enum
+    required: false
+    values:
+      - on
+      - off
+
+  origin:
+    type: enum
+    required: false
+    values:
+      - catalog
+      - suggested
+      - inferred
+      - migrated
+
+  open_questions:
+    type: list
+    required: false
+    items: string
+
+  provenance:
+    type: object
+    required:
+      - source
+      - confidence
+    properties:
+      source:
+        type: string
+        description: "Fuente de procedencia de la metadata."
+      confidence:
+        type: string
+        description: "Nivel de confianza de la procedencia o inferencia."

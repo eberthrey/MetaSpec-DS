@@ -1,0 +1,74 @@
+identity:
+  id: component.photo_uploader
+  name: Photo Uploader (Cargador de Fotos)
+  aliases:
+  - photo_uploader
+taxonomy:
+  type: input
+  category: input
+intent:
+  summary: Componente interactivo para cargar y visualizar múltiples imágenes. Muestra una grilla de miniaturas con botón de eliminación y una ranura de acción con borde punteado para agregar nuevas imágenes.
+  purpose: Permite al dueño subir fotos del perro para facilitar su reconocimiento por parte del paseador.
+  system_role: collect_input
+  user_need: Carga de fotos de la mascota
+usage:
+  use_cases:
+  - id: agregar-fotos-de-un-perro-en-el-registro-de-mascota
+    scenario: Agregar fotos de un perro en el registro de mascota
+    rationale: El dueño selecciona imágenes de su galería local para ilustrar la ficha de su mascota.
+  anti_patterns:
+  - scenario: Mostrar el botón de agregar cuando se superó el límite
+    reason: Confunde al usuario intentando subir más fotos de las permitidas.
+    correction: Ocultar el botón o deshabilitarlo con un mensaje claro.
+composition:
+  slots:
+  - id: thumbnails
+    role: body-content
+    description: Grilla de miniaturas de 80x80px con bordes redondeados.
+    cardinality: exactly_one
+  - id: add-button
+    role: primary-action
+    description: Botón de carga con borde punteado y un icono de cámara/más.
+    cardinality: exactly_one
+behavior:
+  states:
+  - id: empty
+    meaning: Cuando no hay fotos cargadas, se muestra solo la ranura de acción.
+  - id: populated
+    meaning: Muestra las miniaturas y la ranura de acción (si no se superó el límite).
+  - id: limit-reached
+    meaning: Oculta la ranura de acción cuando se alcanza el límite de fotos.
+accessibility:
+  semantic_role: group
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - Cada miniatura eliminable y el botón de agregar deben ser accesibles por teclado.
+  screen_reader_expectations:
+  - 'Los botones de eliminar deben tener un aria-label descriptivo, ej: ''Eliminar foto 1''.'
+  requirements:
+  - id: accessibility.photo-uploader.focus
+    statement: Cada miniatura eliminable y el botón de agregar deben ser accesibles por teclado.
+  - id: accessibility.photo-uploader.screen-reader
+    statement: 'Los botones de eliminar deben tener un aria-label descriptivo, ej: ''Eliminar foto 1''.'
+examples:
+  positive:
+  - scenario: Agregar fotos de un perro en el registro de mascota
+    rationale: El dueño selecciona imágenes de su galería local para ilustrar la ficha de su mascota.
+  negative:
+  - scenario: Mostrar el botón de agregar cuando se superó el límite
+    violation: Confunde al usuario intentando subir más fotos de las permitidas.
+    correction: Ocultar el botón o deshabilitarlo con un mensaje claro.
+implementation_reference:
+  repository_path: specs/design-system/components/photo_uploader.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/photo_uploader.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

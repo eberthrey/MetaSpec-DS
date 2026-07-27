@@ -1,0 +1,166 @@
+version: "0.2"
+
+system:
+  name: "Spec Design"
+  purpose: "Estructura semántica para documentar un design system como metadata estructurada entendible por IA"
+  source_of_truth: "yaml"
+  authoring_mode: "human-guided + llm-assisted"
+
+entities:
+  - id: foundation
+    description: "Dominios base del sistema visual, algunos de los cuales pueden representarse mediante tokens o reglas canónicas"
+    includes:
+      - color
+      - typography
+      - spacing
+      - radius
+      - stroke
+      - elevation
+      - motion
+      - opacity
+      - breakpoint
+      - iconography_rules
+
+  - id: intent
+    description: "Objetivo UX que un componente o patrón ayuda a resolver"
+    required_fields:
+      - id
+      - name
+      - description
+      - desired_outcome
+      - scope
+
+  - id: constraint
+    description: "Límite no negociable del sistema"
+    required_fields:
+      - id
+      - name
+      - description
+      - type
+      - severity
+
+  - id: ui_catalog
+    description: "Catálogo oficial de componentes aprobados del design system"
+    required_fields:
+      - id
+      - name
+      - source
+
+  - id: asset
+    description: "Recurso visual reusable del design system con contrato liviano y sin comportamiento interactivo propio"
+    required_fields:
+      - id
+      - name
+      - asset_type
+      - description
+      - source_type
+      - provenance
+
+  - id: pattern
+    description: "Patrón UX reutilizable independiente de una implementación específica"
+    required_fields:
+      - id
+      - name
+      - purpose
+      - problem
+      - solves
+      - composition
+      - behavior
+      - usage
+      - accessibility
+      - provenance
+
+  - id: component
+    description: "Unidad reusable e implementable del design system con contrato funcional y semántico documentado como metadata estructurada"
+    required_fields:
+      - id
+      - name
+      - category
+      - description
+      - intent
+      - composition
+      - variant_axes
+      - behavior
+      - usage
+      - accessibility
+      - token_bindings
+      - provenance
+
+relationships:
+  - from: component
+    to: pattern
+    type: implements
+
+  - from: component
+    to: foundation
+    type: uses
+
+  - from: component
+    to: intent
+    type: supports
+
+  - from: component
+    to: constraint
+    type: constrained_by
+
+  - from: component
+    to: ui_catalog
+    type: registered_in
+
+  - from: asset
+    to: foundation
+    type: uses
+
+  - from: component
+    to: asset
+    type: may_use
+
+  - from: pattern
+    to: asset
+    type: may_use
+
+  - from: pattern
+    to: intent
+    type: solves
+
+  - from: pattern
+    to: constraint
+    type: constrained_by
+
+catalog_rules:
+  - "Todo component referenciado como parte del sistema debe declarar su relación con el ui_catalog."
+  - "Un component con catalog_visibility: on pertenece al catálogo visible del sistema."
+  - "Un component con catalog_visibility: off no debe tratarse como componente visible del catálogo."
+  - "El LLM debe intentar resolver primero con componentes catalogados."
+  - "Si no encuentra una solución suficiente, puede devolver un component con editorial_status: low y origin: suggested, pero no debe tratarlo como catálogo visible oficial."
+
+rules:
+  - "Un component no puede definirse solo por su apariencia visual."
+  - "Un asset representa un recurso visual reusable con contrato liviano y sin comportamiento interactivo propio."
+  - "No todo elemento reusable del sistema debe modelarse como component; si su valor principal es visual y no interactivo, debe modelarse como asset."
+  - "Los assets pueden ser consumidos por components o patterns, pero no sustituyen un contrato UI completo."
+  - "Si una entidad visual adquiere behavior, usage, accessibility o composición relevante, debe evaluarse si debe promocionarse de asset a component."
+  - "Un pattern no puede definirse como una instancia concreta de UI."
+  - "Todo component debe incluir usage, accessibility y composition."
+  - "usage_rule no se modela como entidad independiente en esta ontología; se resuelve dentro de usage como parte del contrato de component o pattern."
+  - "Todo anti_pattern debe vivir dentro de usage."
+  - "Toda inferencia generada por LLM debe marcarse con provenance: inferred."
+  - "Si una intención no es observable, no debe declararse como hecho."
+  - "variant_axes representa dimensiones configurables del componente y no debe incluir estados de interacción."
+  - "Solo los components registrados en ui_catalog pertenecen al catálogo oficial del design system."
+  - "composition describe la estructura interna observable del component o pattern y no debe usarse para inventar components fuera del ui_catalog."
+  - "Toda referencia a components dentro de composition debe resolverse primero contra ui_catalog; si no existe correspondencia suficiente, debe marcarse como low o suggested."
+  - "La ontología debe mantener un único idioma editorial por archivo y por entidad; no se debe mezclar español e inglés en name, description, purpose, problem, desired_outcome, usage, accessibility ni open_questions."
+  - "Los nombres de entidades, campos, enums y relaciones del contrato técnico pueden mantenerse en inglés, pero el contenido descriptivo de metadata debe usar un solo idioma consistente."
+  - "Cada concepto taxonómico debe tener un único término canónico; no se permiten sinónimos paralelos para el mismo concepto dentro del sistema."
+  - "Si un término canónico cambia, el sistema debe migrar el término anterior y no coexistir con ambos en la metadata nueva."
+  - "Toda entidad debe usar ids canónicos y estables; el id no debe depender de labels visibles, nombres de capa de Figma ni textos temporales."
+  - "Toda metadata generada debe respetar convenciones globales de naming: id en dot.notation, state.name en lowercase, slot.name en snake_case y role en kebab-case."
+  - "Todo enum usado en schema debe consumirse con valores canónicos exactos; no se permiten variantes editoriales del mismo valor."
+  - "No se debe inferir como hecho ningún campo no observable o no soportado por evidencia; en esos casos debe marcarse como open_question o inferred con provenance."
+  - "Toda entidad debe declarar solo campos con significado semántico real; no se deben completar campos por simetría o relleno cuando no aportan al contrato."
+  - "Si un campo requerido no puede resolverse con suficiente confianza, la entidad no debe cerrarse como final; debe quedar marcada para revisión."
+  - "Toda relación entre entidades debe usar vocabulario controlado y evitar verbos equivalentes redundantes para el mismo vínculo semántico."
+  - "La metadata no debe duplicar la misma decisión en múltiples campos; cada decisión debe tener una única fuente canónica dentro de la entidad."
+  - "Los nombres de familias semánticas y taxonómicas deben ser mutuamente excluyentes; no deben coexistir ramas solapadas que describan la misma intención con distinto nombre."
+  - "Toda metadata nueva debe validarse contra la ontología, el schema y las reglas globales antes de considerarse canónica."

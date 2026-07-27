@@ -1,0 +1,53 @@
+schema_version: '0.2'
+kind: foundation
+identifier: spacing
+name: Spacing
+description: Foundación de espaciado y grilla de diseño para la super-app Waup basada en una grilla base de 8pt.
+classification:
+  category: spacing
+  foundation_type: mixed
+  scope: semantic
+metadata:
+  status: in_review
+  links:
+  - kind: repository
+    url: specs/design-system/tokens/base.yaml
+    label: Base spacing tokens
+  - kind: repository
+    url: specs/design-system/tokens/semantic.yaml
+    label: Semantic spacing tokens
+document_blocks:
+- kind: purpose
+  statement: Garantizar consistencia en la alineación, el ritmo vertical y la densidad visual del layout móvil.
+- kind: scale
+  id: spacing-system
+  name: Spacing system
+  description: Capas principales que organizan el espaciado raw y sus asignaciones semánticas.
+  groups:
+  - id: raw-spacing-space
+    description: Escala de espaciados base en pixeles que sigue la grilla de 8pt (8, 12, 16, 24, 32).
+  - id: spacing-layout
+    description: Asignaciones semánticas de espaciado para componentes, paddings de pantalla, márgenes internos y relaciones estructurales.
+- kind: guidelines
+  items:
+  - id: screen-padding
+    description: El espaciado de margen lateral de la pantalla (screen padding) debe ser estrictamente de 24px.
+    guidance: El espaciado de margen lateral de la pantalla (screen padding) debe ser estrictamente de 24px.
+    level: should
+    category: layout-density
+    rationale: Brinda suficiente respiro a los lados en pantallas móviles evitando que el contenido choque con los bordes físicos.
+  - id: card-internal-padding
+    description: El relleno interno de las tarjetas de contenido (card internal padding) debe ser de 20px.
+    guidance: El relleno interno de las tarjetas de contenido (card internal padding) debe ser de 20px.
+    level: should
+    category: layout-density
+    rationale: Proporciona una densidad de visualización cómoda, equilibrando la lectura y el espacio en pantalla.
+  - id: section-spacing
+    description: El espaciado entre secciones independientes de la interfaz (section spacing) debe ser de 24px.
+    guidance: El espaciado entre secciones independientes de la interfaz (section spacing) debe ser de 24px.
+    level: should
+    category: layout-density
+    rationale: Refuerza la ley de proximidad agrupando visualmente elementos relacionados e impidiendo la sobrecarga cognitiva.
+provenance:
+  origin: author_defined
+  confidence: high

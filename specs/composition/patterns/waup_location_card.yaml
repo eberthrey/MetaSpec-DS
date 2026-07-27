@@ -1,0 +1,46 @@
+id: "waup.location-card"
+name: "Waup Location Card"
+purpose: "Tarjeta informativa e interactiva de la dirección de recojo establecida para el paseo de la mascota."
+problem: "El usuario necesita visualizar claramente la ubicación de recogida y poder modificarla libremente si se encuentra en otra dirección, garantizando que el cambio se refleje dinámicamente sin interrumpir la experiencia de simulación."
+solves:
+  - "Visualización clara de la dirección de recojo del servicio."
+  - "Acceso a la funcionalidad de cambio de ubicación en vivo."
+composition:
+  slots:
+    - name: "title"
+      role: "heading-content"
+      required: true
+      description: "Etiqueta superior de la tarjeta (ej. 'Dirección de recojo')."
+    - name: "change_action"
+      role: "secondary-action"
+      required: true
+      description: "Botón tipo enlace (ghost) a la derecha para iniciar la edición de ubicación."
+    - name: "address"
+      role: "body-content"
+      required: true
+      description: "Texto que representa el distrito/dirección configurada actualmente."
+behavior:
+  states:
+    - name: "default"
+      description: "Muestra la dirección configurada en reposo."
+    - name: "editing"
+      description: "Estado interactivo en el cual se despliega un selector o input para modificar la ubicación en vivo."
+usage:
+  use_cases:
+    - "Pantalla de configuración y búsqueda de paseo (Buscar paseo)."
+    - "Secciones de facturación y perfil de usuario."
+  anti_patterns:
+    - scenario: "Bloquear la edición de ubicación o forzar el re-inicio del flujo de configuración completo"
+      reason: "Genera frustración al usuario si solo quiere cambiar su dirección de partida antes de buscar paseadores."
+      alternative: "Implementar un cambio de ubicación en caliente (hot reload) que re-filtre los paseadores del nuevo distrito en segundo plano."
+      severity: "warning"
+accessibility:
+  considerations:
+    - "La acción de cambio ('Cambiar') debe poseer suficiente contraste táctil e indicaciones auditivas."
+    - "El distrito/dirección debe ser legible para lectores de pantalla."
+maps_to_components:
+  - "component.card"
+  - "component.button"
+provenance:
+  source: "author_defined"
+  confidence: "high"

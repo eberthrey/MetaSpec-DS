@@ -1,0 +1,71 @@
+identity:
+  id: component.service_type_switch
+  name: Service Type Switch (Selector de Tipo de Servicio)
+  aliases:
+  - service_type_switch
+taxonomy:
+  type: selection
+  category: selection
+intent:
+  summary: Control segmentado de dos posiciones para alternar entre servicio inmediato ('Ahora') o agendado ('Programar').
+  purpose: Facilita la decisión inmediata del dueño sobre si desea un paseo de forma inmediata o programada, alterando reactivamente el flujo y los campos de la pantalla.
+  system_role: capture_selection
+  user_need: Selección del tipo de servicio de paseo
+usage:
+  use_cases:
+  - id: selector-de-urgencia-en-la-configuracion-del-paseo
+    scenario: Selector de urgencia en la configuración del paseo
+    rationale: El dueño de mascota conmuta a 'Programar' y se le despliegan campos condicionales de fecha y hora.
+  anti_patterns:
+  - scenario: Permitir estados intermedios o vacíos
+    reason: El tipo de servicio debe ser obligatoriamente uno de los dos.
+    correction: Garantizar que la prop 'selected' siempre tenga un valor por defecto.
+composition:
+  slots:
+  - id: option-now
+    role: primary-action
+    description: Segmento para la opción 'Ahora'.
+    cardinality: exactly_one
+  - id: option-schedule
+    role: primary-action
+    description: Segmento para la opción 'Programar'.
+    cardinality: exactly_one
+behavior:
+  states:
+  - id: now-selected
+    meaning: El segmento 'Ahora' está activo con fondo prominente.
+  - id: schedule-selected
+    meaning: El segmento 'Programar' está activo con fondo prominente.
+accessibility:
+  semantic_role: radiogroup
+  focus_behavior:
+  - El control segmentado actúa como un grupo de radio botones navegable por teclado.
+  screen_reader_expectations:
+  - Debe anunciar el rol 'radiogroup' y el estado seleccionado en cada segmento.
+  requirements:
+  - id: accessibility.service-type-switch.focus
+    statement: El control segmentado actúa como un grupo de radio botones navegable por teclado.
+  - id: accessibility.service-type-switch.screen-reader
+    statement: Debe anunciar el rol 'radiogroup' y el estado seleccionado en cada segmento.
+examples:
+  positive:
+  - scenario: Selector de urgencia en la configuración del paseo
+    rationale: El dueño de mascota conmuta a 'Programar' y se le despliegan campos condicionales de fecha y hora.
+  negative:
+  - scenario: Permitir estados intermedios o vacíos
+    violation: El tipo de servicio debe ser obligatoriamente uno de los dos.
+    correction: Garantizar que la prop 'selected' siempre tenga un valor por defecto.
+implementation_reference:
+  repository_path: specs/design-system/components/service_type_switch.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/service_type_switch.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

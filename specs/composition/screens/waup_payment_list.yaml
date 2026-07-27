@@ -1,0 +1,42 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Listado de Métodos de Pago del Owner
+  waup_payment_list:
+    description: "Pantalla donde el dueño visualiza sus tarjetas de crédito/débito guardadas y puede eliminarlas o agregar nuevas."
+    role: "waup_pet_owner"
+    view_state: "waup_payment_methods_list"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Métodos de Pago"
+          back_action: "navigate_to:waup_owner_home"
+          variant: "ghost"
+          
+      - slot_id: "payment_cards_vertical_list"
+        description: "Lista vertical con las tarjetas de crédito o débito registradas por el dueño."
+        layout: "vertical_list"
+        items_source: "user.payment_cards"
+        items:
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "{card.type} **** {card.last4}"
+              description: "{card.holder} • Exp: {card.exp}"
+              icon: "credit-card"
+              action: "remove_payment_card"
+              
+      - slot_id: "add_card_action"
+        description: "Botón principal fijado al pie de la pantalla para registrar una nueva tarjeta."
+        component: "component.button"
+        properties:
+          label: "Agregar Tarjeta"
+          action: "navigate_to:waup_add_payment"
+          hierarchy: "primary"

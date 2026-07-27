@@ -1,0 +1,65 @@
+id: "waup.shortcut-card"
+name: "Waup Shortcut Card (Tarjeta de Acceso Rápido)"
+purpose: "Proporcionar accesos directos compactos, interactivos y auto-descriptivos organizados en un grid simétrico."
+problem: "El usuario necesita navegar de manera directa a subsecciones clave (mascotas, paseos, pagos, programación) sin sobrecargar verticalmente la pantalla de inicio móvil, con claridad sobre el propósito de cada sección."
+solves:
+  - "Navegación en un solo toque a subsecciones operacionales."
+  - "Presentación visual estructurada con ilustración destacada y descripción aclaratoria."
+composition:
+  slots:
+    - name: "title"
+      role: "label"
+      required: true
+      description: "Etiqueta descriptiva corta del acceso directo (tamaño 14px)."
+      accepts:
+        - "text"
+    - name: "icon"
+      role: "icon"
+      required: true
+      description: "Icono o ilustración de soporte visual destacado (40px de contenedor)."
+      accepts:
+        - "asset.icon"
+    - name: "description"
+      role: "description"
+      required: true
+      description: "Texto descriptivo breve complementario para mayor claridad (tamaño 11px/12px)."
+      accepts:
+        - "text"
+behavior:
+  states:
+    - name: "default"
+      description: "Estado base de visualización interactiva de la tarjeta."
+    - name: "active"
+      description: "Estado cuando el usuario pulsa sobre la tarjeta."
+usage:
+  use_cases:
+    - "Grid de accesos rápidos auto-descriptivos en la pantalla principal del dueño y paseador."
+  anti_patterns:
+    - scenario: "Utilizar descripciones largas de más de dos líneas"
+      reason: "Las tarjetas están alineadas horizontalmente y tienen espacio limitado en su alto y ancho."
+      alternative: "Mantener descripciones de máximo 5 o 6 palabras."
+      severity: "warning"
+accessibility:
+  considerations:
+    - "Cada tarjeta tiene un área táctil mínima de 48px de alto para cumplir estándares de usabilidad en móvil."
+    - "El contraste de la etiqueta de 14px y la descripción de 11px cumple con la relación de contraste de color."
+maps_to_components:
+  - "component.card"
+  - "component.button"
+token_bindings:
+  color:
+    - "color.text.title"
+    - "color.shortcut.icon.violet"
+    - "color.shortcut.icon.primary"
+    - "color.shortcut.icon.navy"
+    - "color.surface.default"
+    - "color.text.muted"
+  spacing:
+    - "spacing.layout.card_padding"
+    - "spacing.layout.gap_small"
+  typography:
+    - "typography.size.sm_medium"
+    - "typography.size.caption"
+provenance:
+  source: "author_defined"
+  confidence: "high"

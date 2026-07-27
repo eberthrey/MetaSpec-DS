@@ -1,0 +1,95 @@
+identity:
+  id: component.avatar
+  name: Avatar
+  aliases:
+  - avatar
+taxonomy:
+  type: data_display
+  category: data_display
+intent:
+  summary: Elemento visual circular que representa a un usuario, paseador o mascota mediante una imagen o iniciales.
+  purpose: Facilita la identificación visual rápida de personas o animales en la interfaz.
+  system_role: surface_information
+  user_need: Identificar entidad
+usage:
+  use_cases:
+  - id: foto-de-perfil-de-la-mascota-o-dueno
+    scenario: Foto de perfil de la mascota o dueño
+    rationale: Visualizar el avatar en el header o en los cards de mascotas.
+  anti_patterns:
+  - scenario: Usar avatares cuadrados en Waup
+    reason: Rompe con la geometría rounded_organic establecida en semantic-intent.yaml.
+    correction: Usa siempre formas circulares con desbordes ocultos.
+variants:
+- id: size
+  name: Size
+  description: Tamaño físico del avatar.
+  selection: single
+  values:
+  - id: sm
+    name: Pequeño
+    meaning: Avatar de 32px para listas o navegación densa.
+    use_when:
+    - Avatar de 32px para listas o navegación densa.
+  - id: md
+    name: Mediano
+    meaning: Avatar de 40px estándar.
+    use_when:
+    - Avatar de 40px estándar.
+  - id: lg
+    name: Grande
+    meaning: Avatar de 80px para vistas de detalle o perfiles.
+    use_when:
+    - Avatar de 80px para vistas de detalle o perfiles.
+composition:
+  slots:
+  - id: image
+    role: content
+    description: La imagen de origen de la entidad
+    cardinality: zero_or_one
+    accepts:
+    - asset.graphic
+  - id: fallback-icon
+    role: icon
+    description: Icono alternativo cuando no carga la imagen
+    cardinality: zero_or_one
+    accepts:
+    - asset.icon
+  parent_constraints:
+  - rule: Los avatares de Waup deben ser siempre circulares.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado inicial del avatar.
+accessibility:
+  accessible_name: Debe proporcionarse mediante la prop ariaLabel o derivarse de un texto visible equivalente.
+  focus_behavior:
+  - El avatar no es enfocable a menos que sea interactivo (actúe como botón).
+  requirements:
+  - id: accessibility.avatar.focus
+    statement: El avatar no es enfocable a menos que sea interactivo (actúe como botón).
+  - id: accessibility.avatar.contrast
+    statement: Debe mantener bordes definidos o sombras para no mezclarse con fondos similares.
+examples:
+  positive:
+  - scenario: Foto de perfil de la mascota o dueño
+    rationale: Visualizar el avatar en el header o en los cards de mascotas.
+  negative:
+  - scenario: Usar avatares cuadrados en Waup
+    violation: Rompe con la geometría rounded_organic establecida en semantic-intent.yaml.
+    correction: Usa siempre formas circulares con desbordes ocultos.
+implementation_reference:
+  repository_path: specs/design-system/components/avatar.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/avatar.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

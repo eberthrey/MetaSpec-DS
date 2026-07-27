@@ -1,0 +1,119 @@
+identity:
+  id: component.navigation_header
+  name: Navigation Header (Encabezado de Navegación)
+  aliases:
+  - navigation_header
+taxonomy:
+  type: navigation
+  category: navigation
+intent:
+  summary: Barra superior de navegación interna para pantallas secundarias que incluye botón de retroceso (back button), título centrado o alineado a la izquierda, y opcionalmente un subtítulo explicativo.
+  purpose: Permite al usuario volver a la pantalla anterior y le orienta sobre la sección en la que se encuentra.
+  system_role: orient_navigation
+  user_need: Navegar hacia atrás y proveer contexto jerárquico
+usage:
+  use_cases:
+  - id: pantallas-secundarias-de-edicion-de-perfiles-o-configuracion-de-pagos
+    scenario: Pantallas secundarias de edición de perfiles o configuración de pagos
+    rationale: Permite al dueño o paseador retroceder y cancelando el flujo en curso.
+  anti_patterns:
+  - scenario: Colocar múltiples acciones secundarias en la barra
+    reason: Satura el espacio y compite con la acción principal de retroceder.
+    correction: Usa un diseño limpio, limitando los elementos a retroceso, título y subtítulo.
+variants:
+- id: variant
+  name: Variant
+  description: Tratamiento visual del fondo.
+  selection: single
+  values:
+  - id: solid
+    name: Sólido
+    meaning: Fondo con color de superficie para separar claramente del contenido.
+    use_when:
+    - Fondo con color de superficie para separar claramente del contenido.
+  - id: ghost
+    name: Ghost
+    meaning: Fondo transparente que se funde con el color general de la pantalla.
+    use_when:
+    - Fondo transparente que se funde con el color general de la pantalla.
+- id: size
+  name: Size
+  description: Tamaño y paddings del encabezado.
+  selection: single
+  values:
+  - id: sm
+    name: Pequeño
+    meaning: Altura compacta para pantallas densas.
+    use_when:
+    - Altura compacta para pantallas densas.
+  - id: md
+    name: Mediano
+    meaning: Medidas estándar de navegación.
+    use_when:
+    - Medidas estándar de navegación.
+  - id: lg
+    name: Grande
+    meaning: Cabecera alta para secciones principales.
+    use_when:
+    - Cabecera alta para secciones principales.
+composition:
+  slots:
+  - id: back-action
+    role: primary-navigation
+    description: Botón de retroceso (usualmente flecha hacia la izquierda).
+    cardinality: exactly_one
+    accepts:
+    - component.button_icon
+  - id: title
+    role: heading-content
+    description: Título principal de la sección.
+    cardinality: exactly_one
+    accepts:
+    - text
+  - id: subtitle
+    role: supporting-copy
+    description: Texto de soporte o contexto adicional debajo del título.
+    cardinality: zero_or_one
+    accepts:
+    - text
+  parent_constraints:
+  - rule: El botón de volver es obligatorio.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado normal y visible.
+accessibility:
+  focus_behavior:
+  - El foco se coloca primero en el botón de retroceso.
+  requirements:
+  - id: accessibility.navigation-header.focus
+    statement: El foco se coloca primero en el botón de retroceso.
+  - id: accessibility.navigation-header.contrast
+    statement: El texto debe cumplir con la relación de contraste WCAG de al menos 4.5:1 contra el fondo.
+relationships:
+- type: commonly_composed_with
+  target: component.button_icon
+  rationale: This component commonly composes with component.button_icon through the back-action slot.
+examples:
+  positive:
+  - scenario: Pantallas secundarias de edición de perfiles o configuración de pagos
+    rationale: Permite al dueño o paseador retroceder y cancelando el flujo en curso.
+  negative:
+  - scenario: Colocar múltiples acciones secundarias en la barra
+    violation: Satura el espacio y compite con la acción principal de retroceder.
+    correction: Usa un diseño limpio, limitando los elementos a retroceso, título y subtítulo.
+implementation_reference:
+  repository_path: specs/design-system/components/navigation_header.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/navigation_header.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

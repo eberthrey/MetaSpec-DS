@@ -1,0 +1,13 @@
+id: "asset.icon.card"
+name: "Icono Tarjeta de Crédito (Credit Card)"
+asset_type: "icon"
+description: "Icono representativo de una tarjeta de crédito para la sección de Métodos de Pago."
+category: "system_navigation"
+source_type: "external_library"
+asset_ref:
+  library: "FontAwesome"
+  path: "fa-solid fa-credit-card"
+  format: "svg"
+provenance:
+  source: "author_defined"
+  confidence: "high"

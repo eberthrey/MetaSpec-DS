@@ -1,0 +1,111 @@
+identity:
+  id: component.carousel
+  name: Carrusel (Deslizador / Swiper)
+  aliases:
+  - carousel
+taxonomy:
+  type: layout
+  category: layout
+intent:
+  summary: Contenedor de desplazamiento horizontal que agrupa múltiples elementos del mismo tipo, permitiendo navegar secuencialmente entre ellos mediante gestos de deslizamiento (swipe).
+  purpose: Permite presentar colecciones de información u opciones de forma compacta e interactiva, reduciendo el desplazamiento vertical.
+  system_role: group_related_content
+  user_need: Optimizar espacio visual
+usage:
+  use_cases:
+  - id: carrusel-de-tarjetas-de-mascotas
+    scenario: Carrusel de tarjetas de mascotas
+    rationale: Deslizar entre los perfiles de los perros del dueño directamente en la tarjeta héroe del Home.
+  anti_patterns:
+  - scenario: Anidar carruseles horizontales
+    reason: Confunde la dirección de los gestos del usuario en dispositivos móviles y dificulta la usabilidad.
+    correction: Usa scroll vertical estándar y limita la interacción horizontal a un único carrusel principal.
+variants:
+- id: pagination
+  name: Pagination
+  description: Tipo de indicadores de posición.
+  selection: single
+  values:
+  - id: dots
+    name: Puntos
+    meaning: Puntos inferiores que indican de manera visual la página o slide activa.
+    use_when:
+    - Puntos inferiores que indican de manera visual la página o slide activa.
+  - id: none
+    name: Ninguno
+    meaning: Sin indicadores explícitos, solo desplazamiento libre.
+    use_when:
+    - Sin indicadores explícitos, solo desplazamiento libre.
+- id: size
+  name: Size
+  description: Espaciado y separación de los elementos del carrusel.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Carrusel compacto con espacio reducido.
+    use_when:
+    - Carrusel compacto con espacio reducido.
+  - id: md
+    name: Medium
+    meaning: Carrusel de tamaño estándar.
+    use_when:
+    - Carrusel de tamaño estándar.
+  - id: lg
+    name: Large
+    meaning: Carrusel con separación amplia.
+    use_when:
+    - Carrusel con separación amplia.
+composition:
+  slots:
+  - id: slides
+    role: content
+    description: Colección de componentes o tarjetas a mostrar dentro del carrusel.
+    cardinality: exactly_one
+    accepts:
+    - mixed
+  - id: indicators
+    role: supporting-copy
+    description: Puntos de paginación o indicadores visuales de posición (dots).
+    cardinality: zero_or_one
+    accepts:
+    - text
+  parent_constraints:
+  - rule: El carrusel debe contener al menos un elemento o slide.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado base del carrusel.
+  - id: scrolling
+    meaning: Estado dinámico durante el deslizamiento físico.
+accessibility:
+  focus_behavior:
+  - El carrusel debe permitir la lectura y el enfoque secuencial de cada slide por separado para tecnologías de asistencia (lector de pantalla).
+  requirements:
+  - id: accessibility.carousel.focus
+    statement: El carrusel debe permitir la lectura y el enfoque secuencial de cada slide por separado para tecnologías de asistencia (lector de pantalla).
+  - id: accessibility.carousel.contrast
+    statement: Los puntos de paginación (dots) deben mantener una relación de contraste mínima de 3:1 contra el fondo.
+examples:
+  positive:
+  - scenario: Carrusel de tarjetas de mascotas
+    rationale: Deslizar entre los perfiles de los perros del dueño directamente en la tarjeta héroe del Home.
+  negative:
+  - scenario: Anidar carruseles horizontales
+    violation: Confunde la dirección de los gestos del usuario en dispositivos móviles y dificulta la usabilidad.
+    correction: Usa scroll vertical estándar y limita la interacción horizontal a un único carrusel principal.
+implementation_reference:
+  repository_path: specs/design-system/components/carousel.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/carousel.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

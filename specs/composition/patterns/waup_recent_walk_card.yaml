@@ -1,0 +1,52 @@
+id: "waup-recent-walk-card"
+name: "Waup Recent Walk Card"
+purpose: "Presentar de forma clara y accesible el resumen del último paseo completado por la mascota del usuario directamente en el home."
+problem: "El usuario necesita consultar rápidamente si el último paseo de su mascota culminó de forma exitosa y recordar quién fue el paseador, sin tener que navegar profundamente en el historial."
+solves:
+  - "Acceso inmediato al último servicio completado desde el home."
+  - "Refuerzo visual de tranquilidad y transparencia."
+composition:
+  slots:
+    - name: "avatar"
+      role: "decorative"
+      required: true
+      description: "Foto del paseador que completó el servicio."
+    - name: "walker_name"
+      role: "heading-content"
+      required: true
+      description: "Nombre del paseador."
+    - name: "pet_name"
+      role: "supporting-copy"
+      required: true
+      description: "Nombre de la mascota que fue paseada."
+    - name: "schedule"
+      role: "supporting-copy"
+      required: true
+      description: "Fecha y hora en que se realizó el paseo."
+    - name: "duration"
+      role: "metadata"
+      required: true
+      description: "Duración del paseo (ej: '30 min')."
+behavior:
+  states:
+    - name: "default"
+      description: "Muestra la tarjeta de forma pasiva con un badge verde de estado 'Completado'."
+usage:
+  use_cases:
+    - "Sección inferior de paseos recientes en la pantalla waup_owner_home."
+  anti_patterns:
+    - scenario: "Mostrar la tarjeta vacía o con información incompleta cuando no se han realizado paseos"
+      reason: "Confunde al usuario sobre el estado de su cuenta."
+      alternative: "Ocultar condicionalmente la sección completa mediante la regla de negocio user.completed_walks_count >= 1."
+      severity: "warning"
+accessibility:
+  considerations:
+    - "El avatar del paseador debe contar con texto alternativo."
+    - "La fecha y la duración deben estar en contenedores legibles."
+maps_to_components:
+  - "component.walk_card"
+  - "component.avatar"
+  - "component.badge"
+provenance:
+  source: "author_defined"
+  confidence: "high"

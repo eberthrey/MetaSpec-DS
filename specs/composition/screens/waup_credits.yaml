@@ -1,0 +1,46 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Mis Créditos (Walker Wallet)
+  waup_credits:
+    description: "Pantalla del monedero del paseador que muestra el saldo acumulado, el historial de retiros y el acceso para solicitar un nuevo retiro de fondos."
+    role: "waup_walker"
+    view_state: "waup_walker_credits"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Mis Créditos"
+          back_action: "navigate_to:waup_walker_home"
+          variant: "ghost"
+          
+      - slot_id: "balance_display"
+        description: "Contenedor premium que destaca el saldo disponible actual."
+        component: "component.card"
+        properties:
+          title: "Saldo Disponible"
+          content: "S/. {user.credits_balance}"
+          text_size: "large"
+          
+      - slot_id: "withdraw_action"
+        description: "Botón principal para iniciar el flujo de transferencia de fondos a cuenta de banco."
+        component: "component.button"
+        properties:
+          label: "Retirar fondos"
+          action: "navigate_to:waup_walker_withdrawal_request"
+          hierarchy: "primary"
+          
+      - slot_id: "withdrawal_history"
+        description: "Lista de retiros históricos procesados o en curso."
+        component: "component.card"
+        properties:
+          title: "Historial de Retiros"
+          layout: "vertical_list"
+          empty_state_text: "No registras retiros de saldo aún."

@@ -1,0 +1,39 @@
+id: "waup_onboarding_navigation"
+name: "Navegación Inferior de Onboarding"
+category: "navigation"
+description: "Patrón horizontal que agrupa el indicador de progreso (dots) a la izquierda y el botón de acción (circular con icono de flecha) a la derecha."
+
+properties:
+  active_step:
+    type: "number"
+    required: true
+    description: "Paso activo actual (0, 1 o 2)."
+  primary_label:
+    type: "string"
+    required: true
+    description: "Etiqueta accesible para el botón principal."
+  secondary_label:
+    type: "string"
+    required: false
+    description: "Etiqueta para acción alternativa (ej. Omitir o Iniciar sesión). Opcional."
+
+composition:
+  layout:
+    display: "flex"
+    flex_direction: "row"
+    align_items: "center"
+    justify_content: "space-between"
+    width: "100%"
+  slots:
+    - name: "indicator"
+      role: "indicator"
+      required: true
+      description: "Instancia del componente step_indicator."
+    - name: "primary_action"
+      role: "action"
+      required: true
+      description: "Instancia del componente button_icon para avanzar de pantalla."
+
+maps_to_components:
+  - "component.step_indicator"
+  - "component.button_icon"

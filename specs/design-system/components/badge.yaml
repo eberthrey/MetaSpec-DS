@@ -1,0 +1,130 @@
+identity:
+  id: component.badge
+  name: Badge (Placa / Etiqueta)
+  aliases:
+  - badge
+taxonomy:
+  type: data_display
+  category: data_display
+intent:
+  summary: Pequeño contenedor de información de estado, recuentos numéricos o etiquetas de texto destacadas.
+  purpose: 'Llama la atención sobre estados temporales o atributos clave (ej: ''Quiere salir'', ''Está feliz'').'
+  system_role: surface_information
+  user_need: Destacar estado
+usage:
+  use_cases:
+  - id: mostrar-estado-del-perro
+    scenario: Mostrar estado del perro
+    rationale: Visualizar badges dinámicos sobre la foto de la mascota ('Quiere salir' / 'Está feliz').
+  anti_patterns:
+  - scenario: Colocar textos largos dentro de un badge
+    reason: Rompe la densidad del layout compact y satura el diseño.
+    correction: Usa textos cortos o abreviaciones operativas de 1 o 2 palabras.
+variants:
+- id: status
+  name: Status
+  description: Estado semántico que determina el color.
+  selection: single
+  values:
+  - id: primary
+    name: Primario
+    meaning: Etiqueta con color de marca (coral) para alertas de acción.
+    use_when:
+    - Etiqueta con color de marca (coral) para alertas de acción.
+  - id: success
+    name: Éxito
+    meaning: Etiqueta verde de confirmación o felicidad.
+    use_when:
+    - Etiqueta verde de confirmación o felicidad.
+  - id: info
+    name: Información
+    meaning: Etiqueta neutral o azul para datos de soporte.
+    use_when:
+    - Etiqueta neutral o azul para datos de soporte.
+- id: treatment
+  name: Treatment
+  description: Tratamiento visual (fondo sólido o cristal).
+  selection: single
+  values:
+  - id: solid
+    name: Sólido
+    meaning: Badge sólido estándar con color de fondo plano.
+    use_when:
+    - Badge sólido estándar con color de fondo plano.
+  - id: overlay
+    name: Superposición (Glassmorphism)
+    meaning: Badge semi-transparente con desenfoque de fondo (backdrop-filter) para superponer sobre imágenes sin competir con CTAs primarios.
+    use_when:
+    - Badge semi-transparente con desenfoque de fondo (backdrop-filter) para superponer sobre imágenes sin competir con CTAs primarios.
+- id: size
+  name: Size
+  description: Tamaño físico del badge.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Badge compacto para listados o subtextos.
+    use_when:
+    - Badge compacto para listados o subtextos.
+  - id: md
+    name: Medium
+    meaning: Badge de tamaño estándar.
+    use_when:
+    - Badge de tamaño estándar.
+  - id: lg
+    name: Large
+    meaning: Badge de tamaño grande para títulos o encabezados.
+    use_when:
+    - Badge de tamaño grande para títulos o encabezados.
+composition:
+  slots:
+  - id: label
+    role: label
+    description: Texto informativo de la etiqueta
+    cardinality: exactly_one
+    accepts:
+    - text
+  - id: icon
+    role: icon
+    description: Icono decorativo opcional dentro de la etiqueta
+    cardinality: zero_or_one
+    accepts:
+    - asset.icon
+  parent_constraints:
+  - rule: Los badges no deben responder a eventos táctiles ni del cursor.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado inicial del badge.
+accessibility:
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - Los badges son de solo lectura y no reciben foco.
+  requirements:
+  - id: accessibility.badge.focus
+    statement: Los badges son de solo lectura y no reciben foco.
+  - id: accessibility.badge.contrast
+    statement: El texto en el badge debe mantener una relación de contraste mínima de 4.5:1 contra su color de fondo.
+examples:
+  positive:
+  - scenario: Mostrar estado del perro
+    rationale: Visualizar badges dinámicos sobre la foto de la mascota ('Quiere salir' / 'Está feliz').
+  negative:
+  - scenario: Colocar textos largos dentro de un badge
+    violation: Rompe la densidad del layout compact y satura el diseño.
+    correction: Usa textos cortos o abreviaciones operativas de 1 o 2 palabras.
+implementation_reference:
+  repository_path: specs/design-system/components/badge.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/badge.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

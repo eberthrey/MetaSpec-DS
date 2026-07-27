@@ -1,0 +1,54 @@
+schema_version: '0.2'
+kind: foundation
+identifier: color
+name: Color Foundation
+description: Paleta cromática oficial de Waup, que define los colores primarios, secundarios, neutros y de soporte semántico.
+classification:
+  category: color
+  foundation_type: token_based
+  scope: raw
+metadata:
+  status: in_review
+  links:
+  - kind: repository
+    url: specs/design-system/tokens/base.yaml
+    label: Base color tokens
+document_blocks:
+- kind: purpose
+  statement: Definir la paleta cromática base del sistema para que productos, tokens semánticos y componentes partan de primitives consistentes.
+- kind: scale
+  id: base-palette
+  name: Base palette
+  description: Familias principales de color raw disponibles en el sistema.
+  groups:
+  - id: primary
+    description: Colores de acento principal y conversión.
+  - id: secondary
+    description: Colores complementarios de marca y apoyo visual.
+  - id: neutral
+    description: Colores de fondo, superficie, texto y divisores.
+  - id: support
+    description: Colores funcionales para éxito, advertencia y error.
+- kind: guidelines
+  items:
+  - id: primary-navy-usage
+    description: El color primario Navy (#17356D) debe usarse para títulos, navegación y texto principal.
+    guidance: El color primario Navy (#17356D) debe usarse para títulos, navegación y texto principal.
+    level: should
+    category: color-usage
+    rationale: Proporciona legibilidad extrema y transmite seriedad, confianza y solidez institucional.
+  - id: coral-accent-usage
+    description: El color Coral (#FF6B4A) debe usarse como color de acento y conversión rápida en botones de acción principal, pestañas y estados seleccionados.
+    guidance: El color Coral (#FF6B4A) debe usarse como color de acento y conversión rápida en botones de acción principal, pestañas y estados seleccionados.
+    level: should
+    category: color-usage
+    rationale: Fomenta la inmediatez y destaca elementos interactivos clave sin saturar la vista general.
+  - id: soft-cream-background
+    description: Se debe usar Soft Cream (#FFFCF8) como fondo de pantalla general para dotar a la app de calidez y suavidad.
+    guidance: Se debe usar Soft Cream (#FFFCF8) como fondo de pantalla general para dotar a la app de calidez y suavidad.
+    level: should
+    category: surface-usage
+    rationale: Evita el blanco puro clínico, alineándose con el principio de calidez funcional.
+provenance:
+  origin: author_defined
+  confidence: high

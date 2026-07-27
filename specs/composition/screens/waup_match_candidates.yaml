@@ -1,0 +1,48 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Selección de Paseador (Match Candidates)
+  waup_match_candidates:
+    description: "Pantalla que despliega la terna obligatoria de 3 paseadores disponibles en la zona para que el dueño elija uno."
+    role: "waup_pet_owner"
+    view_state: "waup_candidate_selection"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Elige tu Paseador"
+          subtitle: "Terna de exactamente 3 candidatos"
+          variant: "ghost"
+          
+      - slot_id: "candidates_list"
+        description: "Lista de 3 paseadores filtrados con compatibilidad de distrito."
+        layout: "vertical_list"
+        items_source: "matching_walkers"
+        items:
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "{walker.name}"
+              description: "★ {walker.rating} ({walker.completedWalks} paseos)"
+              avatar: "{walker.avatar}"
+              price_source: "walker.rate"
+              action: "select_walker"
+              
+      - slot_id: "checkout_action"
+        description: "Acción principal para ir a procesar el pago del servicio."
+        component: "component.button"
+        properties:
+          label: "Continuar al Pago"
+          action: "navigate_to:waup_payment_processing"
+          hierarchy: "primary"
+          
+    enforced_rules:
+      - rule_id: "waup_candidate_selection_rule"
+        description: "Valida que se muestren exactamente 3 candidatos disponibles."
+        exact_candidate_count: 3

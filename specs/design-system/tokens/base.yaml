@@ -1,0 +1,757 @@
+tokens:
+- token: color.base.primary
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.primary
+      was_inferred: false
+  intent:
+    description: Color de acento primario (Coral)
+- token: color.base.secondary.navy
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.secondary.navy
+      was_inferred: false
+  intent:
+    description: Color primario Navy de la marca para jerarquía y textos
+- token: color.base.secondary.soft_cream
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.secondary.soft_cream
+      was_inferred: false
+  intent:
+    description: Color de fondo principal cálido
+- token: color.base.secondary.light_lilac
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.secondary.light_lilac
+      was_inferred: false
+  intent:
+    description: Color para tarjetas secundarias y elementos suaves
+- token: color.base.secondary.border_neutral
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.secondary.border_neutral
+      was_inferred: false
+  intent:
+    description: Color de borde y divisores neutros
+- token: color.base.secondary.violet
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.secondary.violet
+      was_inferred: false
+  intent:
+    description: Color morado destacado para acentos, chips y programados
+- token: color.base.neutral.background
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.neutral.background
+      was_inferred: false
+  intent:
+    description: Color de fondo general
+- token: color.base.neutral.warm_surface
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.neutral.warm_surface
+      was_inferred: false
+  intent:
+    description: Color de superficie para tarjetas principales
+- token: color.base.neutral.muted_text
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.neutral.muted_text
+      was_inferred: false
+  intent:
+    description: Color de texto secundario/gris
+- token: color.base.neutral.muted_extra
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.neutral.muted_extra
+      was_inferred: false
+  intent:
+    description: Color de texto extra apagado o placeholder
+- token: color.base.support.success
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.support.success
+      was_inferred: false
+  intent:
+    description: Color de éxito y disponibilidad
+- token: color.base.support.warning
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.support.warning
+      was_inferred: false
+  intent:
+    description: Color de advertencia o atención
+- token: color.base.support.error
+  classification:
+    layer: primitive
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.base.support.error
+      was_inferred: false
+  intent:
+    description: Color de error y validación
+- token: radius.base.small
+  classification:
+    layer: primitive
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.base.small
+      was_inferred: false
+  intent:
+    description: Radio de redondeado pequeño (12px)
+- token: radius.base.input
+  classification:
+    layer: primitive
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.base.input
+      was_inferred: false
+  intent:
+    description: Radio de redondeado para inputs y chips (16px)
+- token: radius.base.medium
+  classification:
+    layer: primitive
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.base.medium
+      was_inferred: false
+  intent:
+    description: Radio de redondeado mediano (Botones y tarjetas secundarias)
+- token: radius.base.large
+  classification:
+    layer: primitive
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.base.large
+      was_inferred: false
+  intent:
+    description: Radio de redondeado grande (Tarjetas principales)
+- token: radius.base.xl
+  classification:
+    layer: primitive
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.base.xl
+      was_inferred: false
+  intent:
+    description: Radio de redondeado extra grande (Bottom Sheets)
+- token: radius.base.circle
+  classification:
+    layer: primitive
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.base.circle
+      was_inferred: false
+  intent:
+    description: Radio circular completo
+- token: typography.base.family
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.family
+      was_inferred: false
+  intent:
+    description: Tipografía principal del sistema
+- token: typography.base.size.xs
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.xs
+      was_inferred: false
+  intent:
+    description: Tamaño extra pequeño (Caption)
+- token: typography.base.size.sm
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.sm
+      was_inferred: false
+  intent:
+    description: Tamaño pequeño (Body)
+- token: typography.base.size.md
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.md
+      was_inferred: false
+  intent:
+    description: Tamaño mediano (Body Large)
+- token: typography.base.size.lg
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.lg
+      was_inferred: false
+  intent:
+    description: Tamaño grande (H3)
+- token: typography.base.size.xl
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.xl
+      was_inferred: false
+  intent:
+    description: Tamaño extra grande (H2)
+- token: typography.base.size.xxl
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.xxl
+      was_inferred: false
+  intent:
+    description: Tamaño doble extra grande (H1)
+- token: typography.base.size.display
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.display
+      was_inferred: false
+  intent:
+    description: Tamaño display gigante
+- token: typography.base.weight.regular
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.weight.regular
+      was_inferred: false
+  intent:
+    description: Peso regular
+- token: typography.base.weight.medium
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.weight.medium
+      was_inferred: false
+  intent:
+    description: Peso medio
+- token: typography.base.weight.semibold
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.weight.semibold
+      was_inferred: false
+  intent:
+    description: Peso seminegrita
+- token: typography.base.weight.bold
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.weight.bold
+      was_inferred: false
+  intent:
+    description: Peso negrita
+- token: spacing.base.space.8
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.8
+      was_inferred: false
+  intent:
+    description: Espaciado de 8px
+- token: spacing.base.space.12
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.12
+      was_inferred: false
+  intent:
+    description: Espaciado de 12px
+- token: spacing.base.space.16
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.16
+      was_inferred: false
+  intent:
+    description: Espaciado de 16px
+- token: spacing.base.space.24
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.24
+      was_inferred: false
+  intent:
+    description: Espaciado de 24px
+- token: spacing.base.space.32
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.32
+      was_inferred: false
+  intent:
+    description: Espaciado de 32px
+- token: elevation.base.small
+  classification:
+    layer: primitive
+    domain: elevation
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: elevation.base.small
+      was_inferred: false
+  intent:
+    description: Sombra suave de elevación para tarjetas
+- token: elevation.base.large
+  classification:
+    layer: primitive
+    domain: elevation
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: elevation.base.large
+      was_inferred: false
+  intent:
+    description: Sombra de elevación para botones flotantes CTA
+- token: stroke.base.default
+  classification:
+    layer: primitive
+    domain: stroke
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: stroke.base.default
+      was_inferred: false
+  intent:
+    description: Grosor de borde estándar de 1px
+- token: stroke.base.thick
+  classification:
+    layer: primitive
+    domain: stroke
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: stroke.base.thick
+      was_inferred: false
+  intent:
+    description: Grosor de borde de 2px para estados activos
+- token: spacing.base.space.6
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.6
+      was_inferred: false
+  intent:
+    description: Espaciado base de 6px
+- token: spacing.base.space.10
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.10
+      was_inferred: false
+  intent:
+    description: Espaciado base de 10px
+- token: spacing.base.space.20
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.20
+      was_inferred: false
+  intent:
+    description: Espaciado base de 20px
+- token: spacing.base.space.22
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.22
+      was_inferred: false
+  intent:
+    description: Espaciado base de 22px
+- token: spacing.base.space.36
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.36
+      was_inferred: false
+  intent:
+    description: Espaciado base de 36px
+- token: spacing.base.space.40
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.40
+      was_inferred: false
+  intent:
+    description: Espaciado base de 40px
+- token: spacing.base.space.216
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.216
+      was_inferred: false
+  intent:
+    description: Espaciado base de 216px
+- token: typography.base.size.10
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.10
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente de 10px
+- token: typography.base.size.11
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.11
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente de 11px
+- token: typography.base.size.18
+  classification:
+    layer: primitive
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.base.size.18
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente de 18px
+- token: spacing.base.space.56
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.56
+      was_inferred: false
+  intent:
+    description: Espaciado base de 56px para botones
+- token: spacing.base.space.52
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.52
+      was_inferred: false
+  intent:
+    description: Espaciado base de 52px para inputs y segmented controls
+- token: spacing.base.space.4
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.4
+      was_inferred: false
+  intent:
+    description: Espaciado base de 4px
+- token: spacing.base.space.80
+  classification:
+    layer: primitive
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/base.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.base.space.80
+      was_inferred: false
+  intent:
+    description: Espaciado base de 80px

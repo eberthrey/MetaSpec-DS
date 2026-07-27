@@ -1,0 +1,43 @@
+id: "waup.pet-select-carousel"
+name: "Waup Pet Select Carousel"
+purpose: "Carrusel de selección múltiple de mascotas para definir qué perros saldrán en el paseo solicitado."
+problem: "El dueño de mascota necesita seleccionar una o más de sus mascotas de forma interactiva y rápida antes de solicitar un paseo, respetando el límite máximo de paseo simultáneo."
+solves:
+  - "Selección múltiple intuitiva de mascotas activas."
+  - "Control y visualización del límite máximo de mascotas permitidas (máximo 3)."
+  - "Acceso directo para registrar una nueva mascota sin abandonar el flujo."
+composition:
+  slots:
+    - name: "pet_cards"
+      role: "content"
+      required: true
+      description: "Colección de tarjetas interactivas compactas de mascotas con su avatar, nombre y checkbox de selección (omitiendo la raza)."
+    - name: "add_pet_card"
+      role: "secondary-action"
+      required: true
+      description: "Tarjeta de acción final (trailing-action) etiquetada como 'Agregar Mascota' para registrar una nueva mascota."
+behavior:
+  states:
+    - name: "idle"
+      description: "Carrusel renderizado con ninguna o algunas mascotas seleccionadas, por debajo de la restricción constitucional. El contenedor habilita scroll horizontal e incluye un indicador de desplazamiento visual sutil (scrollbar) para asegurar el descubrimiento del contenido y la navegación en cualquier tipo de dispositivo."
+    - name: "limit_reached"
+      description: "Estado cuando se han seleccionado exactamente 3 mascotas. El resto de las tarjetas no seleccionadas se atenúan (opacity/disabled) y se bloquea la interacción de marcado."
+usage:
+  use_cases:
+    - "Pantalla de configuración y búsqueda de paseo (Buscar paseo)."
+  anti_patterns:
+    - scenario: "Permitir seleccionar más de 3 mascotas a la vez"
+      reason: "Viola el límite constitucional de seguridad operativa de Waup, comprometiendo la atención del paseador."
+      alternative: "Bloquear la selección del 4to checkbox desactivando visualmente los controles no seleccionados."
+      severity: "critical"
+accessibility:
+  considerations:
+    - "Cada tarjeta de mascota en el carrusel debe anunciar el estado de selección ('seleccionado' o 'no seleccionado') al lector de pantalla."
+    - "El control de Agregar Mascota debe estar claramente etiquetado como acción con descripción por voz."
+maps_to_components:
+  - "component.carousel"
+  - "component.card"
+  - "component.checkbox"
+provenance:
+  source: "author_defined"
+  confidence: "high"

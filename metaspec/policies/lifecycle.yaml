@@ -1,0 +1,52 @@
+version: "0.1"
+
+lifecycle:
+  statuses:
+    - id: low
+      name: Low
+      description: Entidad válida pero todavía provisional, con incertidumbre editorial o contractual todavía relevante.
+      minimum_requirements:
+        - schema_valid
+        - entity_type_resolved
+        - single_editorial_language
+        - provenance_present
+      allowed_uncertainty:
+        - open_questions
+        - pending_review_accessibility
+        - provisional_names
+      promotion_requirements:
+        - category_canonical
+        - no_conflicting_claims
+
+    - id: medium
+      name: Medium
+      description: Entidad usable operativamente dentro del sistema con incertidumbre acotada y contrato suficientemente claro.
+      minimum_requirements:
+        - schema_valid
+        - entity_type_resolved
+        - single_editorial_language
+        - provenance_present
+        - category_canonical
+        - no_conflicting_claims
+      allowed_uncertainty:
+        - minor_open_questions
+      promotion_requirements:
+        - passes_catalog_quality_gate
+
+    - id: high
+      name: High
+      description: Entidad consolidada como referencia confiable del sistema, apta para catálogo, tooling y consumo operativo estable.
+      minimum_requirements:
+        - passes_catalog_quality_gate
+        - no_critical_open_questions
+        - stable_ids
+        - canonical_vocabulary_usage
+      allowed_uncertainty: []
+      promotion_requirements: []
+
+rules:
+  - Si una entidad no cumple su gate mínimo, no puede promocionarse al siguiente estado.
+  - low puede contener incertidumbre relevante; high no.
+  - medium debe ser operativamente usable aunque todavía no esté completamente consolidado como referencia final.
+  - catalog_visibility controla exposición en catálogo y no reemplaza editorial_status.
+  - Una entidad puede permanecer con catalog_visibility: off aunque su editorial_status sea medium o high si todavía no debe mostrarse.

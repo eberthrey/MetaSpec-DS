@@ -1,0 +1,112 @@
+schema_version: '0.2'
+kind: foundation
+identifier: typography
+name: Typography
+description: Foundación de tipografía y jerarquía visual de textos para la super-app Waup usando Manrope como familia oficial observada en Figma.
+classification:
+  category: typography
+  foundation_type: mixed
+  scope: semantic
+metadata:
+  status: in_review
+  links:
+  - kind: repository
+    url: packages/patapet-ui/src/foundations/typography/Typography.tsx
+    label: Current React typography primitive
+  - kind: repository
+    url: specs/design-system/tokens/base.yaml
+    label: Base typography tokens
+  - kind: repository
+    url: specs/design-system/tokens/semantic.yaml
+    label: Semantic typography tokens
+document_blocks:
+- kind: purpose
+  statement: Garantizar legibilidad, consistencia en la escala jerárquica y una experiencia de lectura fluida en mobile.
+- kind: scale
+  id: typography-system
+  name: Typography system
+  description: Capas tipográficas disponibles en el sistema, desde primitives raw hasta estilos compuestos.
+  groups:
+  - id: raw-typography-family
+    description: La tipografía principal es Manrope, con fallback en system-ui o sans-serif.
+  - id: raw-typography-size
+    description: Escala móvil de tamaños de fuente en px (desde 12px hasta 32px) alineada a los estilos `display`, `h1`, `h2`, `h3`, `bodyM`, `bodyS`, `button`, `label`, `caption` y `overline`.
+  - id: raw-typography-weight
+    description: 'Pesos tipográficos soportados: Regular (400), Medium (500), SemiBold (600) y Bold (700).'
+  - id: typography-style
+    description: Estilos tipográficos compuestos que definen tamaño, peso y altura de línea con intención semántica.
+- kind: principles
+  items:
+  - id: manrope-as-primary-family
+    title: Use Manrope consistently
+    description: Todos los elementos de texto en la aplicación deben usar Manrope como familia base.
+    rationale: Mantiene consistencia con los text styles de Figma y con la primitive actual de React.
+  - id: text-color-hierarchy
+    title: Preserve text hierarchy through color
+    description: El color de texto principal debe ser Navy (#17356D) y los textos secundarios o deshabilitados deben usar los grises correspondientes.
+    rationale: Mantiene la jerarquía y el contraste según WCAG AA.
+- kind: use_cases
+  items:
+  - id: typography-style-display
+    title: Display Title
+    description: Texto de gran peso visual para pantallas o tarjetas clave principales (32px, Bold).
+    stance: recommended
+    rationale: 'Use when: Títulos principales o pantallas héroe.'
+    category: headings
+  - id: typography-style-h1
+    title: Heading 1
+    description: Encabezado principal de la pantalla móvil (28px, Bold).
+    stance: recommended
+    rationale: 'Use when: Nombres del usuario o títulos principales en secciones secundarias.'
+    category: headings
+  - id: typography-style-h2
+    title: Heading 2
+    description: Encabezados de segundo nivel para secciones secundarias (24px, SemiBold).
+    stance: recommended
+    rationale: 'Use when: Títulos de secciones principales.'
+    category: headings
+  - id: typography-style-h3
+    title: Heading 3
+    description: Encabezados de tercer nivel (20px, SemiBold).
+    stance: recommended
+    rationale: 'Use when: Títulos de subsecciones o tarjetas destacadas.'
+    category: headings
+  - id: typography-style-body-large
+    title: Body M
+    description: Cuerpo de texto informativo destacado (16px, Medium).
+    stance: recommended
+    rationale: 'Use when: Párrafos principales o subtítulos descriptivos.'
+    category: body
+  - id: typography-style-body
+    title: Body S
+    description: Cuerpo de texto informativo estándar (14px, Regular).
+    stance: recommended
+    rationale: 'Use when: Textos descriptivos de paseadores, razas de mascotas e inputs.'
+    category: body
+  - id: typography-style-button
+    title: Button
+    description: Estilo de texto para CTAs y controles interactivos con énfasis semántico.
+    stance: recommended
+    rationale: 'Use when: Botones primarios, secundarios o acciones de toolbar.'
+    category: actions
+  - id: typography-style-label
+    title: Label
+    description: Estilo compacto para labels persistentes, micro-títulos y texto de apoyo estructural.
+    stance: recommended
+    rationale: 'Use when: Etiquetas de campo, labels de sección o metadata compacta.'
+    category: labels
+  - id: typography-style-caption
+    title: Caption
+    description: Texto pequeño para leyendas y subtextos de menor jerarquía (12px, Regular).
+    stance: recommended
+    rationale: 'Use when: Etiquetas de badges y subtextos de tarjetas secundarias.'
+    category: body
+  - id: typography-style-overline
+    title: Overline
+    description: Estilo de etiqueta superior para grupos, eyebrow labels y metadata de navegación.
+    stance: recommended
+    rationale: 'Use when: Contexto de sección, labels de categoría o headers secundarios.'
+    category: labels
+provenance:
+  origin: author_defined
+  confidence: high

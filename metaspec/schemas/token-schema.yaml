@@ -1,0 +1,136 @@
+schema:
+  entity: token
+  version: "0.3"
+  compatibility: DTCG-2025.10
+
+required:
+  - token
+  - classification
+  - provenance
+
+fields:
+  token:
+    type: string
+    format: dtcg.token.reference
+    description: >
+      Ruta canónica del token existente en una fuente DTCG.
+
+  classification:
+    type: object
+    required:
+      - layer
+      - domain
+    properties:
+      layer:
+        type: enum
+        values:
+          - primitive
+          - semantic
+          - component
+
+      domain:
+        type: enum
+        values:
+          - color
+          - spacing
+          - radius
+          - typography
+          - stroke
+          - elevation
+          - opacity
+          - motion
+
+      component_scope:
+        type: string
+        format: entity.reference
+        required: false
+        required_when:
+          field: layer
+          equals: component
+
+  intent:
+    type: object
+    required: false
+    properties:
+      role:
+        type: string
+        vocabulary: token_role
+
+      description:
+        type: string
+        required: false
+
+  usage:
+    type: object
+    required: false
+    properties:
+      use_when:
+        type: list
+        items:
+          type: string
+
+      avoid_when:
+        type: list
+        items:
+          type: string
+
+  relationships:
+    type: list
+    required: false
+    items:
+      type: object
+      required:
+        - type
+        - target
+      properties:
+        type:
+          type: string
+          vocabulary: token_relationship
+
+        target:
+          type: string
+          format: entity.reference
+
+        rationale:
+          type: string
+          required: false
+
+  provenance:
+    type: object
+    required:
+      - source
+      - confidence
+    properties:
+      source:
+        type: enum
+        values:
+          - json_import
+          - author_defined
+          - inferred
+
+      confidence:
+        type: enum
+        values:
+          - high
+          - medium
+          - low
+
+      source_reference:
+        type: string
+        required: false
+
+      normalization:
+        type: object
+        required: false
+        properties:
+          input_format:
+            type: string
+            required: false
+
+          normalized_from:
+            type: string
+            required: false
+
+          was_inferred:
+            type: boolean
+            required: false

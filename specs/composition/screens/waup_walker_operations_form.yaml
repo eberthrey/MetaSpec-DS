@@ -1,0 +1,42 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Datos Operativos del Walker (Paso 1B)
+  waup_walker_operations_form:
+    description: "Configuración de precios, disponibilidad y zonas (distritos) para el Walker."
+    role: "waup_walker"
+    view_state: "waup_walker_operations_form"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Configuración de Paseos"
+          back_action: "navigate_to:waup_walker_profile_form"
+          variant: "ghost"
+          
+      - slot_id: "district_selector_label"
+        description: "Sección para elegir zonas de operación."
+        properties:
+          title: "Zonas de Paseo (Selecciona 3 distritos)"
+          required: true
+          
+      - slot_id: "pricing_editor"
+        component: "component.input"
+        properties:
+          label: "Tarifa por paseo (S/.)"
+          placeholder: "Ej. 20"
+          required: true
+          
+      - slot_id: "continue_action"
+        component: "component.button"
+        properties:
+          label: "Guardar y Continuar a Identidad"
+          action: "navigate_to:waup_walker_onboarding_dni_front"
+          hierarchy: "primary"

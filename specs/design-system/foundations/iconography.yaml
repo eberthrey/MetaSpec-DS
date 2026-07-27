@@ -1,0 +1,61 @@
+schema_version: '0.2'
+kind: foundation
+identifier: iconography
+name: Iconography
+description: Sistema de iconos SVG del design system para navegación, estados y acciones compactas, alineado a los componentes aprobados desde Figma.
+classification:
+  category: iconography
+  foundation_type: mixed
+  scope: semantic
+metadata:
+  status: in_review
+  links:
+  - kind: repository
+    url: packages/patapet-ui/src/foundations/iconography/Icon.tsx
+    label: Current React icon primitive
+  - kind: repository
+    url: packages/patapet-ui/src/foundations/iconography/icons.tsx
+    label: Current icon registry
+  - kind: repository
+    url: specs/design-system/assets/index.md
+    label: Approved visual assets
+document_blocks:
+- kind: purpose
+  statement: Unificar la semántica visual de acciones, navegación y estados compactos mediante un set de iconos consistente.
+- kind: scale
+  id: icon-system
+  name: Icon system
+  description: Capas que organizan el inventario SVG y sus tamaños de uso.
+  groups:
+  - id: icon-catalog
+    description: El registry actual cubre `search`, `paw`, `chevronLeft`, `chevronRight`, `chevronUp`, `chevronDown`, `bell`, `check`, `map`, `calendar`, `bolt`, `close`, `route` y `creditCard`.
+  - id: icon-size-tokens
+    description: Los tamaños canónicos exportados hoy son `sm`, `md`, `lg` y `xl`.
+- kind: principles
+  items:
+  - id: semantic-icon-selection
+    title: Prefer semantic icons over decorative drift
+    description: Los componentes deben seleccionar iconos por intención semántica y no por similitud visual improvisada.
+    rationale: Mantiene consistencia entre Figma, specs y React incluso cuando crece el catálogo.
+  - id: current-color-inheritance
+    title: Let icons inherit currentColor
+    description: Los iconos deben heredar color desde el contexto del componente anfitrión.
+    rationale: Reduce duplicación cromática y alinea el set con los tokens semánticos del sistema.
+- kind: use_cases
+  items:
+  - id: icon-navigation
+    title: Navigation controls
+    description: Chevron, bell y close para navegación secundaria, notificaciones y dismiss.
+    stance: recommended
+    rationale: 'Use when: headers, drawers, filtros o acciones de cierre.'
+    category: navigation
+  - id: icon-domain
+    title: Domain shortcuts
+    description: Paw, map, route, calendar, bolt y creditCard para expresar conceptos funcionales de PataPet.
+    stance: recommended
+    rationale: 'Use when: shortcuts, cards, switches y estados de flujo.'
+    category: domain
+provenance:
+  origin: inferred
+  confidence: high
+  reference: packages/patapet-ui/src/foundations/iconography/icons.tsx

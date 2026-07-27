@@ -1,0 +1,97 @@
+identity:
+  id: component.input
+  name: Input Field (Campo de Entrada)
+  aliases:
+  - input
+taxonomy:
+  type: input
+  category: input
+intent:
+  summary: Componente de entrada de texto de una o múltiples líneas (textarea) que permite al usuario capturar notas, instrucciones o información estructurada. Los campos de una sola línea respetan una altura fija de 40px.
+  purpose: Proporcionar una caja de texto con soporte para etiquetas (labels), textos de ayuda (supporting copy) y placeholders explicativos.
+  system_role: collect_input
+  user_need: Capturar texto del usuario de forma accesible y segura
+usage:
+  use_cases:
+  - id: captura-de-instrucciones-de-recojo-en-busqueda-de-paseo
+    scenario: Captura de instrucciones de recojo en búsqueda de paseo
+    rationale: Permite al dueño indicar detalles de la entrega de la mascota con un placeholder informativo.
+  anti_patterns:
+  - scenario: Omitir el placeholder explicativo o la etiqueta visible
+    reason: Dificulta la comprensión de qué datos ingresar y compromete la accesibilidad para lectores de pantalla.
+    correction: Proporcionar siempre una etiqueta clara y un ejemplo explicativo en el placeholder.
+variants:
+- id: size
+  name: Size
+  description: Variante de tamaño físico de la caja de texto.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Input compacto de 40px de altura.
+    use_when:
+    - Input compacto de 40px de altura.
+  - id: md
+    name: Medium
+    meaning: Input estándar de 48px de altura.
+    use_when:
+    - Input estándar de 48px de altura.
+composition:
+  slots:
+  - id: label
+    role: label
+    description: Etiqueta superior que identifica el propósito de la entrada.
+    cardinality: exactly_one
+  - id: input-area
+    role: body-content
+    description: Caja de texto interactiva de 40px de altura (o textarea de 80px).
+    cardinality: exactly_one
+  - id: supporting-text
+    role: supporting-copy
+    description: Texto de ayuda inferior o indicador de longitud (ej. 0/250).
+    cardinality: zero_or_one
+  parent_constraints:
+  - rule: La altura del campo de entrada debe corresponder a la variante del eje de tamaño.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado normal en reposo, listo para recibir foco, sin sombra.
+  - id: focused
+    meaning: Estado activo cuando el cursor está dentro del campo.
+  - id: error
+    meaning: Estado de validación fallida.
+accessibility:
+  semantic_role: textbox
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - El input recibe el foco del teclado y destaca su borde para una clara visibilidad táctil y visual.
+  screen_reader_expectations:
+  - Debe asociar la etiqueta del label mediante htmlFor/id para que los lectores lean el contexto de forma automática.
+  requirements:
+  - id: accessibility.input.focus
+    statement: El input recibe el foco del teclado y destaca su borde para una clara visibilidad táctil y visual.
+  - id: accessibility.input.screen-reader
+    statement: Debe asociar la etiqueta del label mediante htmlFor/id para que los lectores lean el contexto de forma automática.
+examples:
+  positive:
+  - scenario: Captura de instrucciones de recojo en búsqueda de paseo
+    rationale: Permite al dueño indicar detalles de la entrega de la mascota con un placeholder informativo.
+  negative:
+  - scenario: Omitir el placeholder explicativo o la etiqueta visible
+    violation: Dificulta la comprensión de qué datos ingresar y compromete la accesibilidad para lectores de pantalla.
+    correction: Proporcionar siempre una etiqueta clara y un ejemplo explicativo en el placeholder.
+implementation_reference:
+  repository_path: specs/design-system/components/input.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/input.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

@@ -1,0 +1,50 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Registrar Nueva Tarjeta de Pago
+  waup_add_payment:
+    description: "Formulario para registrar una nueva tarjeta de crédito o débito de la cuenta del dueño."
+    role: "waup_pet_owner"
+    view_state: "waup_payment_method_detail"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Agregar Tarjeta"
+          back_action: "navigate_to:waup_payment_list"
+          variant: "ghost"
+          
+      - slot_id: "input_card_number"
+        component: "component.input"
+        properties:
+          label: "Número de tarjeta"
+          placeholder: "1234 5678 1234 5678"
+          required: true
+          
+      - slot_id: "input_card_holder"
+        component: "component.input"
+        properties:
+          label: "Nombre del titular"
+          placeholder: "Ej. Eberth Reynoso"
+          required: true
+          
+      - slot_id: "input_card_exp"
+        component: "component.input"
+        properties:
+          label: "Fecha de vencimiento"
+          placeholder: "MM/AA"
+          required: true
+          
+      - slot_id: "save_action"
+        component: "component.button"
+        properties:
+          label: "Guardar Tarjeta"
+          action: "submit_card_creation"
+          hierarchy: "primary"

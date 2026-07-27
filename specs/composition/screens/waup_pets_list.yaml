@@ -1,0 +1,54 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Listado de Mascotas del Owner
+  waup_pets_list:
+    description: "Pantalla que muestra la lista de mascotas registradas del dueño, permitiendo ver detalles de cada perfil y agregar nuevas mascotas."
+    role: "waup_pet_owner"
+    view_state: "waup_pet_profiles"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Mis Mascotas"
+          subtitle: "Administra la información de tus mascotas"
+          back_action: "navigate_to:waup_owner_home"
+          variant: "ghost"
+          action_button:
+            component: "component.button"
+            properties:
+              label: "+ Agregar"
+              action: "navigate_to:waup_add_pet"
+              hierarchy: "secondary"
+              color: "color.brand.secondary.violet"
+          
+      - slot_id: "pets_grid_list"
+        description: "Cuadrícula de dos columnas con las tarjetas informativas de las mascotas."
+        layout: "grid_2_columns"
+        items_source: "user.pets"
+        empty_state:
+          illustration: "paw"
+          title: "Sin mascotas registradas"
+          description: "Aún no has agregado ninguna mascota a tu perfil. Agrega a tu compañero para empezar a programar paseos."
+          action:
+            component: "component.button"
+            properties:
+              label: "Agregar mi primera mascota"
+              action: "navigate_to:waup_add_pet"
+              hierarchy: "primary"
+        items:
+          - pattern: "waup.pet-grid-card"
+            properties:
+              title: "{pet.name}"
+              breed: "{pet.breed}"
+              age: "{pet.age}"
+              sex: "{pet.sex}"
+              avatar: "{pet.avatar}"
+              action: "navigate_to:waup_pet_detail"

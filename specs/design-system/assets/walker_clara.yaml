@@ -1,0 +1,13 @@
+id: "asset.thumbnail.walker_clara"
+name: "Avatar de Clara Domínguez"
+asset_type: "thumbnail"
+description: "Avatar o foto de perfil de la paseadora Clara Domínguez."
+category: "walker_avatar"
+source_type: "imported"
+asset_ref:
+  library: "Unsplash"
+  path: "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
+  format: "jpg"
+provenance:
+  source: "author_defined"
+  confidence: "high"

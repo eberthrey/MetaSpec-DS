@@ -1,0 +1,59 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Procesamiento de Pago (Checkout)
+  waup_payment_processing:
+    description: "Pantalla de cobro final donde el dueño revisa el resumen del paseo, la tarifa del paseador, la comisión y selecciona la tarjeta de cargo antes de pagar."
+    role: "waup_pet_owner"
+    view_state: "waup_payment_processing"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Procesar Pago"
+          back_action: "navigate_to:waup_match_candidates"
+          variant: "ghost"
+          
+      - slot_id: "receipt_summary"
+        description: "Desglose financiero con tarifa del paseador, comisión operativa (10%) y total consolidado."
+        component: "component.card"
+        properties:
+          title: "Resumen del Servicio"
+          layout: "receipt"
+          data:
+            - label: "Mascotas"
+              value: "{selected_pets.names}"
+            - label: "Paseador"
+              value: "{selected_walker.name}"
+            - label: "Duración"
+              value: "{selected_duration}"
+            - label: "Tarifa Paseador"
+              value: "S/. {walker_rate}"
+            - label: "Comisión por servicio (10%)"
+              value: "S/. {service_commission}"
+            - label: "Total a pagar"
+              value: "S/. {total_amount}"
+              is_total: true
+              
+      - slot_id: "payment_card_selector"
+        description: "Visualización de la tarjeta activa que recibirá el cargo."
+        component: "component.card"
+        properties:
+          title: "Tarjeta de Cargo"
+          content: "Visa **** {user.active_card.last4}"
+          status: "Activa"
+          
+      - slot_id: "pay_confirm_action"
+        description: "Botón principal para confirmar la transacción e iniciar el paseo."
+        component: "component.button"
+        properties:
+          label: "Pagar y Confirmar"
+          action: "submit_payment"
+          hierarchy: "primary"

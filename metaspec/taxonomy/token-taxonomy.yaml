@@ -1,0 +1,158 @@
+token_taxonomy:
+  entity: token
+
+  definition: >
+    Unidad reutilizable de diseño que representa un valor o una referencia
+    estructurada para ser consumida por herramientas, componentes y plataformas.
+
+  canonical_layers:
+    - id: base
+      required: true
+      definition: >
+        Token base que representa un valor puro sin intención de UI.
+      purpose: >
+        Proveer escalas y valores primitivos reutilizables.
+      allowed_reference_targets: []
+      forbidden_reference_targets:
+        - semantic
+        - component
+      examples:
+        - color.purple.500
+        - spacing.space.8
+        - radius.base.12
+      anti_examples:
+        - color.action.primary.default
+        - button.background.default
+
+    - id: semantic
+      required: false
+      definition: >
+        Token con significado reusable en la interfaz. Expresa intención de uso,
+        no solo valor.
+      purpose: >
+        Desacoplar la intención de UI del valor base y permitir tematización,
+        consistencia y razonamiento semántico.
+      allowed_reference_targets:
+        - base
+      forbidden_reference_targets:
+        - component
+      examples:
+        - color.action.primary.default
+        - color.text.default
+        - surface.page.default
+        - border.subtle
+      anti_examples:
+        - color.purple.500
+        - button.label.default
+
+    - id: component
+      required: false
+      definition: >
+        Token específico de un componente o parte de componente. Representa
+        la aplicación concreta de un token dentro de un artefacto UI.
+      purpose: >
+        Encapsular decisiones del componente sin romper la semántica global.
+      allowed_reference_targets:
+        - semantic
+        - base
+      forbidden_reference_targets: []
+      reference_rule: >
+        Debe referenciar semantic por defecto. Solo puede referenciar base
+        si existe una justificación explícita.
+      examples:
+        - button.background.default
+        - button.label.disabled
+        - input.border.error
+      anti_examples:
+        - color.purple.500
+        - color.action.primary.default
+
+  accepted_external_layer_aliases:
+    base:
+      - base
+      - raw
+      - primitive
+      - global
+
+    semantic:
+      - semantic
+      - alias
+      - theme
+
+    component:
+      - component
+      - scoped
+      - local
+
+  domains:
+    - id: color
+      definition: Valores o referencias relacionadas con color.
+    - id: spacing
+      definition: Valores o referencias relacionadas con separación, padding o gap.
+    - id: radius
+      definition: Valores o referencias relacionadas con curvatura.
+    - id: typography
+      definition: Valores o referencias relacionadas con tipografía.
+    - id: stroke
+      definition: Valores o referencias relacionadas con bordes o líneas.
+    - id: elevation
+      definition: Valores o referencias relacionadas con profundidad o sombra.
+    - id: opacity
+      definition: Valores o referencias relacionadas con transparencia.
+    - id: motion
+      definition: Valores o referencias relacionadas con duración o easing.
+
+  naming_rules:
+    base:
+      pattern: "{domain}.{family}.{step}"
+      notes:
+        - "No debe expresar intención de UI"
+        - "Debe representar una escala o valor base"
+      examples:
+        - color.purple.500
+        - spacing.space.8
+        - radius.base.12
+
+    semantic:
+      pattern: "{domain}.{role}.{variant}.{state?}"
+      notes:
+        - "Debe expresar intención reusable de UI"
+        - "No debe referirse a un componente específico"
+      examples:
+        - color.action.primary.default
+        - color.text.on-action
+        - surface.page.default
+
+    component:
+      pattern: "{component}.{part}.{state_or_variant?}"
+      notes:
+        - "Debe expresar aplicación en componente"
+        - "No debe reemplazar semantic sin justificación"
+      examples:
+        - button.background.default
+        - button.label.hover
+        - input.border.error
+
+  relationship_rules:
+    - id: semantic-references-base
+      statement: "Un semantic token debe referenciar un base token."
+    - id: component-references-semantic
+      statement: "Un component token debe referenciar un semantic token por defecto."
+    - id: component-base-exception
+      statement: "Un component token solo puede referenciar un base token con justificación explícita."
+    - id: base-no-ui-meaning
+      statement: "Un base token no debe contener significado de UI."
+    - id: semantic-no-component-scope
+      statement: "Un semantic token no debe contener el nombre de un componente."
+    - id: component-has-component-scope
+      statement: "Un component token debe estar ligado a un componente o a una parte de componente."
+
+  fallback_rules:
+    - id: no-semantic-layer
+      statement: >
+        Si no existe capa semantic, los consumidores pueden referenciar base
+        directamente, pero debe marcarse como arquitectura reducida.
+    - id: no-component-layer
+      statement: >
+        Si no existe capa component, los componentes consumen semantic
+        directamente.

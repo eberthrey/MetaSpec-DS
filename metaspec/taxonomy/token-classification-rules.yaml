@@ -1,0 +1,107 @@
+classification_rules:
+  default_behavior: >
+    Aceptar entrada JSON libre, normalizarla al schema canónico de tokens,
+    clasificar por canonical layer, validar y luego persistir.
+
+  layer_requirements:
+    base:
+      required: true
+    semantic:
+      required: false
+    component:
+      required: false
+
+  classification:
+    - id: classify-base
+      assign_layer: base
+      when:
+        has_ui_intent: false
+        has_component_scope: false
+        is_base_value: true
+
+    - id: classify-semantic
+      assign_layer: semantic
+      when:
+        has_ui_intent: true
+        has_component_scope: false
+
+    - id: classify-component
+      assign_layer: component
+      when:
+        has_component_scope: true
+
+  inference_guidelines:
+    has_ui_intent:
+      indicators:
+        - action
+        - text
+        - surface
+        - border
+        - focus
+        - success
+        - warning
+        - danger
+
+    has_component_scope:
+      indicators:
+        - button
+        - input
+        - modal
+        - tag
+        - card
+        - checkbox
+        - radio
+
+    is_base_value:
+      indicators:
+        - numeric scale
+        - family scale
+        - direct raw color
+        - spacing step
+        - radius step
+
+  normalization_rules:
+    - id: normalize-simple-value
+      input_example:
+        primary: "#5F4DF6"
+      output_rule: >
+        Convertir valores primitivos en un objeto token canónico con
+        id, layer, domain, $value, $type y provenance inferidos.
+
+    - id: normalize-non-dtcg-object
+      input_example:
+        primary:
+          value: "#5F4DF6"
+          type: "color"
+      output_rule: >
+        Convertir campos no DTCG como value/type en $value/$type.
+
+    - id: normalize-external-layer-name
+      output_rule: >
+        Mapear alias de layer externos como raw, primitive, alias, scoped o local
+        a las canonical layers base, semantic o component.
+
+  persistence_rules:
+    - id: persist-base
+      layer: base
+      target_path: /tokens/base
+
+    - id: persist-semantic
+      layer: semantic
+      target_path: /tokens/semantic
+
+    - id: persist-component
+      layer: component
+      target_path: /tokens/component
+
+  validation_rules:
+    - id: require-base-layer
+      statement: Debe existir al menos un conjunto de base tokens en el repositorio.
+    - id: semantic-not-required
+      statement: La semantic layer es opcional.
+    - id: component-not-required
+      statement: La component layer es opcional.
+    - id: component-needs-scope
+      statement: Los component layer tokens deben declarar component_scope.
+    - id: semantic-should-not-include-component-name
+      statement: Los semantic tokens no deben incluir el nombre de un componente en su id.

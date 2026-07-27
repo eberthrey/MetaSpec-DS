@@ -1,0 +1,153 @@
+spec_version: "1.0.0"
+intent_version: 5
+last_updated_at: "2026-05-28T10:42:00-0500"
+
+product:
+  name: "Waup"
+  namespace: "waup"
+  description:
+    problem: >
+      Resuelve la desconfianza y la falta de tiempo de los dueños de mascotas que
+      no pueden sacarlas a pasear por sí mismos, conectando con paseadores de
+      confianza.
+    value_proposition: >
+      Aplicación de paseo de mascotas que mitiga la desconfianza mediante un
+      proceso de emparejamiento (match) seguro y transparente con paseadores
+      calificados, resolviendo la necesidad de tiempo de los dueños.
+
+  market:
+    region: "Lima Metropolitana, Peru"
+    demand_focus:
+      socioeconomic_levels:
+        - "NSE A"
+        - "NSE B"
+      priority_zone:
+        - "Miraflores"
+        - "San Isidro"
+        - "San Borja"
+        - "Santiago de Surco"
+        - "La Molina"
+
+business_model:
+    type: "marketplace_transactional"
+    core_loop: "match_3_candidates" # Restricción de diseño: el usuario elije entre exactamente 3 opciones
+    matchmaking_criteria: "district_compatibility" # El match de owner con walker se basa en compatibilidad de distritos (coincidencia de distrito del paseo con uno de los 3 distritos elegidos por el walker)
+    pricing_mechanism: "walker_proposal_owner_decision" # El walker realiza la propuesta de precio y el owner acepta/rechaza
+    revenue_streams:
+      - key: "owner_service_fee"
+        model: "commission_on_demand"
+        audience: "pet_owners"
+        description: "Comisión por servicio cobrada al dueño de la mascota al procesar el pago con tarjeta."
+      - key: "provider_take_rate"
+        model: "commission_deduction"
+        audience: "walkers"
+        description: "Comisión retenida del pago final destinado al paseador tras completar el servicio."
+    loyalty_program:
+      target: "walkers"
+      drivers: ["ride_volume", "owner_recommendations"]
+      rewards: ["tier_badges", "priority_matching"] # Beneficios visuales en la app
+    anti_bypass_required: true
+    
+audience:
+  primary_segment:
+    type: "demand"
+    label: "pet_owners"
+    description: >
+      Hogares NSE A/B de Lima Metropolitana, especialmente profesionales,
+      parejas DINKs y personas con alta humanizacion de la mascota, con alta
+      disposicion a pagar por seguridad, certidumbre y estatus.
+  secondary_segment:
+    type: "supply"
+    label: "service_providers"
+    description: >
+      Paseadores calificados, agencias locales, veterinarias y pet shops de
+      Lima Moderna que buscan formalizacion, digitalizacion y acceso a
+      clientes de alto# =========================================================================
+# BRAND PERSONALITY & EXPERIENCE CRITERIA (Calidez Funcional)
+# =========================================================================
+brand_experience:
+  archetype:
+    primary: "The Caregiver"       # Protector, seguro, confiable y amigable
+    secondary: "The Everyman"      # Cercano, premium pero accesible y urbano
+  
+  tone_of_voice:
+    style: "warm_sophisticated"
+    traits: ["confortable", "rápida", "amigable", "premium", "sophisticated"]
+    avoid:
+      - "exceso de ilustraciones infantiles"
+      - "íconos demasiado cartoon"
+      - "saturación visual"
+      - "bordes pesados"
+      - "sombras agresivas"
+
+  emotional_promise:
+    core_message: "Conexión de confianza, suavidad emocional y claridad operacional con minimalismo moderno."
+    sells: ["saved_time", "absolute_trust", "urban_sophistication"]
+
+design_system:
+  name: "Patazas Ds"
+  slug: "patazas-ds"
+  scope: >
+    Sistema de diseño premium y sofisticado para Waup, que combina claridad operacional
+    con calidez funcional y minimalismo moderno en móvil.
+
+environment:
+  color_modes:
+    supported:
+      - "light"
+      - "dark"
+  density:
+    strategy: "fixed"
+    default_mode: "comfortable"
+
+engineering:
+  platforms:
+    primary:
+      - "mobile_hybrid"
+    framework: "react_native"
+  sizing:
+    root_unit: "rem"
+  accessibility:
+    wcag_minimum: "AA"
+    critical_states_must_not_depend_on_color_only: true
+  internationalization:
+    locales:
+      - "es-PE"
+    direction: "LTR"
+
+# =========================================================================
+# VISUAL FLAVOR & UI CHARACTERISTICS
+# =========================================================================
+visual_flavor:
+  corner_geometry: "rounded_organic" # Curvas amigables: inputs 12px, cards 20px, containers 24px
+  surface_treatment: "layered_with_soft_shadows" # Sombras muy tenues
+  
+  ui_characteristics:
+    layout_density: "comfortable"
+    navigation_pattern: "continuous_discovery"
+    visual_density_strategy: "modular_card_system"
+    
+  illustration_spec:
+    style: "vector_playful_local"
+    chromatic_vibrancy: "medium"
+
+# =========================================================================
+# COLOR SYSTEM (Navy + Coral)
+# =========================================================================
+brand_colors:
+  primary: "#17356D"      # Navy: títulos, navegación, texto principal, iconografía primaria
+  accent: "#FF6B4A"       # Coral: botones primarios, tabs activas, selección activa, estados destacados
+  secondary:
+    soft_cream: "#FFFCF8" # background principal
+    light_lilac: "#F5F2FF" # cards secundarias, placeholders, elementos suaves
+    border_neutral: "#EAEAEA" # divisores, contornos suaves
+    violet: "#6C4DFF" # acentos morados/violeta, chips y programados
+  neutrals:
+    background: "#FFFCF8"
+    warm_surface: "#FFFFFF"
+    muted_text: "#6B7280"
+    muted_extra: "#9CA3AF"
+  support:
+    success: "#22C55E"    # Éxito (disponibilidad / confirmado)
+    warning: "#F59E0B"    # Atención
+    error: "#EF4444"      # Validación

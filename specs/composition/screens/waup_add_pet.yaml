@@ -1,0 +1,80 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Registrar Nueva Mascota
+  waup_add_pet:
+    description: "Formulario para registrar los datos de una nueva mascota del dueño."
+    role: "waup_pet_owner"
+    view_state: "waup_first_pet_creation" # Reutiliza el estado de creación de primera mascota
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Nueva Mascota"
+          back_action: "navigate_to:waup_pets_list"
+          variant: "ghost"
+          
+      - slot_id: "input_name"
+        component: "component.input"
+        properties:
+          label: "Nombre de la mascota"
+          placeholder: "Ej. Firulais"
+          required: true
+          
+      - slot_id: "pet_photos"
+        component: "component.photo_uploader"
+        properties:
+          label: "Fotos del perro"
+          maxPhotos: 5
+          required: false
+
+      - slot_id: "input_breed"
+        component: "component.input_search"
+        properties:
+          label: "Raza"
+          placeholder: "Ej. Golden Retriever"
+          required: true
+          
+      - slot_id: "input_age"
+        component: "component.input"
+        properties:
+          label: "Edad"
+          placeholder: "Ej. 3 años"
+          required: true
+          
+      - slot_id: "input_weight"
+        component: "component.input"
+        properties:
+          label: "Peso"
+          placeholder: "Ej. 25 kg"
+          required: true
+          
+      - slot_id: "textarea_allergies"
+        component: "component.textarea"
+        properties:
+          label: "Alergias y Salud"
+          placeholder: "Ej. Alergias a comida, displasia, etc."
+          required: false
+          text_limit: 250
+          
+      - slot_id: "textarea_notes"
+        component: "component.textarea"
+        properties:
+          label: "Notas de Comportamiento"
+          placeholder: "Ej. Miedoso con ruidos, juguetón con otros perros."
+          required: false
+          text_limit: 250
+          
+      - slot_id: "save_action"
+        component: "component.button"
+        properties:
+          label: "Guardar Mascota"
+          action: "submit_pet_creation"
+          hierarchy: "primary"

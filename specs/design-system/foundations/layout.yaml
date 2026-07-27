@@ -1,0 +1,67 @@
+schema_version: '0.2'
+kind: foundation
+identifier: layout
+name: Layout
+description: Primitivas de layout exportadas en `@patapet/ui` para construir pantallas y composiciones consistentes sobre spacing, radius y superficies.
+classification:
+  category: layout
+  foundation_type: mixed
+  scope: semantic
+metadata:
+  status: in_review
+  links:
+  - kind: repository
+    url: packages/patapet-ui/src/foundations/layout/index.ts
+    label: Current layout exports
+  - kind: repository
+    url: specs/design-system/foundations/spacing.yaml
+    label: Spacing foundation
+  - kind: repository
+    url: specs/design-system/foundations/radius.yaml
+    label: Radius foundation
+document_blocks:
+- kind: purpose
+  statement: Permitir composiciones móviles coherentes mediante primitivas reutilizables en lugar de estilos ad hoc por pantalla.
+- kind: scale
+  id: layout-primitives
+  name: Layout primitives
+  description: El bundle actual exporta `Box`, `Inline`, `ScreenContainer` y `Stack`.
+  groups:
+  - id: stack-and-inline
+    description: Primitivas flex para organización vertical y horizontal con gap tokenizado.
+  - id: box-surface
+    description: Contenedor semántico con surface, elevation, padding y radius tipados.
+  - id: screen-container
+    description: Wrapper móvil con ancho máximo y paddings canónicos de pantalla.
+- kind: guidelines
+  items:
+  - id: use-primitives-before-custom-layout
+    description: Antes de introducir wrappers locales, las pantallas deben intentar resolverse con `Stack`, `Inline`, `Box` y `ScreenContainer`.
+    guidance: Usa primero las layout primitives exportadas antes de crear layout CSS local duplicado.
+    level: should
+    category: composition
+    rationale: Mantiene consistencia entre screens, stories y futuros componentes.
+  - id: token-driven-spacing-and-radius
+    description: El espaciado y el radio deben consumirse mediante tokens y no mediante valores hardcodeados cuando la primitive ya lo soporta.
+    guidance: Prefiere `gap`, `padding` y `radius` tipados a valores arbitrarios dentro de las mismas primitives.
+    level: should
+    category: token-usage
+    rationale: Alinea la composición con los contratos exportados por `tokens/contracts.ts`.
+- kind: use_cases
+  items:
+  - id: layout-screen-shell
+    title: Screen shell
+    description: `ScreenContainer` y `Stack` para estructurar pantallas móviles del simulador y de stories.
+    stance: recommended
+    rationale: 'Use when: páginas, previews y ejemplos de documentación.'
+    category: screens
+  - id: layout-component-composition
+    title: Component composition
+    description: `Inline` y `Box` para agrupar badges, chips, headers y metadata compacta.
+    stance: recommended
+    rationale: 'Use when: cards, toolbars, rows de metadata y wrappers de contenido.'
+    category: components
+provenance:
+  origin: inferred
+  confidence: high
+  reference: packages/patapet-ui/src/foundations/layout/index.ts

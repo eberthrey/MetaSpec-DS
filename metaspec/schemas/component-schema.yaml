@@ -1,0 +1,631 @@
+schema:
+  entity: component
+  version: "0.6"
+  scope: semantic_contract
+  description: >
+    Defines what a design-system component means, when and how it should be used,
+    its semantic variants, composition, expected behavior, content,
+    accessibility requirements, relationships, rules, examples,
+    implementation references, governance, and unresolved questions.
+
+required:
+  - identity
+  - taxonomy
+  - intent
+  - usage
+  - accessibility
+  - governance
+
+fields:
+  identity:
+    type: object
+    required: [id, name]
+    properties:
+      id:
+        type: string
+        format: dot.notation
+        description: Stable canonical identifier.
+        example: component.button
+      name:
+        type: string
+        description: Canonical human-readable name.
+      aliases:
+        type: list
+        required: false
+        items: { type: string }
+        description: Alternative names used for retrieval.
+
+  taxonomy:
+    type: object
+    required: [type, category]
+    properties:
+      type:
+        type: string
+        vocabulary: component_type
+        description: Functional nature of the component.
+      category:
+        type: string
+        vocabulary: component_category
+        description: Canonical category in the design system.
+      subcategory:
+        type: string
+        vocabulary: component_subcategory
+        required: false
+      tags:
+        type: list
+        required: false
+        items:
+          type: string
+          vocabulary: component_tag
+
+  intent:
+    type: object
+    required: [summary, purpose, system_role]
+    properties:
+      summary:
+        type: string
+        description: Concise semantic definition.
+      purpose:
+        type: string
+        description: Why the component exists.
+      system_role:
+        type: string
+        vocabulary: component_role
+      user_need:
+        type: string
+        required: false
+      desired_outcome:
+        type: string
+        required: false
+      boundaries:
+        type: list
+        required: false
+        items: { type: string }
+        description: What the component does not do or represent.
+
+  usage:
+    type: object
+    required: [use_cases, anti_patterns]
+    properties:
+      use_cases:
+        type: list
+        min_items: 1
+        items:
+          type: object
+          required: [id, scenario, rationale]
+          properties:
+            id:
+              type: string
+              format: kebab-case
+            scenario:
+              type: string
+            conditions:
+              type: list
+              required: false
+              items: { type: string }
+            rationale:
+              type: string
+            recommended_variants:
+              type: list
+              required: false
+              items:
+                type: string
+                format: variant.reference
+
+      common_patterns:
+        type: list
+        required: false
+        description: Recurrent semantic compositions using catalog references.
+        items:
+          type: object
+          required: [id, description]
+          properties:
+            id:
+              type: string
+              format: kebab-case
+            description:
+              type: string
+            composition:
+              type: list
+              required: false
+              items:
+                type: string
+                format: entity.reference
+            conditions:
+              type: list
+              required: false
+              items: { type: string }
+
+      anti_patterns:
+        type: list
+        min_items: 1
+        items:
+          type: object
+          required: [scenario, reason]
+          properties:
+            scenario:
+              type: string
+            reason:
+              type: string
+            preferred_alternative:
+              type: string
+              format: entity.reference
+              required: false
+            correction:
+              type: string
+              required: false
+
+      selection_rules:
+        type: list
+        required: false
+        items:
+          type: object
+          required: [condition, decision, rationale]
+          properties:
+            condition:
+              type: string
+            decision:
+              type: string
+            compared_with:
+              type: list
+              required: false
+              items:
+                type: string
+                format: entity.reference
+            rationale:
+              type: string
+
+  variants:
+    type: list
+    required: false
+    description: >
+      Semantic variation axes. MetaSpec defines meaning and selection criteria;
+      Storybook confirms which variants are implemented.
+    items:
+      type: object
+      required: [id, name, selection, values]
+      properties:
+        id:
+          type: string
+          format: kebab-case
+        name:
+          type: string
+        description:
+          type: string
+          required: false
+        selection:
+          type: enum
+          values: [single, multiple]
+        values:
+          type: list
+          min_items: 1
+          items:
+            type: object
+            required: [id, name, meaning, use_when]
+            properties:
+              id:
+                type: string
+                format: kebab-case
+              name:
+                type: string
+              meaning:
+                type: string
+              use_when:
+                type: list
+                min_items: 1
+                items: { type: string }
+              avoid_when:
+                type: list
+                required: false
+                items: { type: string }
+              constraints:
+                type: list
+                required: false
+                items: { type: string }
+              incompatible_with:
+                type: list
+                required: false
+                items:
+                  type: string
+                  format: variant.reference
+
+  composition:
+    type: object
+    required: false
+    description: Semantic anatomy and valid composition rules.
+    properties:
+      slots:
+        type: list
+        min_items: 1
+        items:
+          type: object
+          required: [id, role, cardinality]
+          properties:
+            id:
+              type: string
+              format: kebab-case
+            role:
+              type: string
+              vocabulary: slot_role
+            description:
+              type: string
+              required: false
+            cardinality:
+              type: enum
+              values: [exactly_one, zero_or_one, one_or_more, zero_or_more]
+            accepts:
+              type: list
+              required: false
+              items:
+                type: string
+                format: entity.reference
+            conditions:
+              type: list
+              required: false
+              items: { type: string }
+            constraints:
+              type: list
+              required: false
+              items: { type: string }
+
+      parent_constraints:
+        type: list
+        required: false
+        items:
+          type: object
+          required: [rule, rationale]
+          properties:
+            context:
+              type: string
+              required: false
+            rule:
+              type: string
+            rationale:
+              type: string
+
+      rules:
+        type: list
+        required: false
+        items:
+          type: object
+          required: [id, statement]
+          properties:
+            id:
+              type: string
+              format: dot.notation
+            statement:
+              type: string
+            severity:
+              type: enum
+              values: [error, warning]
+              required: false
+
+  behavior:
+    type: object
+    required: false
+    description: Expected semantic behavior without visual styling or technical event APIs.
+    properties:
+      states:
+        type: list
+        required: false
+        items:
+          type: object
+          required: [id, meaning]
+          properties:
+            id:
+              type: string
+              vocabulary: component_state
+            meaning:
+              type: string
+            entered_when:
+              type: list
+              required: false
+              items: { type: string }
+            expected_behavior:
+              type: list
+              required: false
+              items: { type: string }
+            available_actions:
+              type: list
+              required: false
+              items: { type: string }
+            exit_when:
+              type: list
+              required: false
+              items: { type: string }
+
+      interaction_rules:
+        type: list
+        required: false
+        items:
+          type: object
+          required: [trigger, response]
+          properties:
+            trigger:
+              type: string
+            conditions:
+              type: list
+              required: false
+              items: { type: string }
+            response:
+              type: string
+
+      adaptations:
+        type: list
+        required: false
+        description: Contextual behavior changes without CSS or breakpoint values.
+        items:
+          type: object
+          required: [context, behavior]
+          properties:
+            context:
+              type: string
+            behavior:
+              type: string
+            invariant:
+              type: string
+              required: false
+
+  content:
+    type: object
+    required: false
+    properties:
+      purpose:
+        type: string
+        required: false
+      required_information:
+        type: list
+        required: false
+        items: { type: string }
+      rules:
+        type: list
+        required: false
+        items: { type: string }
+      prohibited_content:
+        type: list
+        required: false
+        items: { type: string }
+      localization_notes:
+        type: list
+        required: false
+        items: { type: string }
+
+  accessibility:
+    type: object
+    required: [requirements]
+    description: >
+      Expected accessibility contract. Implementation evidence and test results
+      belong to Storybook and code.
+    properties:
+      semantic_role:
+        type: string
+        required: false
+      accessible_name:
+        type: string
+        required: false
+      keyboard_behavior:
+        type: list
+        required: false
+        items: { type: string }
+      focus_behavior:
+        type: list
+        required: false
+        items: { type: string }
+      screen_reader_expectations:
+        type: list
+        required: false
+        items: { type: string }
+      requirements:
+        type: list
+        min_items: 1
+        items:
+          type: object
+          required: [id, statement]
+          properties:
+            id:
+              type: string
+              format: dot.notation
+            statement:
+              type: string
+            applies_when:
+              type: string
+              required: false
+            severity:
+              type: enum
+              values: [error, warning]
+              required: false
+      conformance_target:
+        type: string
+        required: false
+        description: Declared target, not proof of compliance.
+
+  relationships:
+    type: list
+    required: false
+    items:
+      type: object
+      required: [type, target, rationale]
+      properties:
+        type:
+          type: string
+          vocabulary: component_relationship
+        target:
+          type: string
+          format: entity.reference
+        rationale:
+          type: string
+        conditions:
+          type: list
+          required: false
+          items: { type: string }
+
+  rules:
+    type: list
+    required: false
+    description: Cross-cutting invariants of the semantic contract.
+    items:
+      type: object
+      required: [id, type, requirement, severity]
+      properties:
+        id:
+          type: string
+          format: dot.notation
+        type:
+          type: enum
+          values:
+            - intent
+            - usage
+            - variant
+            - composition
+            - behavior
+            - content
+            - accessibility
+            - relationship
+        condition:
+          type: string
+          required: false
+        requirement:
+          type: string
+        severity:
+          type: enum
+          values: [error, warning]
+        rationale:
+          type: string
+          required: false
+
+  examples:
+    type: object
+    required: false
+    properties:
+      positive:
+        type: list
+        required: false
+        items:
+          type: object
+          required: [scenario, rationale]
+          properties:
+            scenario:
+              type: string
+            rationale:
+              type: string
+            variants:
+              type: list
+              required: false
+              items:
+                type: string
+                format: variant.reference
+      negative:
+        type: list
+        required: false
+        items:
+          type: object
+          required: [scenario, violation, correction]
+          properties:
+            scenario:
+              type: string
+            violation:
+              type: string
+            correction:
+              type: string
+
+  implementation_reference:
+    type: object
+    required: false
+    description: >
+      Stable pointers to implementation sources without duplicating props,
+      stories, tests, technical defaults, styles, or implementation status.
+    properties:
+      storybook:
+        type: object
+        required: false
+        properties:
+          title:
+            type: string
+            required: false
+          url:
+            type: string
+            required: false
+      repository_path:
+        type: string
+        required: false
+
+  governance:
+    type: object
+    required: [version, status, owners, sources]
+    properties:
+      version:
+        type: string
+      status:
+        type: enum
+        values: [draft, in_review, approved, deprecated]
+      owners:
+        type: list
+        min_items: 1
+        items: { type: string }
+      sources:
+        type: list
+        min_items: 1
+        items:
+          type: object
+          required: [type, reference]
+          properties:
+            type:
+              type: enum
+              values:
+                - workshop
+                - design_review
+                - research
+                - guideline
+                - existing_documentation
+                - expert_decision
+                - other
+            reference:
+              type: string
+            notes:
+              type: string
+              required: false
+      last_reviewed:
+        type: string
+        format: date
+        required: false
+      reviewed_by:
+        type: list
+        required: false
+        items: { type: string }
+      deprecation:
+        type: object
+        required: false
+        properties:
+          deprecated_since:
+            type: string
+            format: date
+            required: false
+          replaced_by:
+            type: string
+            format: entity.reference
+            required: false
+          migration_guidance:
+            type: string
+            required: false
+
+  open_questions:
+    type: list
+    required: false
+    items:
+      type: object
+      required: [id, question, status]
+      properties:
+        id:
+          type: string
+          format: dot.notation
+        question:
+          type: string
+        status:
+          type: enum
+          values: [open, investigating, resolved]
+        owner:
+          type: string
+          required: false
+        resolution:
+          type: string
+          required: false

@@ -1,0 +1,125 @@
+identity:
+  id: component.header
+  name: Header (Encabezado)
+  aliases:
+  - header
+taxonomy:
+  type: navigation
+  category: navigation
+intent:
+  summary: Encabezado principal de la aplicación que proporciona contexto del usuario (saludo y descripción), botón de notificaciones con badge opcional de punto (dot badge), y avatar de perfil interactivo.
+  purpose: Da la bienvenida al usuario y proporciona accesos rápidos a alertas (notificaciones) y configuración del perfil.
+  system_role: orient_navigation
+  user_need: Identificar usuario y proveer navegación contextual
+usage:
+  use_cases:
+  - id: cabecera-en-dashboard-movil
+    scenario: Cabecera en Dashboard móvil
+    rationale: Ubicado en la parte superior de la pantalla principal para saludar al usuario y ofrecer accesos rápidos.
+  anti_patterns:
+  - scenario: Sobrecargar con múltiples botones o texto largo
+    reason: Reduce el espacio limpio del saludo y compite visualmente con el carrusel de tarjetas principal.
+    correction: Limitar a máximo dos acciones (notificaciones y avatar/perfil).
+variants:
+- id: has-notifications
+  name: Has Notifications
+  description: Determina si se muestra el dot badge de notificaciones.
+  selection: single
+  values:
+  - id: 'true'
+    name: Con notificaciones
+    meaning: Muestra un punto rojo de notificación pendiente (dot badge) sobre el botón de campana.
+    use_when:
+    - Muestra un punto rojo de notificación pendiente (dot badge) sobre el botón de campana.
+  - id: 'false'
+    name: Sin notificaciones
+    meaning: Oculta el indicador visual de notificaciones.
+    use_when:
+    - Oculta el indicador visual de notificaciones.
+- id: size
+  name: Size
+  description: Dimensiones y paddings del encabezado.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Encabezado compacto para páginas secundarias.
+    use_when:
+    - Encabezado compacto para páginas secundarias.
+  - id: md
+    name: Medium
+    meaning: Encabezado estándar de dashboard.
+    use_when:
+    - Encabezado estándar de dashboard.
+  - id: lg
+    name: Large
+    meaning: Encabezado amplio de landing o perfil.
+    use_when:
+    - Encabezado amplio de landing o perfil.
+composition:
+  slots:
+  - id: title
+    role: heading-content
+    description: Texto de saludo o título principal (ej. ¡Hola, Eberth!).
+    cardinality: exactly_one
+    accepts:
+    - text
+  - id: description
+    role: supporting-copy
+    description: Texto secundario de soporte o estado.
+    cardinality: zero_or_one
+    accepts:
+    - text
+  - id: avatar
+    role: trailing-visual
+    description: Avatar circular interactivo del usuario.
+    cardinality: exactly_one
+    accepts:
+    - mixed
+  - id: notification-button
+    role: secondary-action
+    description: Botón de notificaciones con icono de campana y soporte para dot badge.
+    cardinality: zero_or_one
+    accepts:
+    - component.button
+  parent_constraints:
+  - rule: El avatar interactivo debe estar siempre presente en el encabezado.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado inicial del encabezado.
+accessibility:
+  focus_behavior:
+  - Los elementos interactivos dentro del encabezado (botón de notificaciones y avatar) reciben foco secuencialmente.
+  requirements:
+  - id: accessibility.header.focus
+    statement: Los elementos interactivos dentro del encabezado (botón de notificaciones y avatar) reciben foco secuencialmente.
+  - id: accessibility.header.contrast
+    statement: El texto del saludo debe mantener una relación de contraste mínima de 4.5:1 contra el color de fondo.
+relationships:
+- type: commonly_composed_with
+  target: component.button
+  rationale: This component commonly composes with component.button through the notification-button slot.
+examples:
+  positive:
+  - scenario: Cabecera en Dashboard móvil
+    rationale: Ubicado en la parte superior de la pantalla principal para saludar al usuario y ofrecer accesos rápidos.
+  negative:
+  - scenario: Sobrecargar con múltiples botones o texto largo
+    violation: Reduce el espacio limpio del saludo y compite visualmente con el carrusel de tarjetas principal.
+    correction: Limitar a máximo dos acciones (notificaciones y avatar/perfil).
+implementation_reference:
+  repository_path: specs/design-system/components/header.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/header.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

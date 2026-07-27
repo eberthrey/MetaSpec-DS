@@ -1,0 +1,114 @@
+identity:
+  id: component.walk_card
+  name: Walk Card (Tarjeta de Paseo)
+  aliases:
+  - walk_card
+taxonomy:
+  type: data_display
+  category: data_display
+intent:
+  summary: Componente de tarjeta contenedor diseñado para mostrar el resumen o detalles de un paseo de mascota. Es reutilizable para paseos recientes en el Home, historial de paseos y listado de paseos programados.
+  purpose: Presentar una tarjeta compacta estructurada con la información del paseador, la mascota, la fecha/hora, la duración y el estado operativo del servicio.
+  system_role: surface_information
+  user_need: Resumir información de un servicio de paseo
+usage:
+  use_cases:
+  - id: paseo-reciente-en-el-home-del-dueno
+    scenario: Paseo reciente en el Home del dueño
+    rationale: Muestra los datos clave del último servicio finalizado.
+  - id: historial-de-paseos
+    scenario: Historial de paseos
+    rationale: Elemento de lista dentro del historial con calificación y costo del servicio.
+  anti_patterns:
+  - scenario: Sobrecargar la tarjeta con detalles del trayecto completo o mapas interactivos miniatura
+    reason: Reduce la legibilidad e impacta el rendimiento del scroll vertical en dispositivos móviles.
+    correction: Mantener la tarjeta con datos textuales simples y derivar el detalle complejo a la vista expandida.
+variants:
+- id: size
+  name: Size
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Tarjeta compacta para listados de alta densidad.
+    use_when:
+    - Tarjeta compacta para listados de alta densidad.
+  - id: md
+    name: Medium
+    meaning: Tarjeta estándar para uso regular en Home e Historial.
+    use_when:
+    - Tarjeta estándar para uso regular en Home e Historial.
+  - id: lg
+    name: Large
+    meaning: Tarjeta grande o expandida para detalle destacado.
+    use_when:
+    - Tarjeta grande o expandida para detalle destacado.
+composition:
+  slots:
+  - id: avatar
+    role: decorative
+    description: Foto de perfil del paseador asignado.
+    cardinality: zero_or_one
+  - id: title
+    role: heading-content
+    description: Título principal de la tarjeta (ej. 'Paseo con [Mascota]').
+    cardinality: exactly_one
+  - id: subtitle
+    role: supporting-copy
+    description: Detalles secundarios como el nombre del paseador y los distritos operativos.
+    cardinality: zero_or_one
+  - id: metadata
+    role: supporting-copy
+    description: Información operativa clave como fecha del servicio, hora de inicio y duración.
+    cardinality: zero_or_one
+  - id: status-badge
+    role: indicator
+    description: Etiqueta distintiva del estado del paseo (ej. 'Completado', 'Programado', 'En Curso').
+    cardinality: zero_or_one
+  - id: price
+    role: metadata
+    description: 'Monto cobrado o por cobrar por el servicio de paseo (ej: ''S/. 20.00'').'
+    cardinality: zero_or_one
+  parent_constraints:
+  - rule: Si la tarjeta es interactiva, su área completa debe ser un control accesible de al menos 48px de altura.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado pasivo en reposo, con bordes redondeados y sombra sutil.
+  - id: interactive
+    meaning: Estado seleccionable que responde al tacto y permite abrir el detalle del paseo.
+accessibility:
+  focus_behavior:
+  - Toda la tarjeta debe actuar como un control enfocable si es interactiva.
+  screen_reader_expectations:
+  - 'Debe verbalizar la descripción textual consolidada del paseo (ej: ''Paseo de Firulais con Clara Domínguez el 20 de Mayo, Completado'').'
+  requirements:
+  - id: accessibility.walk-card.focus
+    statement: Toda la tarjeta debe actuar como un control enfocable si es interactiva.
+  - id: accessibility.walk-card.screen-reader
+    statement: 'Debe verbalizar la descripción textual consolidada del paseo (ej: ''Paseo de Firulais con Clara Domínguez el 20 de Mayo, Completado'').'
+examples:
+  positive:
+  - scenario: Paseo reciente en el Home del dueño
+    rationale: Muestra los datos clave del último servicio finalizado.
+  - scenario: Historial de paseos
+    rationale: Elemento de lista dentro del historial con calificación y costo del servicio.
+  negative:
+  - scenario: Sobrecargar la tarjeta con detalles del trayecto completo o mapas interactivos miniatura
+    violation: Reduce la legibilidad e impacta el rendimiento del scroll vertical en dispositivos móviles.
+    correction: Mantener la tarjeta con datos textuales simples y derivar el detalle complejo a la vista expandida.
+implementation_reference:
+  repository_path: specs/design-system/components/walk_card.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/walk_card.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

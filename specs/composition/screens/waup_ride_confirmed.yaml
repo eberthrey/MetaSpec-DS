@@ -1,0 +1,48 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Reserva Exitosa (Ride Confirmed)
+  waup_ride_confirmed:
+    description: "Pantalla de éxito que se muestra tras aprobarse la transacción. Informa los datos de contacto y el perfil del paseador asignado."
+    role: "waup_pet_owner"
+    view_state: "waup_ride_confirmed"
+    
+    layout:
+      type: "flex_centered"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "success_indicator"
+        description: "Icono distintivo de check de éxito con color de soporte verde."
+        component: "component.badge"
+        properties:
+          shape: "circle"
+          variant: "success"
+          icon: "check"
+          
+      - slot_id: "success_copy"
+        description: "Textos de felicitación y confirmación del pago."
+        component: "component.card"
+        properties:
+          title: "¡Paseo Confirmado!"
+          description: "El pago ha sido procesado de forma segura y los datos del paseo se han liberado."
+          
+      - slot_id: "assigned_walker_card"
+        description: "Tarjeta detallada del paseador asignado, mostrando su avatar, nombre y número telefónico liberado."
+        component: "component.card"
+        properties:
+          title: "Tu Paseador asignado"
+          layout: "horizontal_layout"
+          avatar: "{selected_walker.avatar}"
+          name: "{selected_walker.name}"
+          phone: "+51 987 654 321"
+          
+      - slot_id: "back_to_home_action"
+        description: "Botón principal fijado al pie para retornar a la pantalla principal."
+        component: "component.button"
+        properties:
+          label: "Regresar al inicio"
+          action: "navigate_to:waup_owner_home"
+          hierarchy: "primary"

@@ -1,0 +1,252 @@
+version: "0.1"
+
+policies:
+  - id: pol.editorial.single_language
+    name: Idioma editorial único
+    description: El contenido descriptivo de cada entidad debe mantener un único idioma editorial por archivo.
+    applies_to:
+      - component
+      - asset
+      - foundation
+      - pattern
+    enforcement: blocking
+
+  - id: pol.variant_axes.no_states
+    name: Variant axes no modela estados
+    description: variant_axes no debe usarse para modelar estados de interacción, estados del sistema ni ejes llamados state o status cuando pertenecen a behavior.states.
+    applies_to:
+      - component
+    enforcement: blocking
+
+  - id: pol.open_questions.contract_only
+    name: Open questions solo para incertidumbre material
+    description: open_questions solo debe contener incertidumbres que afecten clasificación, contrato, naming canónico, implementación o promoción editorial. No debe usarse para notas generales de procedencia, inferencia o mecánica del extractor sin impacto material.
+    applies_to:
+      - component
+      - asset
+      - foundation
+      - pattern
+    enforcement: blocking
+
+  - id: pol.accessibility.no_placeholders
+    name: Accessibility sin placeholders vacíos
+    description: accessibility no debe rellenarse con frases vacías como 'No hay evidencia'. Debe usar evidence_level y open_questions cuando aplique.
+    applies_to:
+      - component
+    enforcement: blocking
+
+  - id: pol.canonical_components.usage_required
+    name: Usage mínima en components canónicos
+    description: Los components suficientemente canónicos no deben dejar use_cases o anti_patterns vacíos sin justificación explícita.
+    applies_to:
+      - component
+    enforcement: blocking
+
+  - id: pol.figma_ref.confidence_required
+    name: Figma ref requiere confidence
+    description: Si existe figma_ref, debe existir figma_ref.confidence.
+    applies_to:
+      - component
+      - asset
+      - foundation
+    enforcement: blocking
+
+  - id: pol.figma_ref.real_reference_only
+    name: Figma ref solo con referencia real
+    description: figma_ref solo debe declararse cuando exista una referencia real de Figma para la entidad. No deben generarse bloques vacíos o parciales.
+    applies_to:
+      - component
+      - asset
+      - foundation
+    enforcement: blocking
+
+  - id: pol.controlled_vocabulary.required
+    name: Vocabulario controlado obligatorio
+    description: Las categorías, roles, severidades, state_type, evidence_level, provenance, scope canónico y familias canónicas deben usar exclusivamente los valores definidos en controlled-vocabulary.yaml.
+    applies_to:
+      - component
+      - asset
+      - pattern
+      - foundation
+    enforcement: blocking
+
+  - id: pol.foundation.name_english
+    name: Name de foundation en inglés
+    description: El field name de foundations debe normalizarse en inglés como label canónico del sistema, aunque el resto del contenido descriptivo use el idioma editorial activo.
+    applies_to:
+      - foundation
+    enforcement: warning
+
+  - id: pol.references.no_absolute_local_paths
+    name: References sin rutas locales absolutas
+    description: references no debe incluir rutas absolutas de una máquina local. Debe preferir rutas relativas al repositorio, URLs portables y omitir self-references triviales que no aporten contexto contractual.
+    applies_to:
+      - component
+      - asset
+      - pattern
+      - foundation
+    enforcement: blocking
+
+  - id: pol.foundation.separable_layers_split
+    name: Foundation separa capas contractuales resolubles
+    description: Cuando una foundation contenga capas con contrato distinto y separable, no debe mezclarlas en una sola entidad. Debe modelarlas como foundations distintas y usar scope canónico cuando aplique.
+    applies_to:
+      - foundation
+    enforcement: blocking
+
+  - id: pol.foundation.scope.required_when_split
+    name: Scope obligatorio cuando la foundation se separa
+    description: Cuando una foundation se modele como una capa separada dentro de un sistema mayor, debe declarar scope con un valor canónico consistente con canonical_tokens, scales y dependencies.
+    applies_to:
+      - foundation
+    enforcement: warning
+
+  - id: pol.foundation.typography.catalog_complete_when_stable
+    name: Typography refleja el catálogo estable observado
+    description: En foundation.typography, cuando la fuente exponga un catálogo estable de text styles compuestos, canonical_tokens debe reflejar ese catálogo observable junto con los primitives base que formen parte real del contrato. No debe reducirse a una muestra arbitraria.
+    applies_to:
+      - foundation
+    enforcement: warning
+
+  - id: pol.foundation.typography.style_library_token_based
+    name: Typography style library usa token_based
+    description: Cuando foundation.typography documente una librería estable de text styles compuestos sin primitives raw separados dentro del mismo contrato, debe clasificarse como token_based. mixed debe reservarse para foundations que combinen primitives raw y text styles compuestos como parte explícita de la misma foundation.
+    applies_to:
+      - foundation
+    enforcement: warning
+
+  - id: pol.foundation.typography.composed_styles_not_raw
+    name: Typography no modela text styles compuestos como raw
+    description: Los text styles compuestos de foundation.typography no deben declararse como raw.typography.style. Deben usar la escala canónica typography.style u otra convención canónica equivalente definida en controlled-vocabulary.yaml.
+    applies_to:
+      - foundation
+    enforcement: blocking
+
+  - id: pol.foundation.typography.style_names.preserve_source_until_governed
+    name: Typography preserva naming source-facing hasta que exista mapping formal
+    description: Mientras MetaSpec no defina un mapping tipográfico canónico formal, los estilos tipográficos individuales de foundation.typography deben conservar nombres source-facing con normalización mínima y reversible. El generador no debe reinterpretarlos en una taxonomía semántica nueva.
+    applies_to:
+      - foundation
+    enforcement: blocking
+
+  - id: pol.foundation.typography.open_questions.catalog_boundary
+    name: Typography formula dudas sobre el límite del catálogo
+    description: Las open_questions de foundation.typography deben formular incertidumbre sobre si el catálogo observable es el set canónico completo o si se prevé una ampliación futura. No deben presuponer la existencia implícita de un style ausente sin evidencia directa.
+    applies_to:
+      - foundation
+    enforcement: warning
+
+  - id: pol.figma_ref.matched_name.meaningful_or_omitted
+    name: Figma matched name útil u omitido
+    description: figma_ref.matched_name solo debe conservarse cuando aporte trazabilidad útil. Si el label observado es genérico, ruidoso o no canónico, debe omitirse en lugar de preservarse sin revisión.
+    applies_to:
+      - component
+      - asset
+      - foundation
+    enforcement: warning
+
+  - id: pol.slot.contract_required
+    name: Slots con contrato compositivo
+    description: Los slots no deben modelarse como contenedores libres. Cuando exista evidencia fuerte de un child reutilizable o de evidencia interna visible suficientemente estable, el slot debe declarar accepts. Solo cuando la evidencia no alcance puede dejarse la incertidumbre explícita en open_questions.
+    applies_to:
+      - component
+    enforcement: blocking
+
+  - id: pol.preferred_children.non_redundant
+    name: Preferred children no redundante
+    description: preferred_children solo debe usarse cuando accepts admita múltiples opciones válidas y exista una preferencia real. No debe duplicar exactamente un único valor ya declarado en accepts.
+    applies_to:
+      - component
+    enforcement: warning
+
+  - id: pol.accepts.prefer_most_specific_match
+    name: Accepts prefiere match específico
+    description: Cuando exista evidencia fuerte de un child canónico del catálogo, accepts debe resolver la entidad más específica disponible y no quedarse en una familia semántica más amplia. Las familias amplias solo deben usarse cuando la evidencia no alcance para resolver una entidad concreta.
+    applies_to:
+      - component
+    enforcement: blocking
+
+  - id: pol.slot.role_refines_with_specific_accepts
+    name: Role se refina cuando accepts es específico
+    description: Cuando accepts se resuelva con una entidad suficientemente específica y estable, role no debe quedarse en una categoría más amplia si existe un rol canónico más preciso.
+    applies_to:
+      - component
+    enforcement: warning
+
+  - id: pol.interactive_child.not_visual_asset
+    name: Child interactivo no se clasifica como asset visual
+    description: Cuando exista evidencia fuerte de que un child reutilizable es interactivo, no debe clasificarse como asset.icon aunque contenga un recurso visual interno. Debe priorizarse el wrapper interactivo del child.
+    applies_to:
+      - component
+    enforcement: blocking
+
+  - id: pol.button_icon.default_to_button
+    name: Button icon resuelve a button por defecto
+    description: Si el design system no ha definido explícitamente button icon como entidad canónica separada, los children del tipo button icon deben resolverse como component.button y no como asset.icon.
+    applies_to:
+      - component
+    enforcement: warning
+
+  - id: pol.allowed_children.only_when_additive
+    name: Allowed children solo cuando aporta valor
+    description: allowed_children solo debe declararse cuando aporte una política compositiva general que no ya esté expresada de forma suficiente por los slots. Si solo repite los mismos tipos ya declarados en slots, debe omitirse.
+    applies_to:
+      - component
+    enforcement: warning
+
+  - id: pol.provenance.observed_requires_direct_evidence
+    name: Observed requiere evidencia directa
+    description: observed/high solo debe usarse cuando la evidencia sea explícita y directa, por ejemplo documentación clara, implementación confirmada o estructura inequívoca. Si el caso de uso se deduce principalmente desde una captura visual, naming o inferencia de diseño, debe preferirse inferred/medium.
+    applies_to:
+      - component
+      - asset
+      - foundation
+      - pattern
+    enforcement: warning
+
+  - id: pol.token_bindings.summary_only
+    name: Token bindings como resumen
+    description: token_bindings debe expresar foundations y tokens consumidos, no replicar exhaustivamente el render final en Figma o desarrollo.
+    applies_to:
+      - component
+    enforcement: warning
+
+  - id: pol.token_bindings.typography.prefer_composed_style
+    name: Typography prioriza text style compuesto
+    description: En token_bindings.typography, cuando un text style compuesto ya represente el contrato tipográfico del component, no deben listarse también los sub-tokens que solo explican cómo está construido ese style, salvo que formen parte del contrato de manera separada.
+    applies_to:
+      - component
+    enforcement: warning
+
+  - id: pol.description.contractual_semantic
+    name: Description contractual y semántica
+    description: La description debe explicar qué es la entidad, qué organiza y para qué sirve dentro del sistema. No debe narrar lo observado en Figma, matrices, sets, ejemplos visibles, procedencia de extracción ni mecánicas del extractor.
+    applies_to:
+      - component
+      - asset
+      - foundation
+    enforcement: blocking
+
+  - id: pol.use_cases.contractual_guidance
+    name: Use cases como guidance contractual
+    description: Los use_cases deben redactarse como guidance contractual de uso. Deben explicar cuándo usar la entidad y bajo qué criterio, no describir ejemplos visibles ni composiciones observadas en Figma.
+    applies_to:
+      - component
+      - foundation
+    enforcement: warning
+
+  - id: pol.token_bindings.parent_layers_only
+    name: Token bindings solo de capas del padre
+    description: token_bindings debe registrar únicamente tokens aplicados directamente a capas pertenecientes al componente padre. No debe incluir tokens de componentes hijos reutilizables, nested instances ni subcomponentes con metadata propia.
+    applies_to:
+      - component
+    enforcement: blocking
+
+  - id: pol.screen.prefers_canonical_foundations_and_tokens
+    name: Screens priorizan foundations y tokens canónicos
+    description: Cuando una tarea pida resolver una screen o pantalla, las decisiones visuales deben apoyarse primero en foundations y/o tokens canónicos ya definidos en el sistema. Si falta alguna foundation o token necesario, esa ausencia debe declararse explícitamente antes de usar cualquier fallback generado por el LLM. Los fallbacks generados por el LLM deben tratarse como temporales y no canónicos.
+    applies_to:
+      - pattern
+      - foundation
+      - component
+    enforcement: warning

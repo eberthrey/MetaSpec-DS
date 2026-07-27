@@ -1,0 +1,1267 @@
+tokens:
+- token: color.brand.primary
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.brand.primary
+      was_inferred: false
+  intent:
+    description: Color primario Navy de la marca
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.navy
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.brand.secondary
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.brand.secondary
+      was_inferred: false
+  intent:
+    description: Color secundario Navy de la marca
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.navy
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.brand.secondary.violet
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.brand.secondary.violet
+      was_inferred: false
+  intent:
+    description: Color de acento secundario morado/violeta
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.violet
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.brand.accent
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.brand.accent
+      was_inferred: false
+  intent:
+    description: Color de acento primario Coral
+  relationships:
+  - type: depends_on
+    target: color.base.primary
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.brand.warm
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.brand.warm
+      was_inferred: false
+  intent:
+    description: Color calido de fondo
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.soft_cream
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.background.default
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.background.default
+      was_inferred: false
+  intent:
+    description: Fondo de aplicacion general
+  relationships:
+  - type: depends_on
+    target: color.base.neutral.background
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.surface.default
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.surface.default
+      was_inferred: false
+  intent:
+    description: Color de superficie para tarjetas y bloques
+  relationships:
+  - type: depends_on
+    target: color.base.neutral.warm_surface
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.text.muted
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.text.muted
+      was_inferred: false
+  intent:
+    description: Color de texto secundario y leyendas
+  relationships:
+  - type: depends_on
+    target: color.base.neutral.muted_text
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.text.title
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.text.title
+      was_inferred: false
+  intent:
+    description: Color de texto destacado para cabeceras y títulos
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.navy
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.shortcut.icon.violet
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.shortcut.icon.violet
+      was_inferred: false
+  intent:
+    description: Color de fondo/icono suave lila
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.light_lilac
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.shortcut.icon.primary
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.shortcut.icon.primary
+      was_inferred: false
+  intent:
+    description: Color para iconos primarios/coral
+  relationships:
+  - type: depends_on
+    target: color.base.primary
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.shortcut.icon.navy
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.shortcut.icon.navy
+      was_inferred: false
+  intent:
+    description: Color de alto contraste para iconos azul marino
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.navy
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.feedback.success
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.feedback.success
+      was_inferred: false
+  intent:
+    description: Color de retroalimentacion para estados de exito
+  relationships:
+  - type: depends_on
+    target: color.base.support.success
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: radius.card.default
+  classification:
+    layer: semantic
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.card.default
+      was_inferred: false
+  intent:
+    description: Radio de redondeado estandar para tarjetas y contenedores
+  relationships:
+  - type: depends_on
+    target: radius.base.large
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: radius.button.default
+  classification:
+    layer: semantic
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.button.default
+      was_inferred: false
+  intent:
+    description: Radio de redondeado estandar para botones y elementos interactivos circulares
+  relationships:
+  - type: depends_on
+    target: radius.base.medium
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: radius.avatar.circle
+  classification:
+    layer: semantic
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.avatar.circle
+      was_inferred: false
+  intent:
+    description: Radio circular completo para avatares
+  relationships:
+  - type: depends_on
+    target: radius.base.circle
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.density
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.density
+      was_inferred: false
+  intent:
+    description: Espaciado de layout base
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.12
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.card_padding
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.card_padding
+      was_inferred: false
+  intent:
+    description: Espaciado interno de tarjetas
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.20
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.page_margin
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.page_margin
+      was_inferred: false
+  intent:
+    description: Margen lateral de la pantalla móvil
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.24
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.gap_small
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.gap_small
+      was_inferred: false
+  intent:
+    description: Espaciado pequeño entre elementos adyacentes
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.8
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.gap_medium
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.gap_medium
+      was_inferred: false
+  intent:
+    description: Espaciado mediano entre bloques lógicos
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.12
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.gap_large
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.gap_large
+      was_inferred: false
+  intent:
+    description: Espaciado grande para divisiones de secciones
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.24
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.section_gap
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.section_gap
+      was_inferred: false
+  intent:
+    description: Diferencia de espaciado entre secciones diferentes
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.24
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.item_gap
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.item_gap
+      was_inferred: false
+  intent:
+    description: Espaciado entre elementos de una misma sección
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.24
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.input_card_gap
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.input_card_gap
+      was_inferred: false
+  intent:
+    description: Separación estándar entre campos de entrada (inputs) y tarjetas (cards)
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.16
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.section_cta_gap
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.section_cta_gap
+      was_inferred: false
+  intent:
+    description: Separación entre secciones de contenido y el botón de llamada a la acción principal (CTA)
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.24
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.layout.bottom_safety_margin
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.layout.bottom_safety_margin
+      was_inferred: false
+  intent:
+    description: Espaciado final de seguridad entre el último elemento y el borde inferior de la pantalla
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.40
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.family.default
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.family.default
+      was_inferred: false
+  intent:
+    description: Tipografía principal por defecto
+  relationships:
+  - type: depends_on
+    target: typography.base.family
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.display
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.display
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente display para pantallas clave (32px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.display
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.hero
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.hero
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para títulos héroe / display (32px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.display
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.h1
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.h1
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para títulos H1 (28px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.xxl
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.h2
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.h2
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para encabezados H2 (24px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.xl
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.h3
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.h3
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para encabezados H3 (20px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.lg
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.body_large
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.body_large
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para cuerpo destacado (16px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.md
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.body
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.body
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para cuerpo de texto estándar (14px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.sm
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.sm_medium
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.sm_medium
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente intermedio (14px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.sm
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.caption
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.caption
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para leyendas y subtextos (12px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.xs
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.metadata
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.metadata
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para metadatos extra pequeños (12px)
+  relationships:
+  - type: depends_on
+    target: typography.base.size.xs
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.weight.regular
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.weight.regular
+      was_inferred: false
+  intent:
+    description: Peso regular (400)
+  relationships:
+  - type: depends_on
+    target: typography.base.weight.regular
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.weight.medium
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.weight.medium
+      was_inferred: false
+  intent:
+    description: Peso medio (500)
+  relationships:
+  - type: depends_on
+    target: typography.base.weight.medium
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.weight.semibold
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.weight.semibold
+      was_inferred: false
+  intent:
+    description: Peso seminegrita (600)
+  relationships:
+  - type: depends_on
+    target: typography.base.weight.semibold
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.weight.bold
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.weight.bold
+      was_inferred: false
+  intent:
+    description: Peso negrita (700)
+  relationships:
+  - type: depends_on
+    target: typography.base.weight.bold
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.style.hero
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.style.hero
+      was_inferred: false
+  intent:
+    description: Estilo compuesto para el título de tarjetas héroe principales (20px, Bold)
+  relationships:
+  - type: depends_on
+    target: typography.family.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.size.hero
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.weight.bold
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.style.h1
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.style.h1
+      was_inferred: false
+  intent:
+    description: Estilo compuesto para encabezado principal de pantalla móvil (24px, Bold)
+  relationships:
+  - type: depends_on
+    target: typography.family.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.size.h1
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.weight.bold
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.style.h2
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.style.h2
+      was_inferred: false
+  intent:
+    description: Estilo compuesto para encabezados de segundo nivel (16px, SemiBold)
+  relationships:
+  - type: depends_on
+    target: typography.family.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.size.h2
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.weight.semibold
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.style.body
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.style.body
+      was_inferred: false
+  intent:
+    description: Estilo compuesto para cuerpo de texto estándar (13px, Medium)
+  relationships:
+  - type: depends_on
+    target: typography.family.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.size.body
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.weight.medium
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.style.caption
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.style.caption
+      was_inferred: false
+  intent:
+    description: Estilo compuesto para leyendas y subtextos (11px, Regular)
+  relationships:
+  - type: depends_on
+    target: typography.family.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.size.caption
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.weight.regular
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.style.metadata
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.style.metadata
+      was_inferred: false
+  intent:
+    description: Estilo compuesto para metadatos extra pequeños (10px, Regular)
+  relationships:
+  - type: depends_on
+    target: typography.family.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.size.metadata
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.weight.regular
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.style.button
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.style.button
+      was_inferred: false
+  intent:
+    description: Estilo tipográfico para la etiqueta de los botones (16px, SemiBold, 1.5 line-height)
+  relationships:
+  - type: depends_on
+    target: typography.family.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.size.body
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+  - type: depends_on
+    target: typography.weight.semibold
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: radius.badge.default
+  classification:
+    layer: semantic
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.badge.default
+      was_inferred: false
+  intent:
+    description: Radio de redondeado estándar para placas y badges
+  relationships:
+  - type: depends_on
+    target: radius.base.medium
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: radius.checkbox.default
+  classification:
+    layer: semantic
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.checkbox.default
+      was_inferred: false
+  intent:
+    description: Radio de redondeado estándar para checkboxes
+  relationships:
+  - type: depends_on
+    target: radius.base.small
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: radius.input.default
+  classification:
+    layer: semantic
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.input.default
+      was_inferred: false
+  intent:
+    description: Radio de redondeado estándar para inputs
+  relationships:
+  - type: depends_on
+    target: radius.base.input
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: radius.dot.default
+  classification:
+    layer: semantic
+    domain: radius
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: radius.dot.default
+      was_inferred: false
+  intent:
+    description: Radio de redondeado estándar para puntos de carrusel
+  relationships:
+  - type: depends_on
+    target: radius.base.small
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.checkbox.size
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.checkbox.size
+      was_inferred: false
+  intent:
+    description: Medida estándar para tamaño de checkbox
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.22
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.search_input.left
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.search_input.left
+      was_inferred: false
+  intent:
+    description: Separación izquierda para lupas en cajas de búsqueda
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.36
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.map.height
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.map.height
+      was_inferred: false
+  intent:
+    description: Altura de contenedor estándar para el componente mapa
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.216
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.badge.padding_x
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.badge.padding_x
+      was_inferred: false
+  intent:
+    description: Padding horizontal para badges
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.10
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: spacing.dot.size
+  classification:
+    layer: semantic
+    domain: spacing
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: spacing.dot.size
+      was_inferred: false
+  intent:
+    description: Tamaño estándar para los puntos de navegación de carruseles
+  relationships:
+  - type: depends_on
+    target: spacing.base.space.6
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.badge
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.badge
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente de badges
+  relationships:
+  - type: depends_on
+    target: typography.base.size.11
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.button_icon
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.button_icon
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente estándar para botones con solo icono
+  relationships:
+  - type: depends_on
+    target: typography.base.size.18
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: typography.size.map_instruction
+  classification:
+    layer: semantic
+    domain: typography
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: typography.size.map_instruction
+      was_inferred: false
+  intent:
+    description: Tamaño de fuente para las instrucciones flotantes en mapas
+  relationships:
+  - type: depends_on
+    target: typography.base.size.10
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: elevation.card.raised
+  classification:
+    layer: semantic
+    domain: elevation
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: elevation.card.raised
+      was_inferred: false
+  intent:
+    description: Sombra para tarjetas en estado elevado o flotante
+  relationships:
+  - type: depends_on
+    target: elevation.base.large
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: elevation.card.small
+  classification:
+    layer: semantic
+    domain: elevation
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: elevation.card.small
+      was_inferred: false
+  intent:
+    description: Sombra suave de elevación pequeña para tarjetas
+  relationships:
+  - type: depends_on
+    target: elevation.base.small
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: stroke.checkbox.width
+  classification:
+    layer: semantic
+    domain: stroke
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: stroke.checkbox.width
+      was_inferred: false
+  intent:
+    description: Grosor de borde para checkboxes
+  relationships:
+  - type: depends_on
+    target: stroke.base.checkbox
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: stroke.chip.selected
+  classification:
+    layer: semantic
+    domain: stroke
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: stroke.chip.selected
+      was_inferred: false
+  intent:
+    description: Grosor de borde de realce para chips seleccionados
+  relationships:
+  - type: depends_on
+    target: stroke.base.chip_selected
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: stroke.border.default
+  classification:
+    layer: semantic
+    domain: stroke
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: stroke.border.default
+      was_inferred: false
+  intent:
+    description: Grosor de borde estándar para elementos de la interfaz
+  relationships:
+  - type: depends_on
+    target: stroke.base.default
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.border.panel
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.border.panel
+      was_inferred: false
+  intent:
+    description: Color de borde tenue para paneles, inputs y controles
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.border_neutral
+    rationale: This token is derived from or composes the referenced token in the DTCG source.
+- token: color.text.body
+  classification:
+    layer: semantic
+    domain: color
+  provenance:
+    source: author_defined
+    confidence: high
+    source_reference: specs/design-system/tokens/semantic.yaml
+    normalization:
+      input_format: dtcg.object
+      normalized_from: color.text.body
+      was_inferred: false
+  intent:
+    description: Color de texto principal para cuerpo de lectura
+  relationships:
+  - type: depends_on
+    target: color.base.secondary.navy
+    rationale: This token is derived from or composes the referenced token in the DTCG source.

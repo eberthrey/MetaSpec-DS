@@ -1,0 +1,597 @@
+spec_version: "1.0.0"
+rules_version: 12
+last_updated_at: "2026-05-31T11:27:00-0500"
+
+namespace: "waup"
+inherits_from: "../../metaspec/semantic-intent/semantic-intent.yaml"
+
+waup_business_rules:
+  metadata:
+    product_name: "Waup"
+    permissions_taxonomy:
+      normalized: true
+      schema:
+        - "can_access_view_states"
+        - "can_view_surfaces"
+        - "can_act"
+        - "forbidden_actions"
+        - "hidden_or_disabled_surfaces"
+    permissions_source:
+      explicit_capabilities_captured: true
+      inferred_restrictions_from_role_scope: true
+
+  waup_view_states:
+    waup_app_onboarding_welcome:
+      phase: "app_introduction_flow"
+      kind: "tutorial"
+      description: "Pantalla 1 de bienvenida y presentacion del proposito principal."
+      triggers:
+        - event: "waup_app_first_launch"
+          description: "La aplicacion se inicia por primera vez."
+
+    waup_app_onboarding_gps:
+      phase: "app_introduction_flow"
+      kind: "tutorial"
+      description: "Pantalla 2 explicando el seguimiento GPS en tiempo real."
+      triggers:
+        - event: "waup_onboarding_welcome_completed"
+          description: "El usuario continua desde la bienvenida."
+
+    waup_app_onboarding_booking:
+      phase: "app_introduction_flow"
+      kind: "tutorial"
+      description: "Pantalla 3 explicando la reserva rapida y facilitando el acceso a login."
+      triggers:
+        - event: "waup_onboarding_gps_completed"
+          description: "El usuario continua desde la pantalla GPS."
+
+    waup_auth_start:
+      phase: "account_access_flow"
+      kind: "entry"
+      description: "Pantalla inicial de bienvenida con accesos para registro e inicio de sesion."
+      triggers:
+        - event: "waup_app_opened_without_account"
+          description: "El usuario abre la app sin cuenta o sin sesion activa."
+
+    waup_login:
+      phase: "account_access_flow"
+      kind: "login"
+      description: "Pantalla de inicio de sesion para usuarios ya registrados."
+      triggers:
+        - event: "waup_login_selected"
+          description: "El usuario elige iniciar sesion desde la pantalla de bienvenida."
+
+    waup_register:
+      phase: "account_access_flow"
+      kind: "registration"
+      description: "Pantalla de seleccion de metodo de registro para nuevos usuarios."
+      triggers:
+        - event: "waup_register_selected"
+          description: "El usuario elige registrarse desde la pantalla de bienvenida."
+
+    waup_phone_signup:
+      phase: "account_access_flow"
+      kind: "registration"
+      description: "Vista de registro con telefono y verificacion."
+      triggers:
+        - event: "waup_phone_signup_selected"
+          description: "El usuario elige crear cuenta con celular."
+
+    waup_role_selection:
+      phase: "account_access_flow"
+      kind: "role_routing"
+      description: "Vista donde el usuario elige su rol inicial en la plataforma."
+      triggers:
+        - event: "waup_account_created"
+          description: "La cuenta fue creada y el usuario debe elegir owner o walker."
+
+    waup_owner_onboarding_start:
+      phase: "owner_onboarding_flow"
+      kind: "entry"
+      description: "Pantalla inicial del onboarding de owner."
+      triggers:
+        - event: "waup_owner_role_selected"
+          description: "El usuario eligio owner y debe completar su perfil."
+
+    waup_owner_onboarding_form:
+      phase: "owner_onboarding_flow"
+      kind: "profile_completion"
+      description: "Formulario principal de perfil de owner."
+      triggers:
+        - event: "waup_owner_profile_onboarding_started"
+          description: "El owner inicia la carga de sus datos personales."
+
+    waup_first_pet_creation:
+      phase: "owner_onboarding_flow"
+      kind: "pet_creation_gate"
+      description: "Paso obligatorio de creacion de la primera mascota."
+      triggers:
+        - event: "waup_owner_profile_submitted"
+          description: "El owner envio sus datos y debe crear su primera mascota."
+
+    waup_owner_onboarding_success:
+      phase: "owner_onboarding_flow"
+      kind: "success"
+      description: "Cierre exitoso del onboarding de owner."
+      triggers:
+        - event: "waup_first_pet_created"
+          description: "El owner creo su primera mascota y completa el onboarding."
+
+    waup_walker_onboarding_start:
+      phase: "walker_onboarding_flow"
+      kind: "entry"
+      description: "Pantalla inicial del onboarding de walker con explicacion de los 3 pasos."
+      triggers:
+        - event: "waup_walker_role_selected"
+          description: "El usuario eligio walker y debe iniciar su registro."
+
+    waup_walker_profile_form:
+      phase: "walker_onboarding_flow"
+      kind: "profile_completion"
+      description: "Formulario personal del walker (Paso 1A)."
+      triggers:
+        - event: "waup_walker_profile_onboarding_started"
+          description: "El walker inicia la carga de sus datos personales."
+
+    waup_walker_operations_form:
+      phase: "walker_onboarding_flow"
+      kind: "operational_setup"
+      description: "Configuracion operativa de disponibilidad, zonas (distritos) y precios (Paso 1B)."
+      triggers:
+        - event: "waup_walker_personal_profile_submitted"
+          description: "El walker completa sus datos personales y pasa a la configuracion operativa."
+      constraints:
+        exact_district_selection_count: 3
+
+    waup_walker_onboarding_dni_front:
+      phase: "walker_onboarding_flow"
+      kind: "identity_verification"
+      description: "Subida/Captura de foto del anverso del DNI del walker (Paso 2A)."
+      triggers:
+        - event: "waup_walker_operational_setup_submitted"
+          description: "El walker completa configuracion operativa y pasa al paso de DNI."
+
+    waup_walker_onboarding_dni_back:
+      phase: "walker_onboarding_flow"
+      kind: "identity_verification"
+      description: "Subida/Captura de foto del reverso del DNI del walker (Paso 2B)."
+      triggers:
+        - event: "waup_walker_dni_front_submitted"
+          description: "El walker sube la foto frontal del DNI."
+
+    waup_walker_onboarding_facial:
+      phase: "walker_onboarding_flow"
+      kind: "facial_recognition"
+      description: "Paso de reconocimiento facial biometrico del walker (Paso 3)."
+      triggers:
+        - event: "waup_walker_dni_back_submitted"
+          description: "El walker sube la foto reverso del DNI."
+
+    waup_walker_onboarding_success:
+      phase: "walker_onboarding_flow"
+      kind: "success"
+      description: "Cierre exitoso del onboarding de walker."
+      triggers:
+        - event: "waup_walker_facial_approved"
+          description: "El walker completa el reconocimiento facial exitosamente."
+
+    waup_ride_history_list:
+      phase: "post_service_flow"
+      kind: "history_list"
+      description: "Vista de listado de paseos finalizados."
+      triggers:
+        - event: "waup_ride_history_opened"
+          description: "El usuario entra al historial con al menos un paseo finalizado."
+
+    waup_ride_history_detail:
+      phase: "post_service_flow"
+      kind: "history_detail"
+      description: "Vista de detalle de un paseo historico."
+      triggers:
+        - event: "waup_ride_history_item_selected"
+          description: "El usuario abre el detalle de un paseo finalizado."
+
+    waup_pet_profiles:
+      phase: "pet_management_flow"
+      kind: "pet_list"
+      description: "Vista de listado y gestion de mascotas del owner."
+      triggers:
+        - event: "waup_pet_profiles_opened"
+          description: "El owner entra al modulo de sus mascotas."
+
+    waup_pet_detail:
+      phase: "pet_management_flow"
+      kind: "pet_detail"
+      description: "Vista de detalle de una mascota."
+      triggers:
+        - event: "waup_pet_profile_selected"
+          description: "El owner abre el detalle de una mascota."
+
+    waup_ride_request_idle:
+      phase: "match_flow"
+      kind: "request_setup"
+      description: "Pantalla inicial donde el owner configura el paseo."
+      triggers:
+        - event: "waup_flow_initialized"
+          description: "Inicializacion del flujo por parte del dueno de la mascota."
+
+    waup_waiting_for_offers:
+      phase: "match_flow"
+      kind: "async_loading"
+      description: "Espera activa mientras el sistema recolecta respuestas de walkers."
+      triggers:
+        - event: "waup_request_submitted"
+          description: "Envio exitoso del formulario de solicitud."
+        - event: "waup_geo_validation_approved"
+          description: "Validacion geografica aprobada en Lima Metropolitana."
+
+    waup_candidate_selection:
+      phase: "match_flow"
+      kind: "offer_selection"
+      description: "Se despliega la terna obligatoria de 3 ofertas cerradas."
+      triggers:
+        - event: "waup_three_offers_received"
+          description: "Recepcion en cliente de exactamente 3 ofertas con precio."
+      constraints:
+        exact_candidate_count: 3
+        anti_bypass_lock_enabled: true
+
+    waup_payment_processing:
+      phase: "match_flow"
+      kind: "transaction"
+      description: "Se despliega la pasarela de pago y el desglose de comisiones."
+      triggers:
+        - event: "waup_candidate_selected_by_owner"
+          description: "Seleccion explicita de un candidato por parte del owner."
+
+    waup_ride_confirmed:
+      phase: "match_flow"
+      kind: "success"
+      description: "Estado de exito definitivo que libera datos de contacto y cierra la compra."
+      triggers:
+        - event: "waup_payment_approved"
+          description: "Tokenizacion y callback de pago aprobado por la pasarela."
+
+    waup_arrival_and_pickup:
+      phase: "live_ride_flow"
+      kind: "arrival"
+      description: "Estado de encuentro donde el walker se traslada al hogar del owner."
+      triggers:
+        - event: "waup_payment_confirmed_in_backend"
+          description: "Confirmacion de recepcion del pago en backend."
+        - event: "waup_trip_activated_by_walker"
+          description: "Activacion del trayecto por parte del walker asignado."
+
+    waup_ride_active_gps:
+      phase: "live_ride_flow"
+      kind: "in_service_tracking"
+      description: "Estado operativo central con GPS en tiempo real y feed de hitos activo."
+      triggers:
+        - event: "waup_walk_started"
+          description: "Marcado de paseo iniciado al recoger fisicamente a la mascota."
+
+    waup_emergency_sos:
+      phase: "live_ride_flow"
+      kind: "critical_emergency"
+      description: "Estado de emergencia de prioridad maxima por activacion de SOS."
+      triggers:
+        - event: "waup_sos_triggered"
+          description: "El walker activa el boton de emergencia durante el servicio."
+      priority: "highest"
+
+    waup_ride_completed:
+      phase: "live_ride_flow"
+      kind: "closure"
+      description: "Se congela el rastreo y se despliega la pantalla de calificacion."
+      triggers:
+        - event: "waup_walk_finished"
+          description: "Finalizacion del tiempo del paseo o marcado de paseo concluido."
+      constraints:
+        post_walk_evidence_required: true
+        accepted_evidence_types:
+          - "photo"
+          - "video"
+
+    waup_payment_methods_list:
+      phase: "payment_management_flow"
+      kind: "payment_methods_list"
+      description: "Vista que lista los metodos de pago guardados por el owner."
+      triggers:
+        - event: "waup_payment_methods_selected_from_home"
+          description: "El owner selecciona Metodos de Pago directamente desde el home."
+
+    waup_payment_method_detail:
+      phase: "payment_management_flow"
+      kind: "payment_method_detail"
+      description: "Detalle de una tarjeta o metodo de pago especifico."
+      triggers:
+        - event: "waup_payment_method_selected"
+          description: "El owner selecciona una tarjeta especifica de la lista."
+
+    waup_payout_methods_list:
+      phase: "payout_management_flow"
+      kind: "payout_methods_list"
+      description: "Vista que lista los metodos de cobro (destinos de pago) guardados por el walker."
+      triggers:
+        - event: "waup_payout_methods_selected_from_home"
+          description: "El walker selecciona Metodos de Cobro directamente desde el home."
+
+    waup_payout_method_detail:
+      phase: "payout_management_flow"
+      kind: "payout_method_detail"
+      description: "Detalle de un metodo de cobro especifico (ej: cuenta bancaria, CCI, Yape, Plin)."
+      triggers:
+        - event: "waup_payout_method_selected"
+          description: "El walker selecciona un metodo de cobro especifico de la lista."
+
+    waup_walker_credits:
+      phase: "wallet_management_flow"
+      kind: "credits_balance"
+      description: "Seccion que muestra el saldo de creditos acumulados del walker y permite iniciar el retiro de dinero."
+      triggers:
+        - event: "waup_credits_selected_from_home"
+          description: "El walker selecciona Creditos directamente desde el home."
+
+    waup_walker_withdrawal_request:
+      phase: "wallet_management_flow"
+      kind: "withdrawal_transaction"
+      description: "Vista donde el walker ingresa el monto a retirar y selecciona su metodo de cobro destino."
+      triggers:
+        - event: "waup_withdrawal_initiated"
+          description: "El walker presiona el boton para retirar fondos en la vista de creditos."
+
+    waup_profile_edit:
+      phase: "account_management_flow"
+      kind: "profile_edit"
+      description: "Pantalla de edicion de los datos del perfil y cuenta del usuario."
+      triggers:
+        - event: "waup_profile_button_selected"
+          description: "El usuario presiona el boton de perfil en la parte superior del home."
+
+    waup_owner_addresses_list:
+      phase: "address_management_flow"
+      kind: "address_list"
+      description: "Vista de listado y gestion de direcciones guardadas del owner."
+      triggers:
+        - event: "waup_owner_addresses_list_selected"
+          description: "El owner abre el listado de direcciones desde su perfil o configuracion de paseo."
+
+    waup_owner_address_search:
+      phase: "address_management_flow"
+      kind: "address_search"
+      description: "Pantalla de buscador predictivo para agregar una nueva direccion."
+      triggers:
+        - event: "waup_owner_add_address_clicked"
+          description: "El owner elige agregar una nueva direccion."
+
+    waup_owner_address_type_modal:
+      phase: "address_management_flow"
+      kind: "modal"
+      description: "Modal para seleccionar el tipo de propiedad de la nueva direccion."
+      triggers:
+        - event: "waup_owner_address_selected"
+          description: "El owner selecciona una direccion de la busqueda predictiva o mapa."
+
+    waup_owner_address_details_form:
+      phase: "address_management_flow"
+      kind: "address_form"
+      description: "Formulario de configuracion detallada de la nueva direccion."
+      triggers:
+        - event: "waup_owner_address_type_confirmed"
+          description: "El owner selecciona el tipo de propiedad en el modal."
+
+  waup_environment_mutations:
+    waup_street_operation_contrast_reinforcement:
+      when:
+        screen_context: "street_operation"
+      apply:
+        preserve_color_mode: true
+        reinforce_contrast: true
+        prioritize_legibility_over_decorative_layers: true
+      rationale: "Las pantallas de operacion en calle deben mantener brillo y contraste reforzado."
+      candidate_view_states:
+        - "waup_arrival_and_pickup"
+        - "waup_ride_active_gps"
+        - "waup_emergency_sos"
+
+  waup_roles:
+    waup_pet_owner:
+      can_access_view_states:
+        - "waup_owner_onboarding_start"
+        - "waup_owner_onboarding_form"
+        - "waup_first_pet_creation"
+        - "waup_owner_onboarding_success"
+        - "waup_pet_profiles"
+        - "waup_pet_detail"
+        - "waup_ride_history_list"
+        - "waup_ride_history_detail"
+        - "waup_ride_request_idle"
+        - "waup_waiting_for_offers"
+        - "waup_candidate_selection"
+        - "waup_payment_processing"
+        - "waup_ride_confirmed"
+        - "waup_ride_completed"
+        - "waup_payment_methods_list"
+        - "waup_payment_method_detail"
+        - "waup_profile_edit"
+        - "waup_owner_addresses_list"
+        - "waup_owner_address_search"
+        - "waup_owner_address_type_modal"
+        - "waup_owner_address_details_form"
+      can_view_surfaces:
+        - "waup_pet_profiles"
+        - "waup_ride_live_tracking"
+        - "waup_walk_photos"
+        - "waup_walker_location"
+        - "waup_walk_route_history"
+        - "waup_post_walk_evidence_gallery"
+        - "waup_ride_summary"
+        - "waup_walker_detail_card"
+        - "waup_incident_log"
+        - "waup_payment_methods_list_surface"
+        - "waup_payment_method_detail_surface"
+        - "waup_profile_edit_surface"
+        - "waup_owner_addresses_list_surface"
+        - "waup_owner_address_search_surface"
+        - "waup_owner_address_type_modal_surface"
+        - "waup_owner_address_details_form_surface"
+      can_act:
+        - "waup_complete_owner_personal_information"
+        - "waup_submit_owner_onboarding"
+        - "waup_add_pet"
+        - "waup_edit_pet"
+        - "waup_delete_pet"
+        - "waup_open_pet_detail"
+        - "waup_request_walk"
+        - "waup_rate_walker"
+        - "waup_add_pickup_details"
+        - "waup_filter_ride_history"
+        - "waup_open_ride_history_detail"
+        - "waup_open_payment_methods"
+        - "waup_select_payment_method"
+        - "waup_remove_payment_method"
+        - "waup_open_profile_edit"
+        - "waup_update_profile_information"
+        - "waup_open_owner_addresses"
+        - "waup_select_owner_address"
+        - "waup_add_owner_address"
+        - "waup_save_owner_address"
+      forbidden_actions:
+        - "waup_set_walker_pricing"
+        - "waup_submit_walker_offer"
+        - "waup_accept_assigned_walk_as_provider"
+        - "waup_start_walk"
+        - "waup_upload_provider_evidence"
+        - "waup_finish_walk"
+        - "waup_rate_dog"
+        - "waup_view_walker_operational_calendar"
+        - "waup_open_payout_methods"
+        - "waup_select_payout_method"
+        - "waup_add_payout_method"
+        - "waup_remove_payout_method"
+        - "waup_open_walker_credits"
+        - "waup_request_withdrawal"
+        - "waup_confirm_withdrawal"
+      hidden_or_disabled_surfaces:
+        - "waup_walker_pricing_editor"
+        - "waup_offer_submission_controls"
+        - "waup_provider_trip_start_controls"
+        - "waup_provider_trip_end_controls"
+        - "waup_dog_rating_controls"
+        - "waup_walker_calendar_views"
+        - "waup_payout_methods_list_surface"
+        - "waup_payout_method_detail_surface"
+        - "waup_walker_credits_surface"
+        - "waup_walker_withdrawal_form"
+
+    waup_walker:
+      can_access_view_states:
+        - "waup_walker_onboarding_start"
+        - "waup_walker_profile_form"
+        - "waup_walker_operations_form"
+        - "waup_walker_onboarding_dni_front"
+        - "waup_walker_onboarding_dni_back"
+        - "waup_walker_onboarding_facial"
+        - "waup_walker_onboarding_success"
+        - "waup_ride_history_list"
+        - "waup_ride_history_detail"
+        - "waup_arrival_and_pickup"
+        - "waup_ride_active_gps"
+        - "waup_emergency_sos"
+        - "waup_ride_completed"
+        - "waup_profile_edit"
+        - "waup_payout_methods_list"
+        - "waup_payout_method_detail"
+        - "waup_walker_credits"
+        - "waup_walker_withdrawal_request"
+      can_view_surfaces:
+        - "waup_walker_profile_forms"
+        - "waup_walker_day_week_month_calendar"
+        - "waup_assigned_walk_details"
+        - "waup_post_walk_evidence_gallery"
+        - "waup_ride_summary"
+        - "waup_owner_notes_history"
+        - "waup_dog_detail_card"
+        - "waup_incident_log"
+        - "waup_profile_edit_surface"
+        - "waup_payout_methods_list_surface"
+        - "waup_payout_method_detail_surface"
+        - "waup_walker_credits_surface"
+        - "waup_walker_withdrawal_form"
+      can_act:
+        - "waup_complete_personal_information"
+        - "waup_set_walker_availability"
+        - "waup_set_walker_service_area"
+        - "waup_set_walk_pricing"
+        - "waup_submit_walk_offer"
+        - "waup_accept_walk"
+        - "waup_start_walk"
+        - "waup_capture_walk_evidence_photos"
+        - "waup_capture_post_walk_evidence_photos"
+        - "waup_finish_walk"
+        - "waup_rate_dog"
+        - "waup_submit_walker_profile"
+        - "waup_filter_ride_history"
+        - "waup_open_ride_history_detail"
+        - "waup_open_profile_edit"
+        - "waup_update_profile_information"
+        - "waup_open_payout_methods"
+        - "waup_select_payout_method"
+        - "waup_add_payout_method"
+        - "waup_remove_payout_method"
+        - "waup_open_walker_credits"
+        - "waup_request_withdrawal"
+        - "waup_confirm_withdrawal"
+      forbidden_actions:
+        - "waup_add_pet"
+        - "waup_request_walk_as_owner"
+        - "waup_edit_owner_pickup_preferences"
+        - "waup_rate_walker"
+        - "waup_open_payment_methods"
+        - "waup_select_payment_method"
+        - "waup_remove_payment_method"
+      hidden_or_disabled_surfaces:
+        - "waup_owner_pet_creation_controls"
+        - "waup_owner_walk_request_form"
+        - "waup_owner_checkout_controls"
+        - "waup_owner_walker_rating_controls"
+        - "waup_payment_methods_list_surface"
+        - "waup_payment_method_detail_surface"
+
+  waup_cross_role_constraints:
+    waup_role_separation:
+      description: "La UI debe mostrar unicamente herramientas operativas relevantes para el rol activo."
+    waup_owner_provider_action_exclusivity:
+      description: "Las acciones de owner y walker no deben coexistir como acciones primarias en una misma vista operacional."
+    waup_candidate_selection_rule:
+      description: "La seleccion de candidatos debe mostrar exactamente 3 ofertas cerradas."
+      exact_candidate_count: 3
+    waup_district_compatibility_matching:
+      description: "El emparejamiento (match) entre el dueño y el paseador se basa exclusivamente en la compatibilidad de distritos (el distrito donde se solicita el paseo debe coincidir con uno de los 3 distritos seleccionados por el paseador)."
+    waup_walk_completion_evidence_gate:
+      description: "El paseo no puede finalizarse sin evidencia multimedia de cierre."
+      required_before_event: "waup_walk_finished"
+      accepted_evidence_types:
+        - "photo"
+        - "video"
+
+  waup_notifications:
+    waup_owner_operational_notifications:
+      audience: "waup_pet_owner"
+      description: "Toda accion critica del walker durante el servicio debe notificar al owner."
+      events:
+        - event: "waup_walker_arrived_at_location"
+          delivery_required: true
+          channel_priority:
+            - "in_app"
+            - "push"
+        - event: "waup_walk_started"
+          delivery_required: true
+          channel_priority:
+            - "in_app"
+            - "push"
+        - event: "waup_walk_finished"
+          delivery_required: true
+          channel_priority:
+            - "in_app"
+            - "push"

@@ -1,0 +1,39 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Reconocimiento Facial (Paso 3)
+  waup_walker_onboarding_facial:
+    description: "Flujo biométrico para validación facial del paseador."
+    role: "waup_walker"
+    view_state: "waup_walker_onboarding_facial"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Reconocimiento Facial"
+          back_action: "navigate_to:waup_walker_onboarding_dni_back"
+          variant: "ghost"
+          
+      - slot_id: "facial_instructions"
+        properties:
+          title: "Validación Biométrica"
+          description: "Ubica tu rostro dentro del círculo y mantén la mirada al frente. El sistema escaneará tus facciones en vivo."
+          
+      - slot_id: "facial_scanner"
+        description: "Contenedor de cámara y estado del escáner facial."
+        properties:
+          status: "ready" # ready, scanning, success, error
+          
+      - slot_id: "continue_action"
+        component: "component.button"
+        properties:
+          label: "Terminar y Registrar"
+          action: "navigate_to:waup_walker_onboarding_success"
+          hierarchy: "primary"

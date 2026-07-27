@@ -1,0 +1,127 @@
+identity:
+  id: component.card
+  name: Tarjeta
+  aliases:
+  - card
+taxonomy:
+  type: layout
+  category: layout
+intent:
+  summary: Contenedor modular que agrupa informacion relacionada y acciones secundarias en bloques visualmente separados.
+  purpose: Permite estructurar layouts complejos en bloques de facil escaneo.
+  system_role: group_related_content
+  user_need: Agrupar informacion
+usage:
+  use_cases:
+  - id: mostrar-ofertas-de-paseadores
+    scenario: Mostrar ofertas de paseadores
+    rationale: Uso de tarjetas elevadas para agrupar los datos y precios de cada candidato.
+  anti_patterns:
+  - scenario: Anidar tarjetas de forma excesiva
+    reason: Satura la pantalla y confunde la jerarquia visual.
+    correction: Usa divisiones de espaciado o bordes en lugar de tarjetas anidadas.
+variants:
+- id: elevation
+  name: Elevation
+  description: Nivel de elevación visual de la tarjeta.
+  selection: single
+  values:
+  - id: flat
+    name: Plana (Flat)
+    meaning: Tarjeta con borde sutil y sin sombras, integrada al fondo.
+    use_when:
+    - Tarjeta con borde sutil y sin sombras, integrada al fondo.
+  - id: raised
+    name: Elevada (Raised)
+    meaning: Tarjeta con sombras y elevacion tridimensional.
+    use_when:
+    - Tarjeta con sombras y elevacion tridimensional.
+- id: size
+  name: Size
+  description: Tamaño y espaciado interno de la tarjeta.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Tarjeta compacta para widgets de información rápida.
+    use_when:
+    - Tarjeta compacta para widgets de información rápida.
+  - id: md
+    name: Medium
+    meaning: Tarjeta de tamaño estándar de 20px de padding.
+    use_when:
+    - Tarjeta de tamaño estándar de 20px de padding.
+  - id: lg
+    name: Large
+    meaning: Tarjeta espaciosa para perfiles y resúmenes completos.
+    use_when:
+    - Tarjeta espaciosa para perfiles y resúmenes completos.
+composition:
+  slots:
+  - id: illustration
+    role: leading-visual
+    description: Ilustración o icono decorativo superior o destacado de 72px.
+    cardinality: zero_or_one
+    accepts:
+    - asset.illustration
+    - asset.icon
+  - id: header
+    role: heading-content
+    description: Encabezado opcional de la tarjeta
+    cardinality: zero_or_one
+    accepts:
+    - text
+  - id: body
+    role: body-content
+    description: Contenido principal de la tarjeta
+    cardinality: exactly_one
+    accepts:
+    - text
+    - mixed
+  - id: actions
+    role: action-group
+    description: Botones o links de accion al pie de la tarjeta
+    cardinality: zero_or_one
+    accepts:
+    - component.action
+  parent_constraints:
+  - rule: El espaciado de la tarjeta debe alinearse con la escala del eje de tamaño.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado inicial de visualizacion.
+accessibility:
+  focus_behavior:
+  - La tarjeta completa actua como un elemento enfocable si es interactiva.
+  requirements:
+  - id: accessibility.card.focus
+    statement: La tarjeta completa actua como un elemento enfocable si es interactiva.
+  - id: accessibility.card.contrast
+    statement: Debe respetar la legibilidad del texto en su interior contra el color de superficie calido.
+relationships:
+- type: commonly_composed_with
+  target: component.action
+  rationale: This component commonly composes with component.action through the actions slot.
+examples:
+  positive:
+  - scenario: Mostrar ofertas de paseadores
+    rationale: Uso de tarjetas elevadas para agrupar los datos y precios de cada candidato.
+  negative:
+  - scenario: Anidar tarjetas de forma excesiva
+    violation: Satura la pantalla y confunde la jerarquia visual.
+    correction: Usa divisiones de espaciado o bordes en lugar de tarjetas anidadas.
+implementation_reference:
+  repository_path: specs/design-system/components/card.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/card.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

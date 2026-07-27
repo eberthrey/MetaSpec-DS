@@ -1,0 +1,110 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Configuración de Solicitud de Paseo
+  waup_ride_request_setup:
+    description: "Pantalla donde el dueño de mascota configura la solicitud del paseo (seleccionando hasta 3 mascotas, duración, punto de recojo, e instrucciones, con opción de programar)."
+    role: "waup_pet_owner"
+    view_state: "waup_ride_request_idle"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Buscar paseo"
+          back_action: "navigate_to:waup_owner_home"
+          variant: "ghost"
+
+      - slot_id: "service_type_switch"
+        description: "Interruptor para decidir si el paseo es inmediato (Ahora) o agendado (Programar)."
+        component: "component.service_type_switch"
+        properties:
+          selected: "now"
+
+      - slot_id: "pet_selector"
+        description: "Carrusel de selección múltiple de mascotas con límite constitucional."
+        pattern: "waup.pet-select-carousel"
+        properties:
+          max_selectable_pets: 3
+          add_pet_action: "navigate_to:add_pet"
+
+      # Bloques condicionales cuando la selección del switch es 'schedule' (Programar)
+      - slot_id: "date_selector"
+        description: "Sección para elegir fecha del paseo. Solo visible en modo Programar."
+        pattern: "waup.option-selector-group"
+        conditional: "ui.service_type == 'schedule'"
+        properties:
+          title: "Fecha del paseo"
+          options:
+            - id: "today"
+              label: "Hoy"
+            - id: "tomorrow"
+              label: "Mañana"
+            - id: "custom"
+              label: "Elegir fecha"
+              icon: "calendar"
+          selection_type: "single"
+
+      - slot_id: "time_selector"
+        description: "Carrusel horizontal de rangos horarios. Solo visible en modo Programar."
+        pattern: "waup.option-selector-group"
+        conditional: "ui.service_type == 'schedule'"
+        properties:
+          title: "Horario"
+          layout: "horizontal_scroll"
+          options_source: "dynamic_time_slots"
+          selection_type: "single"
+
+      # Bloque común para ambos modos
+      - slot_id: "duration_selector"
+        description: "Selector de duración en minutos del paseo."
+        pattern: "waup.option-selector-group"
+        properties:
+          title: "Duración del paseo"
+          options:
+            - id: "30_min"
+              label: "30 min"
+            - id: "45_min"
+              label: "45 min"
+            - id: "60_min"
+              label: "60 min"
+            - id: "90_min"
+              label: "90 min"
+          selection_type: "single"
+
+      - slot_id: "pickup_location"
+        description: "Ubicación de la dirección de recojo del paseo."
+        pattern: "waup.location-card"
+        properties:
+          title: "Dirección de recojo"
+          change_action: "open_location_picker"
+          address_source: "user.default_address"
+
+      - slot_id: "pickup_instructions"
+        description: "Campo de texto libre para notas sobre la entrega del perro, con placeholder explicativo para mitigar bypass."
+        properties:
+          title: "Instrucciones de recojo"
+          placeholder: "Ej. Dejaré la llave en recepción o Tocar el timbre 102"
+          text_limit: 250
+          validation: "block_contact_info" # Lógica de anti-bypass activa en el linter
+
+      - slot_id: "action_button"
+        description: "Botón principal de confirmación, fijado al pie de la pantalla."
+        properties:
+          label_now: "Buscar Paseador"
+          label_schedule: "Programar Paseo"
+          action: "submit_ride_request"
+
+    # Candados de negocio y validación heredados
+    enforced_rules:
+      - rule_id: "waup_max_pets_per_walk"
+        description: "Valida en cliente y servidor que no se seleccionen más de 3 mascotas a la vez."
+        max_value: 3
+      - rule_id: "waup_anti_bypass_instructions_linter"
+        description: "Linter activo que bloquea números de teléfono o correos en las instrucciones de recojo."

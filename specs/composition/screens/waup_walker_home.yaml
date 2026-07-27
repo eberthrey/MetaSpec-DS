@@ -1,0 +1,68 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Home Principal del Paseador (Walker)
+  waup_walker_home:
+    description: "Pantalla principal (Dashboard) para el paseador de mascotas. Proporciona accesos a finanzas, métodos de cobro y visualización de solicitudes."
+    role: "waup_walker"
+    view_state: "waup_walker_home" # Mapeado al estado lógico de navegación del Walker
+    
+    layout:
+      type: "scroller"
+      density: "high_conversion"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "header"
+        pattern: "waup.owner-header"
+        properties:
+          title: "¡Hola, {user.first_name}!"
+          description: "Listo para salir a pasear"
+          avatar_source: "{user.avatar_url}"
+          action: "navigate_to:waup_profile_edit"
+          has_notifications: "{user.has_notifications}"
+          notification_action: "open_notifications"
+          
+      - slot_id: "availability_toggle"
+        description: "Interruptor para conmutar la disponibilidad del paseador."
+        component: "component.switch"
+        properties:
+          label: "Disponible para pasear ahora"
+          checked: "{user.is_available}"
+          action: "toggle_availability"
+
+      - slot_id: "actions_grid"
+        description: "Accesos directos financieros organizados en grid de 2 columnas."
+        layout: "grid_2_columns"
+        items:
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "Métodos de Cobro"
+              icon: "wallet"
+              action: "navigate_to:waup_payout_methods_list"
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "Mis Créditos"
+              icon: "coins"
+              action: "navigate_to:waup_walker_credits"
+              
+      - slot_id: "promo_card"
+        description: "Tarjeta de descubrimiento y promoción operativa."
+        pattern: "waup.shortcut-card"
+        properties:
+          title: "Paseos Seguros"
+          description: "Tus patazas en manos de paseadores locales certificados."
+          icon: "shield-dog"
+          
+      - slot_id: "active_requests_button"
+        description: "Botón secundario al pie para consultar solicitudes de paseo activas en la zona."
+        component: "component.button"
+        properties:
+          label: "Ver Solicitudes Activas"
+          action: "open_active_requests"
+          hierarchy: "secondary"
+          
+    enforced_rules:
+      - rule_id: "waup_role_separation"
+        description: "Solo permite accesos del rol waup_walker. Oculta las secciones específicas de dueños."

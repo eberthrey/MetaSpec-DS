@@ -1,0 +1,29 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Buscando Paseadores (Matchmaking Loading)
+  waup_match_loading:
+    description: "Pantalla de espera activa mientras el sistema busca y filtra paseadores compatibles en el distrito seleccionado."
+    role: "waup_pet_owner"
+    view_state: "waup_waiting_for_offers"
+    
+    layout:
+      type: "flex_centered"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "loading_spinner"
+        description: "Indicador circular animado de carga en progreso."
+        component: "component.badge" # or custom loading indicator asset
+        properties:
+          shape: "circle"
+          animation: "spin"
+          
+      - slot_id: "status_messages"
+        description: "Textos informativos del progreso de búsqueda."
+        component: "component.card"
+        properties:
+          title: "Emparejando..."
+          description: "Filtrando paseadores con disponibilidad inmediata y compatibilidad en {district}."

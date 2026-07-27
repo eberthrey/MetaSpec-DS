@@ -1,0 +1,94 @@
+identity:
+  id: component.checkbox
+  name: Checkbox (Casilla de Selección)
+  aliases:
+  - checkbox
+taxonomy:
+  type: selection
+  category: selection
+intent:
+  summary: Componente de selección binaria interactivo que permite activar o desactivar una opción dentro de una lista o grupo.
+  purpose: Permite al usuario marcar opciones de forma independiente en listados de selección múltiple (como la selección de mascotas).
+  system_role: capture_selection
+  user_need: Selección binaria de opciones en listados o carruseles
+usage:
+  use_cases:
+  - id: seleccion-multiple-de-mascotas-en-carrusel
+    scenario: Selección múltiple de mascotas en carrusel
+    rationale: Define qué perros saldrán en el paseo dentro de la tarjeta de mascota del carrusel.
+  anti_patterns:
+  - scenario: Permitir interactuar con el checkbox cuando se ha alcanzado el límite operativo del negocio
+    reason: Permite violar restricciones operativas, causando errores posteriores en el servidor.
+    correction: Cambiar el checkbox no seleccionado al estado disabled y opacidad reducida.
+variants:
+- id: size
+  name: Size
+  description: Tamaño físico de la casilla.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Checkbox de 16x16px compacto.
+    use_when:
+    - Checkbox de 16x16px compacto.
+  - id: md
+    name: Medium
+    meaning: Checkbox estándar de 24x24px.
+    use_when:
+    - Checkbox estándar de 24x24px.
+  - id: lg
+    name: Large
+    meaning: Checkbox prominente de 32x32px.
+    use_when:
+    - Checkbox prominente de 32x32px.
+composition:
+  slots:
+  - id: checkbox-indicator
+    role: icon
+    description: Elemento visual que muestra el estado de selección (marcado con check/vacío).
+    cardinality: exactly_one
+  parent_constraints:
+  - rule: El área interactiva debe seguir las proporciones establecidas.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: unchecked
+    meaning: Estado inicial del control, sin marca de selección.
+  - id: checked
+    meaning: Estado activo cuando el usuario ha accionado el control y se muestra la marca de check.
+  - id: disabled
+    meaning: Estado inhabilitado cuando se ha alcanzado una restricción de negocio.
+accessibility:
+  semantic_role: checkbox
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - El control recibe el foco secuencialmente y puede ser conmutado mediante la barra espaciadora.
+  screen_reader_expectations:
+  - Debe anunciar el rol 'checkbox' y el estado del atributo 'aria-checked'.
+  requirements:
+  - id: accessibility.checkbox.focus
+    statement: El control recibe el foco secuencialmente y puede ser conmutado mediante la barra espaciadora.
+  - id: accessibility.checkbox.screen-reader
+    statement: Debe anunciar el rol 'checkbox' y el estado del atributo 'aria-checked'.
+examples:
+  positive:
+  - scenario: Selección múltiple de mascotas en carrusel
+    rationale: Define qué perros saldrán en el paseo dentro de la tarjeta de mascota del carrusel.
+  negative:
+  - scenario: Permitir interactuar con el checkbox cuando se ha alcanzado el límite operativo del negocio
+    violation: Permite violar restricciones operativas, causando errores posteriores en el servidor.
+    correction: Cambiar el checkbox no seleccionado al estado disabled y opacidad reducida.
+implementation_reference:
+  repository_path: specs/design-system/components/checkbox.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/checkbox.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

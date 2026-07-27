@@ -1,0 +1,57 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Registrar Nuevo Método de Cobro del Walker
+  waup_add_payout:
+    description: "Formulario para registrar una nueva cuenta de cobro o billetera de pago para el paseador."
+    role: "waup_walker"
+    view_state: "waup_payout_method_detail"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Agregar Cuenta"
+          back_action: "navigate_to:waup_payout_list"
+          variant: "ghost"
+          
+      - slot_id: "input_payout_type"
+        component: "component.input"
+        properties:
+          label: "Tipo de cobro / Banco"
+          placeholder: "Ej. Cuenta BCP, Yape / Plin, BBVA"
+          required: true
+          
+      - slot_id: "input_payout_account"
+        component: "component.input"
+        properties:
+          label: "Número de cuenta / Celular"
+          placeholder: "Ej. 191-98765432-0-12"
+          required: true
+          
+      - slot_id: "input_payout_cci"
+        component: "component.input"
+        properties:
+          label: "CCI (Opcional)"
+          placeholder: "Ej. 002-1919876543201254"
+          required: false
+          
+      - slot_id: "input_payout_holder"
+        component: "component.input"
+        properties:
+          label: "Titular de la cuenta"
+          placeholder: "Ej. Percy Walker"
+          required: true
+          
+      - slot_id: "save_action"
+        component: "component.button"
+        properties:
+          label: "Guardar Cuenta"
+          action: "submit_payout_creation"
+          hierarchy: "primary"

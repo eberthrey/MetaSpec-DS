@@ -1,0 +1,13 @@
+id: "asset.illustration.pet_golden"
+name: "Ilustración de Golden Retriever (Lucas/Firulais)"
+asset_type: "illustration"
+description: "Ilustración representativa de un perro Golden Retriever usada en avatares y tarjetas de Lucas y Firulais."
+category: "pet_avatar"
+source_type: "imported"
+asset_ref:
+  library: "Unsplash"
+  path: "https://images.unsplash.com/photo-1543466835-00a7907e9de1"
+  format: "jpg"
+provenance:
+  source: "author_defined"
+  confidence: "high"

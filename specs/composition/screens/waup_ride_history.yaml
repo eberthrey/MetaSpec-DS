@@ -1,0 +1,34 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Historial de Paseos
+  waup_ride_history:
+    description: "Pantalla compartida que lista los paseos completados y facturados en la cuenta del dueño o paseador."
+    role: "shared" # Accesible por dueños y paseadores
+    view_state: "waup_ride_history_list"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Mis Paseos"
+          back_action: "navigate_to:home"
+          variant: "ghost"
+          
+      - slot_id: "completed_walks_vertical_list"
+        description: "Lista vertical que agrupa todas las tarjetas de paseos completados."
+        layout: "vertical_list"
+        items_source: "user.completed_walks"
+        items:
+          - component: "component.walk_card"
+            properties:
+              title: "Paseo con {walk.petName}"
+              subtitle: "{walk.schedule} • {walk.duration}"
+              metadata: "Paseador: {walk.walkerName}"
+              price: "S/. 20.00"

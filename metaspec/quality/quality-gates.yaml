@@ -1,0 +1,133 @@
+version: "0.1"
+
+checks:
+  controlled_vocabulary_is_used:
+    description: La metadata usa exclusivamente el vocabulario canónico definido en controlled-vocabulary.yaml para categorías, roles, state_type, severidades, evidence levels, provenance, scope canónico y familias canónicas.
+  foundation_name_english:
+    description: El field name de foundations se normaliza en inglés como label canónico del sistema.
+  references_are_portable:
+    description: references usa rutas relativas al repo o URLs portables, sin rutas locales absolutas ni self-references triviales.
+  foundation_separable_layers_are_split:
+    description: Las foundations con capas contractuales distintas y resolubles se modelan como entidades separadas en lugar de mezclarse en una sola.
+  foundation_scope_matches_layer_contract:
+    description: Cuando una foundation declara scope, canonical_tokens, scales y dependencies son coherentes con esa capa.
+  typography_foundation_catalog_is_not_arbitrary:
+    description: foundation.typography refleja el catálogo estable de text styles observados cuando la fuente lo expone, en lugar de quedarse en una muestra arbitraria.
+  typography_foundation_type_matches_contract:
+    description: foundation.typography usa token_based cuando documenta una librería estable de text styles compuestos sin primitives raw separados, y reserva mixed para contratos que combinan primitives raw y estilos compuestos.
+  typography_foundation_composed_styles_not_raw:
+    description: foundation.typography no usa raw.typography.style para text styles compuestos; usa la escala canónica correspondiente a estilos compuestos.
+  typography_foundation_style_names_preserve_source_until_governed:
+    description: foundation.typography conserva naming source-facing para estilos individuales mientras MetaSpec no defina un mapping tipográfico canónico formal.
+  typography_foundation_open_questions_reference_catalog_boundary:
+    description: Las open_questions de foundation.typography formulan incertidumbre sobre el límite o expansión del catálogo observado, sin presuponer styles faltantes como si ya debieran existir.
+  figma_ref_matched_name_meaningful_or_omitted:
+    description: figma_ref.matched_name solo se conserva cuando aporta trazabilidad útil; labels genéricos o ruidosos se omiten.
+  slot_contract_required_when_child_evidence_is_strong:
+    description: Cuando existe evidencia fuerte de child reutilizable o evidencia interna visible suficientemente estable, el slot no queda sin accepts.
+  accepts_most_specific_when_evidence_is_strong:
+    description: accepts no se queda en una familia amplia si existe evidencia fuerte de un child canónico más específico.
+  role_refines_when_accepts_is_specific:
+    description: Cuando accepts ya resuelve una entidad específica y estable, role no se queda en una categoría más amplia si existe un rol canónico más preciso.
+  typography_prefers_composed_style_token:
+    description: token_bindings.typography prioriza el text style compuesto cuando ya representa el contrato tipográfico y no repite sub-tokens internos redundantes.
+  description_is_contractual_semantic:
+    description: description explica qué es la entidad, qué organiza y para qué sirve dentro del sistema, en lugar de narrar lo observado en Figma, su procedencia o detalles de extracción.
+  use_cases_are_contractual_guidance:
+    description: use_cases describe cuándo usar la entidad y bajo qué criterio, sin narrar ejemplos visibles ni matrices observadas.
+  interactive_child_not_visual_asset:
+    description: Un child reutilizable con evidencia fuerte de interactividad no se clasifica como asset.icon.
+  button_icon_defaults_to_button_unless_separate:
+    description: Los casos de button icon se resuelven como component.button salvo que el sistema haya definido explícitamente una entidad canónica separada.
+  allowed_children_only_when_additive:
+    description: allowed_children no aparece cuando solo repite la información ya declarada en slots.
+  observed_high_requires_direct_evidence:
+    description: observed/high no se usa cuando la evidencia es principalmente visual, inferida o contextual.
+  open_questions_material_only:
+    description: open_questions no contiene notas generales de procedencia o inferencia sin impacto material en el contrato.
+  preferred_children_non_redundant:
+    description: preferred_children solo aparece cuando agrega orientación real y no duplica un único valor de accepts.
+  token_bindings_parent_layers_only:
+    description: token_bindings solo contiene tokens aplicados directamente a capas del padre y excluye tokens del árbol interno de hijos reutilizables con metadata propia.
+
+gates:
+  foundation_low_quality:
+    checks:
+      - controlled_vocabulary_is_used
+      - foundation_name_english
+      - references_are_portable
+      - foundation_separable_layers_are_split
+      - foundation_scope_matches_layer_contract
+      - typography_foundation_catalog_is_not_arbitrary
+      - typography_foundation_type_matches_contract
+      - typography_foundation_composed_styles_not_raw
+      - typography_foundation_style_names_preserve_source_until_governed
+      - typography_foundation_open_questions_reference_catalog_boundary
+      - figma_ref_matched_name_meaningful_or_omitted
+      - description_is_contractual_semantic
+      - use_cases_are_contractual_guidance
+      - open_questions_material_only
+  foundation_catalog_quality:
+    checks:
+      - controlled_vocabulary_is_used
+      - foundation_name_english
+      - references_are_portable
+      - foundation_separable_layers_are_split
+      - foundation_scope_matches_layer_contract
+      - typography_foundation_catalog_is_not_arbitrary
+      - typography_foundation_type_matches_contract
+      - typography_foundation_composed_styles_not_raw
+      - typography_foundation_style_names_preserve_source_until_governed
+      - typography_foundation_open_questions_reference_catalog_boundary
+      - figma_ref_matched_name_meaningful_or_omitted
+      - description_is_contractual_semantic
+      - use_cases_are_contractual_guidance
+      - open_questions_material_only
+  component_low_quality:
+    checks:
+      - controlled_vocabulary_is_used
+      - slot_contract_required_when_child_evidence_is_strong
+      - accepts_most_specific_when_evidence_is_strong
+      - role_refines_when_accepts_is_specific
+      - typography_prefers_composed_style_token
+      - description_is_contractual_semantic
+      - use_cases_are_contractual_guidance
+      - interactive_child_not_visual_asset
+      - button_icon_defaults_to_button_unless_separate
+      - allowed_children_only_when_additive
+      - observed_high_requires_direct_evidence
+      - open_questions_material_only
+      - preferred_children_non_redundant
+      - token_bindings_parent_layers_only
+  component_catalog_quality:
+    checks:
+      - controlled_vocabulary_is_used
+      - slot_contract_required_when_child_evidence_is_strong
+      - accepts_most_specific_when_evidence_is_strong
+      - role_refines_when_accepts_is_specific
+      - typography_prefers_composed_style_token
+      - description_is_contractual_semantic
+      - use_cases_are_contractual_guidance
+      - interactive_child_not_visual_asset
+      - button_icon_defaults_to_button_unless_separate
+      - allowed_children_only_when_additive
+      - observed_high_requires_direct_evidence
+      - preferred_children_non_redundant
+      - token_bindings_parent_layers_only
+      - open_questions_material_only
+  llm_readiness:
+    checks:
+      - controlled_vocabulary_is_used
+      - slot_contract_required_when_child_evidence_is_strong
+      - accepts_most_specific_when_evidence_is_strong
+      - role_refines_when_accepts_is_specific
+      - typography_prefers_composed_style_token
+      - description_is_contractual_semantic
+      - use_cases_are_contractual_guidance
+      - interactive_child_not_visual_asset
+      - button_icon_defaults_to_button_unless_separate
+      - allowed_children_only_when_additive
+      - observed_high_requires_direct_evidence
+      - open_questions_material_only
+      - preferred_children_non_redundant
+      - token_bindings_parent_layers_only

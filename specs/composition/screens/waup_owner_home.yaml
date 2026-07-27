@@ -1,0 +1,87 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Home Principal del Dueño (Owner)
+  waup_owner_home:
+    description: "Pantalla principal (Dashboard) para el dueño de mascotas. Punto de partida de toda navegación post-login."
+    role: "waup_pet_owner"
+    view_state: "waup_owner_home" # Mapeado al estado lógico de navegación
+    
+    layout:
+      type: "scroller"
+      density: "high_conversion" # Densidad de alta conversión (estilo Rappi)
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "header"
+        pattern: "waup.owner-header"
+        properties:
+          title: "¡Hola, {user.first_name}!"
+          description: "Tu pataza está en manos seguras"
+          avatar_source: "{user.avatar_url}"
+          action: "navigate_to:waup_profile_edit"
+          has_notifications: "{user.has_notifications}"
+          notification_action: "open_notifications"
+          
+      - slot_id: "hero_pet_carousel"
+        pattern: "waup-hero-pet-card-carousel"
+        description: "Carrusel de tarjetas de mascotas. Si hay 3 o más mascotas se habilita el swipe horizontal. Cada slide tiene imagen de fondo, indicador de estado de IA y CTA central."
+        properties:
+          data_source: "{pets}"
+          dynamic_state_source: "ia_photo_state_analysis"
+          layout_rules:
+            carousel_if_gt_2: true # Regla de negocio: Carrusel si el dueño tiene 3 o más mascotas
+          cta_button:
+            label: "Buscar Paseador"
+            action: "navigate_to:waup_ride_request_idle"
+            
+      - slot_id: "shortcuts_grid"
+        description: "Accesos directos organizados en grid de 2 columnas."
+        layout: "grid_2_columns"
+        items:
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "Mis Mascotas"
+              description: "Gestiona tus patazas"
+              icon: "asset.icon.paw"
+              action: "navigate_to:waup_pet_profiles"
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "Mis Paseos"
+              description: "Historial de servicios"
+              icon: "asset.icon.map"
+              action: "navigate_to:waup_ride_history_list"
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "Métodos de Pago"
+              description: "Tarjetas de crédito o débito"
+              icon: "asset.icon.card"
+              action: "navigate_to:waup_payment_methods_list"
+          - pattern: "waup.shortcut-card"
+            properties:
+              title: "Paseos Programados"
+              description: "Servicios agendados"
+              icon: "asset.icon.calendar"
+              action: "navigate_to:waup_scheduled_walks"
+              
+      - slot_id: "recent_walks"
+        description: "Sección de paseos recientes. Se visualiza condicionalmente tras completar el primer paseo."
+        layout: "vertical_list"
+        conditional: "user.completed_walks_count >= 1"
+        items:
+          - pattern: "waup-recent-walk-card"
+            properties:
+              walker_name: "{last_walk.walker_name}"
+              pet_name: "{last_walk.pet_name}"
+              schedule: "{last_walk.schedule}"
+              duration: "{last_walk.duration}"
+              status: "completed"
+          
+    # Candados de negocio y validación heredados
+    enforced_rules:
+      - rule_id: "waup_role_separation"
+        description: "Solo permite accesos del rol waup_pet_owner. Oculta u inhabilita secciones de walker."
+      - rule_id: "waup_owner_provider_action_exclusivity"
+        description: "Las acciones primarias y menús de cobros de walkers no deben coexistir en esta vista."
+

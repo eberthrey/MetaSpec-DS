@@ -1,0 +1,50 @@
+id: "waup_app_onboarding_welcome"
+name: "Onboarding — Bienvenida"
+view_state: "waup_app_onboarding_welcome"
+role: "guest"
+layout:
+  display: "flex"
+  flex_direction: "column"
+  background_color: "color.background.default"
+  height: "100%"
+
+composition:
+  - slot_id: "visual_image"
+    component: "image"
+    properties:
+      source: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80"
+      height: "400px"
+    layout:
+      width: "100%"
+
+  - slot_id: "content_card"
+    component: "component.card"
+    properties:
+      interactive: false
+    layout:
+      display: "flex"
+      flex_direction: "column"
+      gap: "spacing.layout.gap_medium"
+      padding: "spacing.layout.page_margin"
+      background_color: "color.surface.default"
+      border_radius: "radius.card.default"
+      margin_t: "-24px"
+      elevation: "elevation.card.raised"
+      positioning: "relative"
+      z_index: 10
+    items:
+      - slot_id: "welcome_title"
+        component: "title"
+        properties:
+          text: "¡Hola, amante de los perros!"
+          style: "typography.style.h1"
+      - slot_id: "welcome_description"
+        component: "text"
+        properties:
+          text: "Conectamos a dueños de mascotas con los mejores paseadores certificados de la zona de manera rápida y segura."
+          style: "typography.style.body"
+      - slot_id: "navigation"
+        pattern: "waup_onboarding_navigation"
+        properties:
+          active_step: 0
+          primary_label: "Continuar"

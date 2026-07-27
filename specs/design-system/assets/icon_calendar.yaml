@@ -1,0 +1,13 @@
+id: "asset.icon.calendar"
+name: "Icono Calendario (Calendar)"
+asset_type: "icon"
+description: "Icono representativo de un calendario para la sección de Paseos Programados."
+category: "system_navigation"
+source_type: "external_library"
+asset_ref:
+  library: "FontAwesome"
+  path: "fa-solid fa-calendar"
+  format: "svg"
+provenance:
+  source: "author_defined"
+  confidence: "high"

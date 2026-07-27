@@ -1,0 +1,56 @@
+identity:
+  id: component.step_indicator
+  name: Step Indicator (Indicador de Pasos)
+  aliases:
+  - step_indicator
+taxonomy:
+  type: navigation
+  category: navigation
+intent:
+  summary: Componente visual que muestra el progreso del usuario a través de una serie de pasos lineales (onboarding, formularios multifase). Soporta estilos de puntos (dots) y cápsula activa expandida horizontalmente.
+  purpose: Ayudar al usuario a ubicarse dentro de un proceso de múltiples pantallas.
+  system_role: orient_navigation
+  user_need: Mostrar progreso en flujos secuenciales
+usage:
+  use_cases:
+  - id: mostrar-progreso-en-flujos-multietapa
+    scenario: Mostrar progreso en flujos multietapa
+    rationale: Ayuda a la persona usuaria a ubicarse dentro de un proceso secuencial y anticipar cuántos pasos faltan.
+  anti_patterns:
+  - scenario: Usarlo en recorridos no secuenciales o sin un paso activo claro
+    reason: Introduce una noción de progreso lineal que no corresponde al flujo real.
+    correction: Utilizar una navegación contextual o un indicador no secuencial cuando el recorrido no siga pasos lineales.
+variants:
+- id: variant
+  name: Variant
+  description: El estilo visual del indicador de pasos.
+  selection: single
+  values:
+  - id: dots
+    name: Dots
+    meaning: 'Variant style: dots.'
+    use_when:
+    - 'Variant style: dots.'
+  - id: bars
+    name: Bars
+    meaning: 'Variant style: bars.'
+    use_when:
+    - 'Variant style: bars.'
+accessibility:
+  requirements:
+  - id: accessibility.step-indicator.baseline
+    statement: El componente debe comunicar su propósito y estado a tecnologías de asistencia de forma comprensible.
+implementation_reference:
+  repository_path: specs/design-system/components/step_indicator.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/step_indicator.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

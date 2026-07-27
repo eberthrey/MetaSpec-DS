@@ -1,0 +1,41 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Verificación DNI Reverso (Paso 2B)
+  waup_walker_onboarding_dni_back:
+    description: "Carga de la fotografía legible de la parte trasera del DNI."
+    role: "waup_walker"
+    view_state: "waup_walker_onboarding_dni_back"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Identidad (DNI Atrás)"
+          back_action: "navigate_to:waup_walker_onboarding_dni_front"
+          variant: "ghost"
+          
+      - slot_id: "photo_instructions"
+        properties:
+          title: "Foto Reverso del DNI"
+          description: "Por favor, toma una foto nítida de la parte trasera de tu documento. Todos los campos de texto deben poder leerse con claridad."
+          
+      - slot_id: "photo_uploader_dni_back"
+        component: "component.photo_uploader"
+        properties:
+          label: "Foto de DNI (Atrás)"
+          maxPhotos: 1
+          required: true
+          
+      - slot_id: "continue_action"
+        component: "component.button"
+        properties:
+          label: "Siguiente Paso: Reconocimiento Facial"
+          action: "navigate_to:waup_walker_onboarding_facial"
+          hierarchy: "primary"

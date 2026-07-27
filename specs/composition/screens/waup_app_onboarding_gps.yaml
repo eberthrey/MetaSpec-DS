@@ -1,0 +1,99 @@
+id: "waup_app_onboarding_gps"
+name: "Onboarding — Seguimiento GPS"
+view_state: "waup_app_onboarding_gps"
+role: "guest"
+layout:
+  display: "flex"
+  flex_direction: "column"
+  background_color: "color.background.default"
+  height: "100%"
+
+composition:
+  - slot_id: "visual_map_section"
+    layout:
+      display: "flex"
+      flex_direction: "column"
+      positioning: "relative"
+      height: "400px"
+    items:
+      - slot_id: "map_image"
+        component: "image"
+        properties:
+          source: "/onboarding_gps_map.png"
+          height: "400px"
+      
+      - slot_id: "floating_summary"
+        component: "component.walk_card"
+        properties:
+          title: "Paseo de Milo"
+          subtitle: "Paseador: Clara D."
+          status: "active"
+          priceText: "S/. 20.00"
+          interactive: false
+        layout:
+          positioning: "absolute"
+          top: "spacing.layout.gap_medium"
+          left: "spacing.layout.gap_medium"
+          right: "spacing.layout.gap_medium"
+          elevation: "elevation.card.raised"
+
+      - slot_id: "metrics_overlay"
+        layout:
+          display: "flex"
+          justify_content: "space-between"
+          padding: "spacing.layout.card_padding"
+          background_color: "color.brand.warm"
+          border_radius: "radius.card.default"
+          positioning: "absolute"
+          bottom: "spacing.layout.gap_medium"
+          left: "spacing.layout.gap_medium"
+          right: "spacing.layout.gap_medium"
+          elevation: "elevation.card.small"
+        items:
+          - slot_id: "metric_time"
+            component: "text"
+            properties:
+              text: "⏱️ 15 min"
+              style: "typography.style.body"
+          - slot_id: "metric_distance"
+            component: "text"
+            properties:
+              text: "🏃 1.2 km"
+              style: "typography.style.body"
+          - slot_id: "metric_status"
+            component: "text"
+            properties:
+              text: "En Curso"
+              style: "typography.style.button"
+
+  - slot_id: "content_card"
+    component: "component.card"
+    properties:
+      interactive: false
+    layout:
+      display: "flex"
+      flex_direction: "column"
+      gap: "spacing.layout.gap_medium"
+      padding: "spacing.layout.page_margin"
+      background_color: "color.surface.default"
+      border_radius: "radius.card.default"
+      margin_t: "-24px"
+      elevation: "elevation.card.raised"
+      positioning: "relative"
+      z_index: 10
+    items:
+      - slot_id: "gps_title"
+        component: "title"
+        properties:
+          text: "Rastreo en Tiempo Real"
+          style: "typography.style.h1"
+      - slot_id: "gps_description"
+        component: "text"
+        properties:
+          text: "Sigue el recorrido de tu mascota en vivo desde el mapa interactivo con notificaciones instantáneas."
+          style: "typography.style.body"
+      - slot_id: "navigation"
+        pattern: "waup_onboarding_navigation"
+        properties:
+          active_step: 1
+          primary_label: "Avanzar"

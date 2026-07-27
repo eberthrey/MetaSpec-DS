@@ -1,0 +1,13 @@
+id: "asset.icon.paw"
+name: "Icono Huella (Paw)"
+asset_type: "icon"
+description: "Icono representativo de una huella de perro para la sección de Mascotas."
+category: "system_navigation"
+source_type: "external_library"
+asset_ref:
+  library: "FontAwesome"
+  path: "fa-solid fa-paw"
+  format: "svg"
+provenance:
+  source: "author_defined"
+  confidence: "high"

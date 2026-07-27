@@ -1,0 +1,13 @@
+id: "asset.illustration.pet_beagle"
+name: "Ilustración de Beagle (Luna/Coco)"
+asset_type: "illustration"
+description: "Ilustración representativa de un perro Beagle usada en avatares y tarjetas de Luna y Coco."
+category: "pet_avatar"
+source_type: "imported"
+asset_ref:
+  library: "Unsplash"
+  path: "https://images.unsplash.com/photo-1517841905240-472988babdf9"
+  format: "jpg"
+provenance:
+  source: "author_defined"
+  confidence: "high"

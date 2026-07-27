@@ -1,0 +1,41 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Verificación DNI Anverso (Paso 2A)
+  waup_walker_onboarding_dni_front:
+    description: "Carga de la fotografía legible de la parte frontal del DNI."
+    role: "waup_walker"
+    view_state: "waup_walker_onboarding_dni_front"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "navigation_header"
+        pattern: "waup.nav-header"
+        properties:
+          title: "Identidad (DNI Frente)"
+          back_action: "navigate_to:waup_walker_operations_form"
+          variant: "ghost"
+          
+      - slot_id: "photo_instructions"
+        properties:
+          title: "Foto Anverso del DNI"
+          description: "Por favor, toma una foto nítida de la parte frontal de tu documento. Asegúrate de que los textos y tu rostro sean legibles."
+          
+      - slot_id: "photo_uploader_dni_front"
+        component: "component.photo_uploader"
+        properties:
+          label: "Foto de DNI (Frente)"
+          maxPhotos: 1
+          required: true
+          
+      - slot_id: "continue_action"
+        component: "component.button"
+        properties:
+          label: "Siguiente Paso: DNI Reverso"
+          action: "navigate_to:waup_walker_onboarding_dni_back"
+          hierarchy: "primary"

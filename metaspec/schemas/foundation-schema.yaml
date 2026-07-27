@@ -1,0 +1,338 @@
+schema:
+  entity: foundation
+  version: "0.2"
+
+description: >
+  Semantic and governance contract for a design-system foundation.
+  Defines classification, metadata, relationships, structured document blocks,
+  provenance, and unresolved questions without depending on implementation format.
+
+required:
+  - schema_version
+  - kind
+  - identifier
+  - name
+  - description
+  - classification
+  - metadata
+  - document_blocks
+  - provenance
+
+fields:
+  schema_version:
+    type: string
+    description: "Version of the foundation document schema used by the instance."
+    example: "0.2"
+
+  kind:
+    type: enum
+    values:
+      - foundation
+    description: "Entity kind for this document."
+
+  identifier:
+    type: string
+    format: kebab-case
+    description: "Stable canonical identifier for the foundation."
+    example: "color-semantic"
+
+  name:
+    type: string
+    description: "Canonical human-readable name of the foundation."
+
+  description:
+    type: string
+    description: "Concise semantic description of what the foundation defines."
+
+  classification:
+    type: object
+    required:
+      - category
+      - foundation_type
+      - scope
+    properties:
+      category:
+        type: enum
+        values:
+          - color
+          - typography
+          - spacing
+          - radius
+          - stroke
+          - elevation
+          - opacity
+          - motion
+          - breakpoint
+          - iconography
+          - accessibility
+          - layout
+        description: "Primary domain of the foundation."
+
+      foundation_type:
+        type: enum
+        values:
+          - token_based
+          - rule_based
+          - mixed
+        description: "Contract model used by the foundation."
+
+      scope:
+        type: enum
+        values:
+          - raw
+          - semantic
+        description: "Abstraction layer represented by the foundation."
+
+  metadata:
+    type: object
+    required:
+      - status
+    properties:
+      status:
+        type: enum
+        values:
+          - draft
+          - in_review
+          - approved
+          - deprecated
+        description: "Governance status of the foundation definition."
+
+      links:
+        type: list
+        required: false
+        items:
+          type: object
+          required:
+            - kind
+            - url
+          properties:
+            kind:
+              type: enum
+              values:
+                - design
+                - documentation
+                - repository
+                - research
+                - other
+
+            url:
+              type: string
+              description: "Portable reference or URL for the linked resource."
+
+            label:
+              type: string
+              required: false
+              description: "Human-readable label for the link."
+
+  relationships:
+    type: list
+    required: false
+    description: "Typed relationships between this foundation and other catalog entities."
+    items:
+      type: object
+      required:
+        - type
+        - target
+        - rationale
+      properties:
+        type:
+          type: enum
+          values:
+            - depends_on
+            - implements
+            - implemented_by
+            - related_to
+            - supersedes
+            - superseded_by
+
+        target:
+          type: string
+          format: entity.reference
+          description: "Reference to the related entity."
+
+        rationale:
+          type: string
+          description: "Why the relationship exists and how it affects interpretation."
+
+  document_blocks:
+    type: list
+    min_items: 1
+    description: >
+      Structured editorial blocks that capture the semantic contract of the foundation.
+      The exact supporting properties depend on the block kind.
+    items:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: enum
+          values:
+            - purpose
+            - principles
+            - scale
+            - guidelines
+            - use_cases
+          description: "Editorial block type."
+
+        id:
+          type: string
+          format: kebab-case
+          required: false
+          description: "Stable identifier for the block when needed."
+
+        name:
+          type: string
+          required: false
+          description: "Human-readable block name, typically used for scales."
+
+        statement:
+          type: string
+          required: false
+          description: "Primary statement for purpose-style blocks."
+
+        description:
+          type: string
+          required: false
+          description: "Editorial description of the block."
+
+        items:
+          type: list
+          required: false
+          description: "Structured items contained by principles, guidelines, or use_cases blocks."
+          items:
+            type: object
+            required:
+              - id
+              - description
+            properties:
+              id:
+                type: string
+                format: kebab-case
+
+              title:
+                type: string
+                required: false
+
+              description:
+                type: string
+
+              guidance:
+                type: string
+                required: false
+
+              level:
+                type: enum
+                values:
+                  - must
+                  - should
+                  - may
+                  - must-not
+                  - should-not
+                required: false
+
+              category:
+                type: string
+                required: false
+
+              rationale:
+                type: string
+                required: false
+
+              stance:
+                type: enum
+                values:
+                  - recommended
+                  - discouraged
+                  - required
+                  - optional
+                required: false
+
+              alternative:
+                type: object
+                required: false
+                properties:
+                  target:
+                    type: string
+                    format: entity.reference
+                    required: false
+
+                  rationale:
+                    type: string
+                    required: false
+
+        groups:
+          type: list
+          required: false
+          description: "Subgroups contained in a scale block."
+          items:
+            type: object
+            required:
+              - id
+              - description
+            properties:
+              id:
+                type: string
+                format: kebab-case
+
+              description:
+                type: string
+
+  provenance:
+    type: object
+    required:
+      - origin
+      - confidence
+    properties:
+      origin:
+        type: enum
+        values:
+          - figma
+          - imported
+          - author_defined
+          - inferred
+        description: "Primary source of the foundation definition."
+
+      confidence:
+        type: enum
+        values:
+          - high
+          - medium
+          - low
+        description: "Confidence in the accuracy or completeness of the definition."
+
+      reference:
+        type: string
+        required: false
+        description: "Source pointer, document identifier, or URL for provenance."
+
+  open_questions:
+    type: list
+    required: false
+    description: "Unresolved questions that affect semantic certainty or governance."
+    items:
+      type: object
+      required:
+        - id
+        - question
+        - status
+      properties:
+        id:
+          type: string
+          format: dot.notation
+
+        question:
+          type: string
+
+        status:
+          type: enum
+          values:
+            - open
+            - investigating
+            - resolved
+
+        affects:
+          type: list
+          required: false
+          items: string
+          description: "Identifiers of blocks, scales, or areas impacted by the question."

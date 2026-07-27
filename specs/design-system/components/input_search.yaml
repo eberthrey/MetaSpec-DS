@@ -1,0 +1,101 @@
+identity:
+  id: component.input_search
+  name: Input Search (Campo de Búsqueda)
+  aliases:
+  - input_search
+taxonomy:
+  type: input
+  category: input
+intent:
+  summary: Componente de entrada de texto especializado para la búsqueda de términos o direcciones. Cuenta con un icono de lupa a la izquierda, borde de 1px sin sombra y una altura fija de 40px.
+  purpose: Permitir al usuario filtrar direcciones u opciones escribiendo en un campo dedicado.
+  system_role: collect_input
+  user_need: Facilitar la búsqueda interactiva
+usage:
+  use_cases:
+  - id: busqueda-predictiva-de-direcciones-de-recojo
+    scenario: Búsqueda predictiva de direcciones de recojo
+    rationale: Permite al dueño escribir y ver sugerencias de calles en tiempo real.
+  anti_patterns:
+  - scenario: Aumentar el grosor del borde en focus o usar sombras densas
+    reason: Rompe la consistencia con las directrices visuales del design system Patazas DS.
+    correction: Cambiar únicamente el color del borde a navy (light) o primary (dark) manteniendo el trazo en 1px.
+variants:
+- id: size
+  name: Size
+  description: Tamaño del input.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Tamaño compacto de 40px.
+    use_when:
+    - Tamaño compacto de 40px.
+  - id: md
+    name: Medium
+    meaning: Tamaño estándar de 52px.
+    use_when:
+    - Tamaño estándar de 52px.
+  - id: lg
+    name: Large
+    meaning: Tamaño grande de 56px.
+    use_when:
+    - Tamaño grande de 56px.
+composition:
+  slots:
+  - id: icon
+    role: decorative
+    description: Icono de lupa a la izquierda.
+    cardinality: exactly_one
+  - id: input-area
+    role: body-content
+    description: Caja de texto interactiva de 40px de altura con padding izquierdo para evitar colisión con el icono.
+    cardinality: exactly_one
+  - id: clear-action
+    role: primary-action
+    description: Botón de limpieza (ej. icono de cruz) que aparece al escribir para borrar el contenido rápidamente.
+    cardinality: zero_or_one
+  parent_constraints:
+  - rule: El tamaño del campo debe corresponder a un eje de tamaño válido.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado normal en reposo, listo para recibir foco, sin sombra y con borde gris tenue.
+  - id: focused
+    meaning: Estado activo cuando el cursor está en el campo, cambiando el color del borde (navy en light theme / primario en dark theme) manteniendo el mismo grosor de trazo (1px).
+  - id: typing
+    meaning: Estado activo cuando el usuario está escribiendo, mostrando el botón de limpieza.
+accessibility:
+  semantic_role: searchbox
+  focus_behavior:
+  - El input destaca su borde al recibir el foco.
+  screen_reader_expectations:
+  - Debe contener una etiqueta de accesibilidad o aria-label clara indicando que es una caja de búsqueda.
+  requirements:
+  - id: accessibility.input-search.focus
+    statement: El input destaca su borde al recibir el foco.
+  - id: accessibility.input-search.screen-reader
+    statement: Debe contener una etiqueta de accesibilidad o aria-label clara indicando que es una caja de búsqueda.
+examples:
+  positive:
+  - scenario: Búsqueda predictiva de direcciones de recojo
+    rationale: Permite al dueño escribir y ver sugerencias de calles en tiempo real.
+  negative:
+  - scenario: Aumentar el grosor del borde en focus o usar sombras densas
+    violation: Rompe la consistencia con las directrices visuales del design system Patazas DS.
+    correction: Cambiar únicamente el color del borde a navy (light) o primary (dark) manteniendo el trazo en 1px.
+implementation_reference:
+  repository_path: specs/design-system/components/input_search.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/input_search.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

@@ -1,0 +1,13 @@
+id: "asset.thumbnail.walker_percy"
+name: "Avatar de Percy Walker"
+asset_type: "thumbnail"
+description: "Avatar o foto de perfil del paseador Percy Walker."
+category: "walker_avatar"
+source_type: "imported"
+asset_ref:
+  library: "Unsplash"
+  path: "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
+  format: "jpg"
+provenance:
+  source: "author_defined"
+  confidence: "high"

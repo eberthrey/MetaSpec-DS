@@ -1,0 +1,97 @@
+identity:
+  id: component.chip
+  name: Chip (Pastilla Seleccionable)
+  aliases:
+  - chip
+taxonomy:
+  type: input
+  category: input
+intent:
+  summary: Componente interactivo compacto de tipo pastilla utilizado en grupos de selección (option selector groups) y filtros de parámetros. Posee estados de reposo (inactivo) y seleccionado (activo) que aplican una combinación de borde y fondo tenue de color secundario navy, sin sombras, para no competir con el CTA principal.
+  purpose: Proporcionar un control táctil para la selección de valores específicos (como duración, fecha u horario) visualizando su estado de forma clara.
+  system_role: collect_input
+  user_need: Seleccionar opciones rápidas de forma compacta
+usage:
+  use_cases:
+  - id: selector-de-parametros-de-configuracion-en-buscar-paseo
+    scenario: Selector de parámetros de configuración en Buscar paseo
+    rationale: Usado en los selectores de duración, fecha y hora de reserva.
+  anti_patterns:
+  - scenario: Utilizar el color de marca primario (naranja/coral) en chips activos
+    reason: Compite visualmente con el botón de acción principal de la pantalla, diluyendo la jerarquía visual.
+    correction: Reservar el color primario exclusivamente para el Call to Action principal y usar el color secundario navy para los chips activos.
+variants:
+- id: size
+  name: Size
+  description: Tamaño físico del chip.
+  selection: single
+  values:
+  - id: sm
+    name: Small
+    meaning: Chip compacto de tamaño pequeño.
+    use_when:
+    - Chip compacto de tamaño pequeño.
+  - id: md
+    name: Medium
+    meaning: Chip estándar de tamaño mediano.
+    use_when:
+    - Chip estándar de tamaño mediano.
+  - id: lg
+    name: Large
+    meaning: Chip grande de espaciado amplio.
+    use_when:
+    - Chip grande de espaciado amplio.
+composition:
+  slots:
+  - id: label
+    role: text-content
+    description: 'Etiqueta textual del chip (ej: ''30 min'', ''Hoy'').'
+    cardinality: exactly_one
+  - id: icon
+    role: decorative
+    description: 'Icono secundario que acompaña a la etiqueta (ej: icono de calendario).'
+    cardinality: zero_or_one
+  parent_constraints:
+  - rule: Los chips no deben usar el color coral primario para no competir con los CTAs principales.
+    rationale: Preserves the intended semantic contract during composition and usage.
+behavior:
+  states:
+  - id: default
+    meaning: Estado inactivo o en reposo, con fondo cálido de superficie, borde de 1px gris tenue (border-panel) y texto en color navy.
+  - id: selected
+    meaning: Estado activo cuando el chip está seleccionado.
+  - id: focused
+    meaning: Estado de accesibilidad por foco de teclado, destacando el contorno del chip.
+accessibility:
+  accessible_name: Debe derivarse de la etiqueta visible asociada al componente.
+  focus_behavior:
+  - Destaca el contorno del chip al enfocar.
+  screen_reader_expectations:
+  - Debe usar el atributo aria-selected o role='button' indicando el estado del chip.
+  requirements:
+  - id: accessibility.chip.focus
+    statement: Destaca el contorno del chip al enfocar.
+  - id: accessibility.chip.screen-reader
+    statement: Debe usar el atributo aria-selected o role='button' indicando el estado del chip.
+examples:
+  positive:
+  - scenario: Selector de parámetros de configuración en Buscar paseo
+    rationale: Usado en los selectores de duración, fecha y hora de reserva.
+  negative:
+  - scenario: Utilizar el color de marca primario (naranja/coral) en chips activos
+    violation: Compite visualmente con el botón de acción principal de la pantalla, diluyendo la jerarquía visual.
+    correction: Reservar el color primario exclusivamente para el Call to Action principal y usar el color secundario navy para los chips activos.
+implementation_reference:
+  repository_path: specs/design-system/components/chip.yaml
+governance:
+  version: '0.6'
+  status: draft
+  owners:
+  - design-system
+  sources:
+  - type: existing_documentation
+    reference: specs/design-system/components/chip.yaml
+    notes: Migrated to semantic contract schema 0.6 on 2026-07-26.
+  last_reviewed: '2026-07-26'
+  reviewed_by:
+  - codex

@@ -1,0 +1,107 @@
+spec_version: "1.0.0"
+namespace: "waup"
+
+screens:
+  # COMPOSICIÓN DE PANTALLA: Detalle de Mascota (Perfil)
+  waup_pet_detail:
+    description: "Visualización en formato perfil del perro, integrando un carousel hero superior, header flotante elevado, micro-cards de características físicas y listado modular de datos adicionales."
+    role: "waup_pet_owner"
+    view_state: "waup_pet_detail"
+    
+    layout:
+      type: "scroller"
+      density: "comfortable"
+      background_color: "brand_colors.neutrals.background"
+      
+    composition:
+      - slot_id: "pet_hero_carousel"
+        description: "Carrusel de imágenes hero en la parte superior que presenta las fotografías del perro con controles de navegación superpuestos (Regresar y Editar)."
+        component: "component.carousel"
+        properties:
+          pagination: "dots"
+          active_index: 0
+          floating_left_action:
+            component: "component.button_icon"
+            properties:
+              icon: "chevron-left"
+              style: "filled"
+              size: "md"
+              aria_label: "Regresar"
+              action: "go_back"
+          floating_right_action:
+            component: "component.button_icon"
+            properties:
+              icon: "pencil"
+              style: "filled"
+              size: "md"
+              aria_label: "Editar perfil"
+              action: "navigate_to:waup_edit_pet"
+          
+      - slot_id: "pet_header_card"
+        description: "Tarjeta modal flotante con elevación que contiene el nombre del perro (tipografía dominante) y su raza como descripción."
+        component: "component.card"
+        properties:
+          elevation: "raised"
+          layout: "hero_header"
+          title: "{pet.name}"
+          description: "{pet.breed}"
+          
+      - slot_id: "pet_attributes_scroll"
+        description: "Fila horizontal deslizable de micro-tarjetas con los atributos físicos principales del perro para lectura rápida."
+        layout: "horizontal_scroll"
+        items:
+          - component: "component.card"
+            properties:
+              size: "sm"
+              icon: "venus-mars"
+              label: "Sexo"
+              value: "{pet.sex}"
+          - component: "component.card"
+            properties:
+              size: "sm"
+              icon: "cake-candles"
+              label: "Edad"
+              value: "{pet.age}"
+          - component: "component.card"
+            properties:
+              size: "sm"
+              icon: "weight-scale"
+              label: "Peso"
+              value: "{pet.weight}"
+          - component: "component.card"
+            properties:
+              size: "sm"
+              icon: "ruler-vertical"
+              label: "Tamaño"
+              value: "{pet.size}"
+          - component: "component.card"
+            properties:
+              size: "sm"
+              icon: "bolt"
+              label: "Energía"
+              value: "{pet.energy}"
+              
+      - slot_id: "pet_health_box"
+        description: "Panel informativo sobre alergias e indicaciones de salud."
+        component: "component.card"
+        properties:
+          title: "Alergias y Salud"
+          content: "{pet.allergiesHealth}"
+          icon: "heart-pulse"
+          
+      - slot_id: "pet_notes_box"
+        description: "Panel informativo para observaciones de cuidado de los paseadores."
+        component: "component.card"
+        properties:
+          title: "Notas médicas y cuidados"
+          content: "{pet.medicalNotes}"
+          icon: "file-medical"
+              
+      - slot_id: "delete_pet_action"
+        description: "Botón de acción destructiva secundaria para dar de baja la ficha del perro."
+        component: "component.button"
+        properties:
+          label: "Eliminar Perfil"
+          action: "delete_pet_profile"
+          hierarchy: "secondary"
+          is_destructive: true
